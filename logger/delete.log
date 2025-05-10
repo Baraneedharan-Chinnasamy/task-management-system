@@ -1,0 +1,26 @@
+2025-05-10 15:45:43,472 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:45:43,532 - delete - INFO - Marked checklists as deleted: [82]
+2025-05-10 15:47:24,528 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:47:24,578 - delete - INFO - Marked checklists as deleted: [82]
+2025-05-10 15:47:24,602 - delete - INFO - Deletion process completed successfully.
+2025-05-10 15:48:20,495 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:48:20,558 - delete - INFO - Marked checklists as deleted: [81]
+2025-05-10 15:48:20,582 - delete - INFO - Deletion process completed successfully.
+2025-05-10 15:51:02,529 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:51:02,588 - delete - INFO - Marked checklists as deleted: [81]
+2025-05-10 15:51:02,606 - delete - INFO - Deletion process completed successfully.
+2025-05-10 15:52:33,506 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:52:33,550 - delete - INFO - Marked checklists as deleted: [84]
+2025-05-10 15:52:33,573 - delete - INFO - Deletion process completed successfully.
+2025-05-10 15:57:16,962 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:57:17,011 - delete - INFO - Marked checklists as deleted: [87]
+2025-05-10 15:57:17,028 - delete - INFO - Deletion process completed successfully.
+2025-05-10 15:59:10,453 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 15:59:10,501 - delete - INFO - Marked checklists as deleted: [90]
+2025-05-10 15:59:10,522 - delete - INFO - Deletion process completed successfully.
+2025-05-10 16:00:47,283 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 16:00:47,335 - delete - INFO - Marked checklists as deleted: [93]
+2025-05-10 16:00:47,352 - delete - INFO - Deletion process completed successfully.
+2025-05-10 16:02:28,324 - delete - INFO - DELETE requested by user_id=5
+2025-05-10 16:02:28,369 - delete - INFO - Marked checklists as deleted: [96]
+2025-05-10 16:02:28,398 - delete - INFO - Deletion process completed successfully.

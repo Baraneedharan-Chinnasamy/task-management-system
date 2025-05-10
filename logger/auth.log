@@ -1,0 +1,12 @@
+2025-05-08 13:07:23,228 - auth - INFO - Login attempt for username='Baranee'
+2025-05-08 13:07:24,083 - auth - WARNING - Login failed for username='Baranee'
+2025-05-08 13:07:31,739 - auth - INFO - Signup attempt for username='string', email='user@example.com'
+2025-05-08 13:07:32,364 - auth - INFO - New user created: user_id=5, username=string
+2025-05-08 13:07:41,893 - auth - INFO - Login attempt for username='string'
+2025-05-08 13:07:42,490 - auth - INFO - Login successful for user_id=5, username=string
+2025-05-08 16:19:18,190 - auth - INFO - Login attempt for username='string'
+2025-05-08 16:19:18,801 - auth - INFO - Login successful for user_id=5, username=string
+2025-05-10 10:03:40,660 - auth - INFO - Login attempt for username='string'
+2025-05-10 10:03:41,279 - auth - INFO - Login successful for user_id=5, username=string
+2025-05-10 12:24:24,424 - auth - INFO - Login attempt for username='string'
+2025-05-10 12:24:24,998 - auth - INFO - Login successful for user_id=5, username=string

@@ -1,0 +1,1276 @@
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 74, in update_Status
+    propagate_incomplete_upwards(data.checklist_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 143, in propagate_incomplete_upwards
+    task.status = TaskStatus(last_status_log.old_value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\BARANEEDHARAN\AppData\Local\Programs\Python\Python312\Lib\enum.py", line 751, in __call__
+    return cls.__new__(cls, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\BARANEEDHARAN\AppData\Local\Programs\Python\Python312\Lib\enum.py", line 1165, in __new__
+    raise ve_exc
+ValueError: 'None' is not a valid TaskStatus
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 99, in update_Status
+    propagate_incomplete_upwards(data.checklist_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 128, in propagate_incomplete_upwards
+    print(parent_tasks.task_id)
+          ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'task_id'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 199, in _key_not_found
+    self._key_fallback(key, None)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 138, in _key_fallback
+    raise KeyError(key) from err
+KeyError: 'task_id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 99, in update_Status
+    propagate_incomplete_upwards(data.checklist_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 128, in propagate_incomplete_upwards
+    print(parent_tasks.task_id)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "lib\\sqlalchemy\\cyextension\\resultproxy.pyx", line 66, in sqlalchemy.cyextension.resultproxy.BaseRow.__getattr__
+  File "lib\\sqlalchemy\\cyextension\\resultproxy.pyx", line 63, in sqlalchemy.cyextension.resultproxy.BaseRow._get_by_key_impl
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\result.py", line 201, in _key_not_found
+    raise AttributeError(ke.args[0]) from ke
+AttributeError: task_id
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 99, in update_Status
+    propagate_incomplete_upwards(data.checklist_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 131, in propagate_incomplete_upwards
+    parent_task_id = pt[0]
+                     ~~^^^
+TypeError: 'int' object is not subscriptable
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 99, in update_Status
+    propagate_incomplete_upwards(data.checklist_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 130, in propagate_incomplete_upwards
+    parent_task_id = pt[0]
+                     ^^
+NameError: name 'pt' is not defined
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 37, in update_parent_task_status
+    review_task.previous_status = review_task.status
+                                  ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'status'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 37, in update_parent_task_status
+    review_task.previous_status = review_task.status if review_task.status is not None else "To_Do"
+                                                        ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'status'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 37, in update_parent_task_status
+    review_task.previous_status = review_task.status if review_task.status is not None else "To_Do"
+                                                        ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'status'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 37, in update_parent_task_status
+    review_task.previous_status = review_task.status if review_task and review_task.status is not None else "To_Do"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'previous_status'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 36, in update_parent_task_status
+    if review_task is not None:
+       ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'review_task' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'previous_status' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 64, in update_parent_task_status
+    db.flush()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'previous_status' at row 1")
+[SQL: UPDATE tasks SET previous_status=%(previous_status)s, updated_at=CURRENT_TIMESTAMP WHERE tasks.task_id = %(tasks_task_id)s]
+[parameters: {'previous_status': 'In_Progress', 'tasks_task_id': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'previous_status' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 64, in update_parent_task_status
+    db.flush()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'previous_status' at row 1")
+[SQL: UPDATE tasks SET previous_status=%(previous_status)s, updated_at=CURRENT_TIMESTAMP WHERE tasks.task_id = %(tasks_task_id)s]
+[parameters: {'previous_status': 'In_Progress', 'tasks_task_id': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'previous_status' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 64, in update_parent_task_status
+    db.flush()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'previous_status' at row 1")
+[SQL: UPDATE tasks SET previous_status=%(previous_status)s, updated_at=CURRENT_TIMESTAMP WHERE tasks.task_id = %(tasks_task_id)s]
+[parameters: {'previous_status': 'In_Progress', 'tasks_task_id': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'previous_status' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 64, in update_parent_task_status
+    db.flush()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'previous_status' at row 1")
+[SQL: UPDATE tasks SET previous_status=%(previous_status)s, updated_at=CURRENT_TIMESTAMP WHERE tasks.task_id = %(tasks_task_id)s]
+[parameters: {'previous_status': 'In_Progress', 'tasks_task_id': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'previous_status' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 64, in update_parent_task_status
+    db.flush()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'previous_status' at row 1")
+[SQL: UPDATE tasks SET previous_status=%(previous_status)s, updated_at=CURRENT_TIMESTAMP WHERE tasks.task_id = %(tasks_task_id)s]
+[parameters: {'previous_status': 'In_Progress', 'tasks_task_id': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1265, "Data truncated for column 'previous_status' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 97, in update_Status
+    update_parent_task_status(parent_task_id, db, Current_user)
+  File "D:\Task Management System Final code\Checklist\functions.py", line 64, in update_parent_task_status
+    db.flush()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4353, in flush
+    self._flush(objects)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4488, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4449, in _flush
+    flush_context.execute()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.DataError: (pymysql.err.DataError) (1265, "Data truncated for column 'previous_status' at row 1")
+[SQL: UPDATE tasks SET status=%(status)s, previous_status=%(previous_status)s, updated_at=CURRENT_TIMESTAMP WHERE tasks.task_id = %(tasks_task_id)s]
+[parameters: {'status': 'In_Progress', 'previous_status': 'In_Progress', 'tasks_task_id': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 138, in update_Status
+    log_task_field_change(db, child_task.task_id, "status", old_status, child_task.previous_status, 2)
+                                                            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'old_status' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 138, in update_Status
+    log_task_field_change(db, child_task.task_id, "status", old_status, child_task.previous_status, 2)
+                                                            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'old_status' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Checklist\checklist_status.py", line 138, in update_Status
+    log_task_field_change(db, child_task.task_id, "status", old_status, child_task.previous_status, 2)
+                                                            ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'old_status' where it is not associated with a value
+2025-05-08 16:19:58,686 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-08 16:19:58,686 - mark_checklist_complete - INFO - Checklist 1 found, current status: True
+2025-05-08 16:19:58,703 - mark_checklist_complete - WARNING - User 5 has no access to parent task 1
+2025-05-08 16:20:27,232 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-08 16:20:27,244 - mark_checklist_complete - INFO - Checklist 29 found, current status: False
+2025-05-08 16:20:27,248 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=19, task_type=TaskType.Normal
+2025-05-08 16:20:27,263 - mark_checklist_complete - INFO - Checklist 29 marked as completed
+2025-05-08 16:20:27,313 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-08 16:20:48,075 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-08 16:20:48,075 - mark_checklist_complete - INFO - Checklist 29 found, current status: True
+2025-05-08 16:20:48,091 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=19, task_type=TaskType.Normal
+2025-05-08 16:20:48,091 - mark_checklist_complete - INFO - Checklist 29 marked as incomplete
+2025-05-08 16:20:48,126 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:06:39,647 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:06:39,647 - mark_checklist_complete - INFO - Checklist 31 found, current status: False
+2025-05-10 10:06:39,663 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:06:39,685 - mark_checklist_complete - INFO - Checklist 31 marked as completed
+2025-05-10 10:06:39,780 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:06:44,284 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:06:44,301 - mark_checklist_complete - INFO - Checklist 32 found, current status: False
+2025-05-10 10:06:44,306 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:06:44,306 - mark_checklist_complete - INFO - Checklist 32 marked as completed
+2025-05-10 10:06:44,334 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:06:49,238 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:06:49,238 - mark_checklist_complete - INFO - Checklist 33 found, current status: False
+2025-05-10 10:06:49,260 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:06:49,262 - mark_checklist_complete - INFO - Checklist 33 marked as completed
+2025-05-10 10:06:49,288 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:06:54,425 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:06:54,425 - mark_checklist_complete - WARNING - Checklist 34 not found or deleted
+2025-05-10 10:07:00,801 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:07:00,814 - mark_checklist_complete - INFO - Checklist 30 found, current status: False
+2025-05-10 10:07:00,814 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:07:00,814 - mark_checklist_complete - INFO - Checklist 30 marked as completed
+2025-05-10 10:07:00,863 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:08:20,403 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:08:20,403 - mark_checklist_complete - INFO - Checklist 36 found, current status: False
+2025-05-10 10:08:20,414 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:08:20,417 - mark_checklist_complete - WARNING - Checklist 36 has subtasks and cannot be directly updated
+2025-05-10 10:08:27,510 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:08:27,510 - mark_checklist_complete - INFO - Checklist 37 found, current status: False
+2025-05-10 10:08:27,515 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=24, task_type=TaskType.Normal
+2025-05-10 10:08:27,518 - mark_checklist_complete - INFO - Checklist 37 marked as completed
+2025-05-10 10:08:27,531 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:11:46,346 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:11:46,350 - mark_checklist_complete - INFO - Checklist 40 found, current status: False
+2025-05-10 10:11:46,351 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=24, task_type=TaskType.Normal
+2025-05-10 10:11:46,366 - mark_checklist_complete - INFO - Checklist 40 marked as completed
+2025-05-10 10:11:46,384 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:11:50,890 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:11:50,890 - mark_checklist_complete - INFO - Checklist 41 found, current status: False
+2025-05-10 10:11:50,890 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=24, task_type=TaskType.Normal
+2025-05-10 10:11:50,890 - mark_checklist_complete - INFO - Checklist 41 marked as completed
+2025-05-10 10:11:50,924 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:11:53,991 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:11:53,991 - mark_checklist_complete - INFO - Checklist 42 found, current status: False
+2025-05-10 10:11:54,005 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=24, task_type=TaskType.Normal
+2025-05-10 10:11:54,007 - mark_checklist_complete - INFO - Checklist 42 marked as completed
+2025-05-10 10:11:54,044 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:12:44,432 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:12:44,449 - mark_checklist_complete - INFO - Checklist 34 found, current status: False
+2025-05-10 10:12:44,454 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:12:44,454 - mark_checklist_complete - INFO - Checklist 34 marked as completed
+2025-05-10 10:12:44,482 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:12:50,138 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:12:50,138 - mark_checklist_complete - INFO - Checklist 35 found, current status: False
+2025-05-10 10:12:50,154 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:12:50,154 - mark_checklist_complete - INFO - Checklist 35 marked as completed
+2025-05-10 10:12:50,187 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:13:03,747 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:13:03,748 - mark_checklist_complete - INFO - Checklist 35 found, current status: True
+2025-05-10 10:13:03,748 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:13:03,748 - mark_checklist_complete - INFO - Checklist 35 marked as incomplete
+2025-05-10 10:13:03,783 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:14:31,321 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:14:31,321 - mark_checklist_complete - INFO - Checklist 35 found, current status: False
+2025-05-10 10:14:31,337 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:14:31,339 - mark_checklist_complete - INFO - Checklist 35 marked as completed
+2025-05-10 10:14:31,371 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:15:38,827 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:15:38,827 - mark_checklist_complete - INFO - Checklist 43 found, current status: False
+2025-05-10 10:15:38,844 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
+2025-05-10 10:15:38,853 - mark_checklist_complete - INFO - Checklist 43 marked as completed
+2025-05-10 10:15:38,893 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:25:31,292 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:25:31,299 - mark_checklist_complete - INFO - Checklist 48 found, current status: False
+2025-05-10 10:25:31,307 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=34, task_type=TaskType.Normal
+2025-05-10 10:25:31,316 - mark_checklist_complete - INFO - Checklist 48 marked as completed
+2025-05-10 10:25:31,358 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:25:45,178 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:25:45,182 - mark_checklist_complete - INFO - Checklist 48 found, current status: True
+2025-05-10 10:25:45,184 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=34, task_type=TaskType.Normal
+2025-05-10 10:25:45,196 - mark_checklist_complete - INFO - Checklist 48 marked as incomplete
+2025-05-10 10:25:45,249 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:25:55,337 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:25:55,337 - mark_checklist_complete - INFO - Checklist 48 found, current status: False
+2025-05-10 10:25:55,353 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=34, task_type=TaskType.Normal
+2025-05-10 10:25:55,353 - mark_checklist_complete - INFO - Checklist 48 marked as completed
+2025-05-10 10:25:55,387 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:26:23,529 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:26:23,546 - mark_checklist_complete - INFO - Checklist 49 found, current status: False
+2025-05-10 10:26:23,546 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=34, task_type=TaskType.Normal
+2025-05-10 10:26:23,546 - mark_checklist_complete - INFO - Checklist 49 marked as completed
+2025-05-10 10:26:23,577 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:26:30,286 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:26:30,290 - mark_checklist_complete - INFO - Checklist 49 found, current status: True
+2025-05-10 10:26:30,296 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=34, task_type=TaskType.Normal
+2025-05-10 10:26:30,299 - mark_checklist_complete - INFO - Checklist 49 marked as incomplete
+2025-05-10 10:26:30,356 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:26:39,240 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:26:39,240 - mark_checklist_complete - INFO - Checklist 49 found, current status: False
+2025-05-10 10:26:39,240 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=34, task_type=TaskType.Normal
+2025-05-10 10:26:39,258 - mark_checklist_complete - INFO - Checklist 49 marked as completed
+2025-05-10 10:26:39,291 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:41:54,282 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:41:54,297 - mark_checklist_complete - INFO - Checklist 50 found, current status: False
+2025-05-10 10:41:54,306 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=36, task_type=TaskType.Normal
+2025-05-10 10:41:54,314 - mark_checklist_complete - INFO - Checklist 50 marked as completed
+2025-05-10 10:41:54,347 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:44:53,770 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:44:53,774 - mark_checklist_complete - INFO - Checklist 53 found, current status: False
+2025-05-10 10:44:53,779 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=37, task_type=TaskType.Normal
+2025-05-10 10:44:53,788 - mark_checklist_complete - INFO - Checklist 53 marked as completed
+2025-05-10 10:44:53,830 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:50:02,519 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:50:02,519 - mark_checklist_complete - INFO - Checklist 54 found, current status: False
+2025-05-10 10:50:02,559 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=37, task_type=TaskType.Normal
+2025-05-10 10:50:02,576 - mark_checklist_complete - INFO - Checklist 54 marked as completed
+2025-05-10 10:50:02,618 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:50:07,939 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:50:07,939 - mark_checklist_complete - INFO - Checklist 55 found, current status: False
+2025-05-10 10:50:07,957 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=37, task_type=TaskType.Normal
+2025-05-10 10:50:07,957 - mark_checklist_complete - INFO - Checklist 55 marked as completed
+2025-05-10 10:50:07,989 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:50:13,611 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:50:13,611 - mark_checklist_complete - INFO - Checklist 56 found, current status: False
+2025-05-10 10:50:13,611 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=37, task_type=TaskType.Normal
+2025-05-10 10:50:13,629 - mark_checklist_complete - INFO - Checklist 56 marked as completed
+2025-05-10 10:50:13,646 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 10:50:19,349 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 10:50:19,349 - mark_checklist_complete - INFO - Checklist 57 found, current status: False
+2025-05-10 10:50:19,367 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=37, task_type=TaskType.Normal
+2025-05-10 10:50:19,367 - mark_checklist_complete - INFO - Checklist 57 marked as completed
+2025-05-10 10:50:19,415 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:30:48,057 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:30:48,073 - mark_checklist_complete - INFO - Checklist 61 found, current status: False
+2025-05-10 12:30:48,089 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:30:48,094 - mark_checklist_complete - INFO - Checklist 61 marked as completed
+2025-05-10 12:30:48,139 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:30:54,828 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:30:54,828 - mark_checklist_complete - INFO - Checklist 61 found, current status: True
+2025-05-10 12:30:54,845 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:30:54,845 - mark_checklist_complete - INFO - Checklist 61 marked as incomplete
+2025-05-10 12:30:54,894 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:03,485 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:03,502 - mark_checklist_complete - INFO - Checklist 61 found, current status: False
+2025-05-10 12:31:03,507 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:03,507 - mark_checklist_complete - INFO - Checklist 61 marked as completed
+2025-05-10 12:31:03,531 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:09,423 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:09,423 - mark_checklist_complete - INFO - Checklist 62 found, current status: False
+2025-05-10 12:31:09,441 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:09,441 - mark_checklist_complete - INFO - Checklist 62 marked as completed
+2025-05-10 12:31:09,457 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:14,079 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:14,079 - mark_checklist_complete - WARNING - Checklist 63 not found or deleted
+2025-05-10 12:31:18,031 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:18,031 - mark_checklist_complete - INFO - Checklist 60 found, current status: False
+2025-05-10 12:31:18,047 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:18,049 - mark_checklist_complete - INFO - Checklist 60 marked as completed
+2025-05-10 12:31:18,080 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:24,837 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:24,853 - mark_checklist_complete - INFO - Checklist 60 found, current status: True
+2025-05-10 12:31:24,853 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:24,853 - mark_checklist_complete - INFO - Checklist 60 marked as incomplete
+2025-05-10 12:31:24,903 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:42,151 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:42,168 - mark_checklist_complete - INFO - Checklist 61 found, current status: True
+2025-05-10 12:31:42,168 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:42,178 - mark_checklist_complete - INFO - Checklist 61 marked as incomplete
+2025-05-10 12:31:42,185 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:46,254 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:46,254 - mark_checklist_complete - INFO - Checklist 62 found, current status: True
+2025-05-10 12:31:46,254 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:46,271 - mark_checklist_complete - INFO - Checklist 62 marked as incomplete
+2025-05-10 12:31:46,305 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:53,160 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:53,160 - mark_checklist_complete - INFO - Checklist 62 found, current status: False
+2025-05-10 12:31:53,160 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:53,160 - mark_checklist_complete - INFO - Checklist 62 marked as completed
+2025-05-10 12:31:53,194 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:31:57,718 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:31:57,718 - mark_checklist_complete - INFO - Checklist 61 found, current status: False
+2025-05-10 12:31:57,731 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:31:57,734 - mark_checklist_complete - INFO - Checklist 61 marked as completed
+2025-05-10 12:31:57,752 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:32:03,585 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:32:03,585 - mark_checklist_complete - INFO - Checklist 62 found, current status: True
+2025-05-10 12:32:03,585 - mark_checklist_complete - INFO - Checklist 62 already completed
+2025-05-10 12:32:09,307 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:32:09,307 - mark_checklist_complete - INFO - Checklist 60 found, current status: False
+2025-05-10 12:32:09,307 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:32:09,307 - mark_checklist_complete - INFO - Checklist 60 marked as completed
+2025-05-10 12:32:09,358 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:32:19,716 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:32:19,716 - mark_checklist_complete - INFO - Checklist 60 found, current status: True
+2025-05-10 12:32:19,716 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:32:19,716 - mark_checklist_complete - INFO - Checklist 60 marked as incomplete
+2025-05-10 12:32:19,732 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:32:40,198 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:32:40,198 - mark_checklist_complete - INFO - Checklist 61 found, current status: True
+2025-05-10 12:32:40,198 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:32:40,198 - mark_checklist_complete - INFO - Checklist 61 marked as incomplete
+2025-05-10 12:32:40,222 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:32:44,953 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:32:44,953 - mark_checklist_complete - INFO - Checklist 62 found, current status: True
+2025-05-10 12:32:44,969 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=39, task_type=TaskType.Normal
+2025-05-10 12:32:44,970 - mark_checklist_complete - INFO - Checklist 62 marked as incomplete
+2025-05-10 12:32:44,986 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:34:13,992 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:34:13,993 - mark_checklist_complete - INFO - Checklist 63 found, current status: False
+2025-05-10 12:34:13,993 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=41, task_type=TaskType.Normal
+2025-05-10 12:34:13,993 - mark_checklist_complete - INFO - Checklist 63 marked as completed
+2025-05-10 12:34:14,029 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:34:35,677 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:34:35,678 - mark_checklist_complete - INFO - Checklist 63 found, current status: True
+2025-05-10 12:34:35,678 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=41, task_type=TaskType.Normal
+2025-05-10 12:34:35,678 - mark_checklist_complete - INFO - Checklist 63 marked as incomplete
+2025-05-10 12:34:35,728 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:35:18,647 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:35:18,659 - mark_checklist_complete - INFO - Checklist 66 found, current status: False
+2025-05-10 12:35:18,664 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:35:18,668 - mark_checklist_complete - INFO - Checklist 66 marked as completed
+2025-05-10 12:35:18,697 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:35:30,990 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:35:30,990 - mark_checklist_complete - INFO - Checklist 67 found, current status: False
+2025-05-10 12:35:31,007 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:35:31,007 - mark_checklist_complete - INFO - Checklist 67 marked as completed
+2025-05-10 12:35:31,023 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:36:06,608 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:36:06,608 - mark_checklist_complete - WARNING - Checklist 69 not found or deleted
+2025-05-10 12:36:22,567 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:36:22,567 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:36:22,567 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:36:22,584 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:36:22,615 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:36:36,695 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:36:36,701 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:36:36,701 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:36:36,712 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:36:36,744 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:36:46,870 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:36:46,870 - mark_checklist_complete - INFO - Checklist 67 found, current status: True
+2025-05-10 12:36:46,870 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:36:46,888 - mark_checklist_complete - INFO - Checklist 67 marked as incomplete
+2025-05-10 12:36:46,926 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:37:04,590 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:37:04,601 - mark_checklist_complete - INFO - Checklist 66 found, current status: True
+2025-05-10 12:37:04,601 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:37:04,601 - mark_checklist_complete - INFO - Checklist 66 marked as incomplete
+2025-05-10 12:37:04,650 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:37:20,213 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:37:20,215 - mark_checklist_complete - INFO - Checklist 66 found, current status: False
+2025-05-10 12:37:20,215 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:37:20,225 - mark_checklist_complete - INFO - Checklist 66 marked as completed
+2025-05-10 12:37:20,251 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:37:31,056 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:37:31,056 - mark_checklist_complete - INFO - Checklist 67 found, current status: False
+2025-05-10 12:37:31,056 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:37:31,056 - mark_checklist_complete - INFO - Checklist 67 marked as completed
+2025-05-10 12:37:31,090 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:37:41,982 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:37:41,982 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:37:41,982 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:37:41,999 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:37:42,032 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:37:55,213 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:37:55,213 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:37:55,226 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:37:55,226 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:37:55,244 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:40:06,106 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:40:06,106 - mark_checklist_complete - INFO - Checklist 67 found, current status: True
+2025-05-10 12:40:06,106 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:40:06,118 - mark_checklist_complete - INFO - Checklist 67 marked as incomplete
+2025-05-10 12:40:06,141 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:40:12,739 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:40:12,741 - mark_checklist_complete - INFO - Checklist 67 found, current status: False
+2025-05-10 12:40:12,745 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:40:12,745 - mark_checklist_complete - INFO - Checklist 67 marked as completed
+2025-05-10 12:40:12,761 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:40:19,079 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:40:19,079 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:40:19,079 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:40:19,086 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:40:19,098 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:40:31,745 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:40:31,757 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:40:31,757 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:40:31,762 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:40:31,777 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:40:55,881 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:40:55,881 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:40:55,881 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:40:55,881 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:40:55,906 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:41:00,680 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:41:00,682 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:41:00,682 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:41:00,688 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:41:00,699 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:41:31,856 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:41:31,856 - mark_checklist_complete - INFO - Checklist 67 found, current status: True
+2025-05-10 12:41:31,862 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:41:31,862 - mark_checklist_complete - INFO - Checklist 67 marked as incomplete
+2025-05-10 12:41:31,873 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:41:48,211 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:41:48,211 - mark_checklist_complete - INFO - Checklist 67 found, current status: False
+2025-05-10 12:41:48,220 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:41:48,222 - mark_checklist_complete - INFO - Checklist 67 marked as completed
+2025-05-10 12:41:48,227 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:41:53,676 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:41:53,676 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:41:53,676 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:41:53,676 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:41:53,698 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:42:01,963 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:42:01,964 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:42:01,964 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:42:01,971 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:42:01,981 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:42:46,746 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:42:46,749 - mark_checklist_complete - INFO - Checklist 67 found, current status: True
+2025-05-10 12:42:46,753 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:42:46,753 - mark_checklist_complete - INFO - Checklist 67 marked as incomplete
+2025-05-10 12:42:46,773 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:47:08,368 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:47:08,368 - mark_checklist_complete - INFO - Checklist 66 found, current status: True
+2025-05-10 12:47:08,391 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:47:08,401 - mark_checklist_complete - INFO - Checklist 66 marked as incomplete
+2025-05-10 12:47:08,451 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:47:14,033 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:47:14,033 - mark_checklist_complete - INFO - Checklist 66 found, current status: False
+2025-05-10 12:47:14,043 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:47:14,045 - mark_checklist_complete - INFO - Checklist 66 marked as completed
+2025-05-10 12:47:14,057 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:47:18,793 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:47:18,810 - mark_checklist_complete - INFO - Checklist 67 found, current status: False
+2025-05-10 12:47:18,810 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:47:18,810 - mark_checklist_complete - INFO - Checklist 67 marked as completed
+2025-05-10 12:47:18,843 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:47:25,432 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:47:25,432 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:47:25,438 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:47:25,442 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:47:25,481 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:49:25,670 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:49:25,670 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:49:25,670 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:49:25,684 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:49:25,699 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:49:36,056 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:49:36,056 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:49:36,072 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:49:36,073 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:49:36,108 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:49:46,221 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:49:46,221 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:49:46,221 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:49:46,231 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:49:46,236 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:57:15,549 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:57:15,555 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:57:15,555 - mark_checklist_complete - INFO - Checklist 68 already incomplete
+2025-05-10 12:57:15,564 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:57:15,566 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:57:15,608 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:57:22,824 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:57:22,827 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:57:22,827 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:57:22,827 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:57:22,859 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:57:31,099 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:57:31,099 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:57:31,099 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:57:31,099 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:57:31,118 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:57:52,150 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:57:52,150 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:57:52,150 - mark_checklist_complete - INFO - Checklist 68 already incomplete
+2025-05-10 12:57:52,150 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:57:52,150 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:57:52,169 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:58:35,825 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:58:35,827 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:58:35,827 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:58:35,827 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:58:35,841 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:58:43,465 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:58:43,465 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:58:43,465 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:58:43,465 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:58:43,479 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:59:49,109 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:59:49,115 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 12:59:49,129 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:59:49,130 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 12:59:49,181 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 12:59:58,038 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 12:59:58,038 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 12:59:58,054 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 12:59:58,054 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 12:59:58,088 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:00:08,966 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:00:08,979 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:00:08,980 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:00:08,980 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:00:09,017 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:00:14,244 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:00:14,251 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:00:14,252 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:00:14,252 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:00:14,268 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:05:16,480 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:05:16,484 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:05:16,494 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:05:16,502 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:05:16,524 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:05:21,306 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:05:21,306 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:05:21,306 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:05:21,321 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:05:21,337 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:07:23,151 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:07:23,156 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:07:23,165 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:07:23,175 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:07:23,212 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:07:38,386 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:07:38,386 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:07:38,386 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:07:38,401 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:07:38,433 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:07:45,068 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:07:45,075 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:07:45,076 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:07:45,076 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:07:45,111 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:07:54,783 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:07:54,783 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:07:54,795 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:07:54,800 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:07:54,819 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:09:42,672 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:09:42,672 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:09:42,689 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:09:42,705 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:09:42,739 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:09:47,026 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:09:47,026 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:09:47,026 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:09:47,041 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:09:47,075 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:09:51,096 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:09:51,096 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:09:51,114 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:09:51,114 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:09:51,146 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:09:58,168 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:09:58,168 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:09:58,168 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:09:58,183 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:09:58,188 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:11:01,904 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:11:01,914 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:11:01,921 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:11:01,935 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:11:01,975 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:11:09,494 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:11:09,511 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:11:09,511 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:11:09,511 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:11:09,560 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:11:14,348 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:11:14,348 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:11:14,354 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:11:14,354 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:11:14,381 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:11:18,518 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:11:18,519 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:11:18,519 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:11:18,519 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:11:18,542 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:12:33,275 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:12:33,280 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:12:33,291 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:12:33,306 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:12:33,347 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:12:39,635 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:12:39,635 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:12:39,635 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:12:39,635 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:12:39,686 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:12:44,279 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:12:44,289 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 13:12:44,289 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:12:44,289 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 13:12:44,330 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 13:12:50,060 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 13:12:50,076 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 13:12:50,076 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 13:12:50,076 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 13:12:50,110 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 14:47:12,099 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 14:47:12,117 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 14:47:12,117 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 14:47:12,132 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 14:47:12,166 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 14:47:15,885 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 14:47:15,885 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 14:47:15,885 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 14:47:15,885 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 14:47:15,931 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 14:47:21,323 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 14:47:21,323 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 14:47:21,328 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 14:47:21,337 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 14:47:21,355 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 14:47:24,831 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 14:47:24,840 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 14:47:24,841 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 14:47:24,841 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 14:47:24,881 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 14:47:28,494 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 14:47:28,494 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-10 14:47:28,511 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 14:47:28,511 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-10 14:47:28,545 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 14:47:33,331 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 14:47:33,334 - mark_checklist_complete - INFO - Checklist 68 found, current status: True
+2025-05-10 14:47:33,334 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=43, task_type=TaskType.Normal
+2025-05-10 14:47:33,334 - mark_checklist_complete - INFO - Checklist 68 marked as incomplete
+2025-05-10 14:47:33,382 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:45:13,880 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:45:13,880 - mark_checklist_complete - INFO - Checklist 80 found, current status: False
+2025-05-10 15:45:13,896 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=49, task_type=TaskType.Normal
+2025-05-10 15:45:13,896 - mark_checklist_complete - INFO - Checklist 80 marked as completed
+2025-05-10 15:45:13,940 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:45:20,300 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:45:20,304 - mark_checklist_complete - INFO - Checklist 81 found, current status: False
+2025-05-10 15:45:20,308 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=49, task_type=TaskType.Normal
+2025-05-10 15:45:20,318 - mark_checklist_complete - INFO - Checklist 81 marked as completed
+2025-05-10 15:45:20,352 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:49:17,391 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:49:17,391 - mark_checklist_complete - INFO - Checklist 80 found, current status: True
+2025-05-10 15:49:17,391 - mark_checklist_complete - INFO - Checklist 80 already completed
+2025-05-10 15:49:17,398 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=49, task_type=TaskType.Normal
+2025-05-10 15:49:17,407 - mark_checklist_complete - INFO - Checklist 80 marked as completed
+2025-05-10 15:49:17,451 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:51:33,367 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:51:33,367 - mark_checklist_complete - INFO - Checklist 83 found, current status: False
+2025-05-10 15:51:33,377 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=49, task_type=TaskType.Normal
+2025-05-10 15:51:33,394 - mark_checklist_complete - INFO - Checklist 83 marked as completed
+2025-05-10 15:51:33,429 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:52:16,626 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:52:16,629 - mark_checklist_complete - INFO - Checklist 84 found, current status: False
+2025-05-10 15:52:16,637 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=49, task_type=TaskType.Normal
+2025-05-10 15:52:16,642 - mark_checklist_complete - INFO - Checklist 84 marked as completed
+2025-05-10 15:52:16,687 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:56:57,239 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:56:57,246 - mark_checklist_complete - INFO - Checklist 85 found, current status: False
+2025-05-10 15:56:57,255 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=50, task_type=TaskType.Normal
+2025-05-10 15:56:57,271 - mark_checklist_complete - INFO - Checklist 85 marked as completed
+2025-05-10 15:56:57,314 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:57:02,275 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:57:02,280 - mark_checklist_complete - INFO - Checklist 86 found, current status: False
+2025-05-10 15:57:02,283 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=50, task_type=TaskType.Normal
+2025-05-10 15:57:02,291 - mark_checklist_complete - INFO - Checklist 86 marked as completed
+2025-05-10 15:57:02,317 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:58:59,231 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:58:59,231 - mark_checklist_complete - INFO - Checklist 88 found, current status: False
+2025-05-10 15:58:59,246 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=51, task_type=TaskType.Normal
+2025-05-10 15:58:59,259 - mark_checklist_complete - INFO - Checklist 88 marked as completed
+2025-05-10 15:58:59,299 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 15:59:02,699 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 15:59:02,705 - mark_checklist_complete - INFO - Checklist 89 found, current status: False
+2025-05-10 15:59:02,705 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=51, task_type=TaskType.Normal
+2025-05-10 15:59:02,716 - mark_checklist_complete - INFO - Checklist 89 marked as completed
+2025-05-10 15:59:02,733 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 16:00:36,083 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 16:00:36,083 - mark_checklist_complete - INFO - Checklist 91 found, current status: False
+2025-05-10 16:00:36,095 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=52, task_type=TaskType.Normal
+2025-05-10 16:00:36,109 - mark_checklist_complete - INFO - Checklist 91 marked as completed
+2025-05-10 16:00:36,155 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 16:00:40,559 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 16:00:40,562 - mark_checklist_complete - INFO - Checklist 92 found, current status: False
+2025-05-10 16:00:40,564 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=52, task_type=TaskType.Normal
+2025-05-10 16:00:40,564 - mark_checklist_complete - INFO - Checklist 92 marked as completed
+2025-05-10 16:00:40,597 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 16:02:18,810 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 16:02:18,813 - mark_checklist_complete - INFO - Checklist 94 found, current status: False
+2025-05-10 16:02:18,829 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=53, task_type=TaskType.Normal
+2025-05-10 16:02:18,829 - mark_checklist_complete - INFO - Checklist 94 marked as completed
+2025-05-10 16:02:18,886 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 16:02:22,099 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 16:02:22,099 - mark_checklist_complete - INFO - Checklist 95 found, current status: False
+2025-05-10 16:02:22,114 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=53, task_type=TaskType.Normal
+2025-05-10 16:02:22,114 - mark_checklist_complete - INFO - Checklist 95 marked as completed
+2025-05-10 16:02:22,150 - mark_checklist_complete - INFO - Checklist status updated and committed successfully

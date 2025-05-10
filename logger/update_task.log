@@ -1,0 +1,685 @@
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 184, in update_task
+    Mark_complete_help(parent_task.task_id, db, Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 59, in Mark_complete_help
+    log_checklist_field_change(db,checklist.checklist_id,"is_compelete",checklist.is_complete,True,Current_user.employee_id)
+                                                                        ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Checklist' object has no attribute 'is_complete'. Did you mean: 'is_completed'?
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 180, in update_task
+    rollback_parent_task_if_needed(task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 241, in rollback_parent_task_if_needed
+    rollback_parent_task_if_needed(parent_task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 224, in rollback_parent_task_if_needed
+    next_review_task.status = TaskStatus.Pending.name  # Deactivate it
+                              ^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'TaskStatus' has no attribute 'Pending'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 180, in update_task
+    rollback_parent_task_if_needed(task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 247, in rollback_parent_task_if_needed
+    rollback_parent_task_if_needed(parent_task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 214, in rollback_parent_task_if_needed
+    next_review_task.status = TaskStatus.Pending.name
+                              ^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'TaskStatus' has no attribute 'Pending'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 180, in update_task
+    rollback_parent_task_if_needed(task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 247, in rollback_parent_task_if_needed
+    rollback_parent_task_if_needed(parent_task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 214, in rollback_parent_task_if_needed
+    next_review_task.status = TaskStatus.Pending.name
+                              ^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'TaskStatus' has no attribute 'Pending'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'checklist.created_by' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 147, in update_task
+    ).all()
+      ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'checklist.created_by' in 'field list'")
+[SQL: SELECT checklist.checklist_id AS checklist_checklist_id, checklist.checklist_name AS checklist_checklist_name, checklist.is_completed AS checklist_is_completed, checklist.created_by AS checklist_created_by, checklist.is_delete AS checklist_is_delete, checklist.created_at AS checklist_created_at, checklist.updated_at AS checklist_updated_at 
+FROM checklist INNER JOIN task_checklist_link ON checklist.checklist_id = task_checklist_link.checklist_id 
+WHERE task_checklist_link.parent_task_id = %(parent_task_id_1)s AND checklist.is_delete = false AND task_checklist_link.checklist_id IS NOT NULL]
+[parameters: {'parent_task_id_1': 2}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'checklist.created_by' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 148, in update_task
+    ).all()
+      ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 945, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'checklist.created_by' in 'field list'")
+[SQL: SELECT checklist.checklist_id AS checklist_checklist_id, checklist.checklist_name AS checklist_checklist_name, checklist.is_completed AS checklist_is_completed, checklist.created_by AS checklist_created_by, checklist.is_delete AS checklist_is_delete, checklist.created_at AS checklist_created_at, checklist.updated_at AS checklist_updated_at 
+FROM checklist INNER JOIN task_checklist_link ON checklist.checklist_id = task_checklist_link.checklist_id 
+WHERE task_checklist_link.parent_task_id = %(parent_task_id_1)s AND checklist.is_delete = false AND task_checklist_link.checklist_id IS NOT NULL]
+[parameters: {'parent_task_id_1': 2}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 165, in start_rollback_from_task
+    old_reviewed = task.is_reviewed
+                   ^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 1670, in load_scalar_attributes
+    result = load_on_ident(
+             ^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 509, in load_on_ident
+    return load_on_pk_identity(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2241, in _execute_internal
+    conn = self._connection_for_bind(bind)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2110, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in _connection_for_bind
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 103, in _go
+    self._raise_for_prerequisite_state(fn.__name__, current_state)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 973, in _raise_for_prerequisite_state
+    raise sa_exc.PendingRollbackError(
+sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`employeee_task`.`task_update_logs`, CONSTRAINT `task_update_logs_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`employee_id`))')
+[SQL: INSERT INTO task_update_logs (task_id, field_name, old_value, new_value, updated_by, updated_at) VALUES (%(task_id)s, %(field_name)s, %(old_value)s, %(new_value)s, %(updated_by)s, %(updated_at)s)]
+[parameters: {'task_id': 11, 'field_name': 'status', 'old_value': 'Completed', 'new_value': 'New', 'updated_by': 0, 'updated_at': datetime.datetime(2025, 4, 30, 11, 43, 12, 72626)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 165, in start_rollback_from_task
+    old_reviewed = task.is_reviewed
+                   ^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 1670, in load_scalar_attributes
+    result = load_on_ident(
+             ^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 509, in load_on_ident
+    return load_on_pk_identity(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2241, in _execute_internal
+    conn = self._connection_for_bind(bind)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2110, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in _connection_for_bind
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 103, in _go
+    self._raise_for_prerequisite_state(fn.__name__, current_state)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 973, in _raise_for_prerequisite_state
+    raise sa_exc.PendingRollbackError(
+sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`employeee_task`.`task_update_logs`, CONSTRAINT `task_update_logs_ibfk_2` FOREIGN KEY (`updated_by`) REFERENCES `users` (`employee_id`))')
+[SQL: INSERT INTO task_update_logs (task_id, field_name, old_value, new_value, updated_by, updated_at) VALUES (%(task_id)s, %(field_name)s, %(old_value)s, %(new_value)s, %(updated_by)s, %(updated_at)s)]
+[parameters: {'task_id': 11, 'field_name': 'status', 'old_value': 'Completed', 'new_value': 'New', 'updated_by': 0, 'updated_at': datetime.datetime(2025, 4, 30, 11, 44, 34, 100422)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 186, in start_rollback_from_task
+    rollback_review_chain(task, db)
+TypeError: rollback_review_chain() missing 1 required positional argument: 'Current_user'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db,Current_user)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\Tasks\functions.py", line 186, in start_rollback_from_task
+    rollback_review_chain(task, db,Current_user)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: rollback_review_chain() missing 1 required positional argument: 'Current_user'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db,Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 195, in start_rollback_from_task
+    rollback_review_chain(task, db, Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 87, in rollback_review_chain
+    status_log = get_rollback_log(task.task_id, "status", task.status.value, Current_user.employee_id, db)
+                 ^^^^^^^^^^^^^^^^
+NameError: name 'get_rollback_log' is not defined
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db,Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 195, in start_rollback_from_task
+    # Revert any child review task that may have been triggered
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\Tasks\functions.py", line 87, in rollback_review_chain
+    def rollback_review_chain(task, db, Current_user):
+                     ^^^^^^^^^^^^^^^^
+NameError: name 'get_rollback_log' is not defined
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 211, in update_task
+    start_rollback_from_task(task, db,Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 209, in start_rollback_from_task
+    rollback_review_chain(task, db, Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 101, in rollback_review_chain
+    status_log = get_rollback_log(task.task_id, "status", task.status.value, Current_user.employee_id, db)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\Tasks\functions.py", line 80, in get_rollback_log
+    return db.query(TaskUpdateLog).filter(
+                    ^^^^^^^^^^^^^
+NameError: name 'TaskUpdateLog' is not defined
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 165, in update_task
+    log_task_field_change(db, review_task.task_id, "is_reviewed", False, True, Current_user.employee_id)
+                              ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'review_task' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 165, in update_task
+    log_task_field_change(db, task.task_id, "is_reviewed", False, True, Current_user.employee_id)
+                              ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'review_task' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 173, in update_task
+    reverse_completion_from_review(task, db, Current_user.employee_id, logger)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 178, in reverse_completion_from_review
+    recurse_reverse(task.parent_task_id)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 138, in recurse_reverse
+    ).all()
+      ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1630, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 711, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 320, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4728, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 686, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1246, in _create_orm_context
+    self._setup_for_generate()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1281, in _setup_for_generate
+    self._join(query._setup_joins, self._entities)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1924, in _join
+    self._join_left_to_right(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2023, in _join_left_to_right
+    _ORMJoin(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\util.py", line 1884, in __init__
+    expression.Join.__init__(self, left, right, onclause, isouter, full)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1297, in __init__
+    self.onclause = self._match_primaries(self.left, self.right)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1408, in _match_primaries
+    return self._join_condition(left, right, a_subset=left_right)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1431, in _join_condition
+    cls._joincond_trim_constraints(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1576, in _joincond_trim_constraints
+    raise exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'tasks' and 'task_checklist_link'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 169, in update_task
+    propagate_completion_upwards(task, db, Current_user.employee_id, logger)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 106, in propagate_completion_upwards
+    complete_task_and_children(task)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 50, in complete_task_and_children
+    child.previous_status = child.status
+                            ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'status'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 169, in update_task
+    propagate_completion_upwards(task, db, Current_user.employee_id, logger)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 106, in propagate_completion_upwards
+    complete_task_and_children(task)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 50, in complete_task_and_children
+    child.previous_status = child.status
+                            ^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'status'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 169, in update_task
+    propagate_completion_upwards(task, db, Current_user.employee_id, logger)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 107, in propagate_completion_upwards
+    complete_task_and_children(task)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 50, in complete_task_and_children
+    print(child.task_id)
+          ^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'task_id'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 174, in update_task
+    reverse_completion_from_review(task, db, Current_user.employee_id, logger)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 179, in reverse_completion_from_review
+    recurse_reverse(task.parent_task_id)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 139, in recurse_reverse
+    ).all()
+      ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1630, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 711, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 320, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4728, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 686, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1246, in _create_orm_context
+    self._setup_for_generate()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1281, in _setup_for_generate
+    self._join(query._setup_joins, self._entities)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1924, in _join
+    self._join_left_to_right(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2023, in _join_left_to_right
+    _ORMJoin(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\util.py", line 1884, in __init__
+    expression.Join.__init__(self, left, right, onclause, isouter, full)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1297, in __init__
+    self.onclause = self._match_primaries(self.left, self.right)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1408, in _match_primaries
+    return self._join_condition(left, right, a_subset=left_right)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1431, in _join_condition
+    cls._joincond_trim_constraints(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1576, in _joincond_trim_constraints
+    raise exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'tasks' and 'task_checklist_link'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 63, in update_task
+    log_task_field_change(db, existing_review.task_id, "is_review_required", False, True, Current_user.employee_id)
+                              ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'existing_review' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 63, in update_task
+    log_task_field_change(db, task.task_id, "is_review_required", False, True, Current_user.employee_id)
+                              ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'existing_review' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 179, in update_task
+    reverse_completion_from_review(task, db, Current_user.employee_id, logger)
+TypeError: reverse_completion_from_review() missing 1 required positional argument: 'Current_user'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 170, in update_task
+    propagate_completion_upwards(task, db, Current_user.employee_id, logger,Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 47, in propagate_completion_upwards
+    check_checklist_completion(task.task_id)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 26, in check_checklist_completion
+    checklist = db.query(Checklist).filter(Checklist.checklist_id == link.checklist_id, Checklist.is_delete == False).first()
+                                                                     ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'checklist_id'
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 170, in update_task
+    propagate_completion_upwards(task, db, Current_user.employee_id, logger,Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 48, in propagate_completion_upwards
+    check_checklist_completion(task.task_id)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 28, in check_checklist_completion
+    if checklist:
+       ^^^^^^^^^
+UnboundLocalError: cannot access local variable 'checklist' where it is not associated with a value
+Traceback (most recent call last):
+  File "D:\Task Management System Final code\Tasks\Update_Task.py", line 170, in update_task
+    propagate_completion_upwards(task, db, Current_user.employee_id, logger,Current_user)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 70, in propagate_completion_upwards
+    check_checklist_completion(final_task.task_id)
+  File "D:\Task Management System Final code\Tasks\functions.py", line 51, in check_checklist_completion
+    ).all()
+      ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2858, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1630, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 711, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 320, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4728, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 686, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1246, in _create_orm_context
+    self._setup_for_generate()
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1281, in _setup_for_generate
+    self._join(query._setup_joins, self._entities)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1924, in _join
+    self._join_left_to_right(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2023, in _join_left_to_right
+    _ORMJoin(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\orm\util.py", line 1884, in __init__
+    expression.Join.__init__(self, left, right, onclause, isouter, full)
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1297, in __init__
+    self.onclause = self._match_primaries(self.left, self.right)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1408, in _match_primaries
+    return self._join_condition(left, right, a_subset=left_right)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1431, in _join_condition
+    cls._joincond_trim_constraints(
+  File "D:\Task Management System Final code\.venv\Lib\site-packages\sqlalchemy\sql\selectable.py", line 1576, in _joincond_trim_constraints
+    raise exc.AmbiguousForeignKeysError(
+sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'tasks' and 'task_checklist_link'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+2025-05-10 10:08:59,248 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 10:08:59,250 - update_task - INFO - User 5 is updating Task 25 | Creator=True, Assignee=True
+2025-05-10 10:08:59,253 - update_task - INFO - Starting propagate_completion_upwards for task_id=25
+2025-05-10 10:08:59,253 - update_task - INFO - Marking child task 24 as Completed
+2025-05-10 10:08:59,260 - update_task - INFO - Child task 24 of review task 25 marked as Completed
+2025-05-10 10:08:59,266 - update_task - INFO - Checklist 36 marked as completed
+2025-05-10 10:08:59,273 - update_task - INFO - propagate_completion_upwards completed for task_id=24
+2025-05-10 10:08:59,276 - update_task - INFO - Task 25 updated successfully with changes: {}
+2025-05-10 10:12:09,403 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 10:12:09,419 - update_task - INFO - User 5 is updating Task 25 | Creator=True, Assignee=True
+2025-05-10 10:12:09,423 - update_task - INFO - Starting propagate_completion_upwards for task_id=25
+2025-05-10 10:12:09,423 - update_task - INFO - Marking child task 24 as Completed
+2025-05-10 10:12:09,436 - update_task - INFO - Child task 24 of review task 25 marked as Completed
+2025-05-10 10:12:09,453 - update_task - INFO - Checklist 36 marked as completed
+2025-05-10 10:12:09,469 - update_task - INFO - propagate_completion_upwards completed for task_id=24
+2025-05-10 10:12:09,474 - update_task - INFO - Task 25 updated successfully with changes: {}
+2025-05-10 15:26:03,208 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 15:26:03,222 - update_task - INFO - User 5 is updating Task 46 | Creator=True, Assignee=True
+2025-05-10 15:26:03,257 - update_task - INFO - Starting propagate_completion_upwards for task_id=46
+2025-05-10 15:26:03,263 - update_task - INFO - Marking child task 45 as Completed
+2025-05-10 15:26:03,274 - update_task - INFO - Child task 45 of review task 46 marked as Completed
+2025-05-10 15:26:03,282 - update_task - INFO - propagate_completion_upwards completed for task_id=45
+2025-05-10 15:26:03,293 - update_task - INFO - Task 46 updated successfully with changes: {'task_name': True}
+2025-05-10 15:26:26,765 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 15:26:26,765 - update_task - INFO - User 5 is updating Task 46 | Creator=True, Assignee=True
+2025-05-10 15:26:26,782 - update_task - INFO - Starting reverse_completion_from_review for task_id=46
+2025-05-10 15:26:26,799 - update_task - INFO - Review task 46 reverted to TaskStatus.New
+2025-05-10 15:26:26,811 - update_task - INFO - Reverting normal task 45 from Completed to TaskStatus.To_Do
+2025-05-10 15:26:26,813 - update_task - INFO - reverse_completion_from_review completed for task_id=45
+2025-05-10 15:26:26,829 - update_task - INFO - Task 46 updated successfully with changes: {'task_name': False}
