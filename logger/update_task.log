@@ -683,3 +683,280 @@ sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'tasks' a
 2025-05-10 15:26:26,811 - update_task - INFO - Reverting normal task 45 from Completed to TaskStatus.To_Do
 2025-05-10 15:26:26,813 - update_task - INFO - reverse_completion_from_review completed for task_id=45
 2025-05-10 15:26:26,829 - update_task - INFO - Task 46 updated successfully with changes: {'task_name': False}
+2025-05-10 17:43:08,523 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 17:43:08,523 - update_task - INFO - User 5 is updating Task 59 | Creator=True, Assignee=True
+2025-05-10 17:43:08,539 - update_task - INFO - Starting propagate_completion_upwards for task_id=59
+2025-05-10 17:43:08,539 - update_task - INFO - Marking child task 58 as Completed
+2025-05-10 17:43:08,555 - update_task - INFO - Child task 58 of review task 59 marked as Completed
+2025-05-10 17:43:08,561 - update_task - INFO - propagate_completion_upwards completed for task_id=58
+2025-05-10 17:43:08,569 - update_task - INFO - Task 59 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 17:43:13,496 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 17:43:13,496 - update_task - INFO - User 5 is updating Task 59 | Creator=True, Assignee=True
+2025-05-10 17:43:13,507 - update_task - INFO - Starting reverse_completion_from_review for task_id=59
+2025-05-10 17:43:13,516 - update_task - INFO - Review task 59 reverted to TaskStatus.To_Do
+2025-05-10 17:43:13,524 - update_task - INFO - Reverting normal task 58 from Completed to TaskStatus.In_Review
+2025-05-10 17:43:13,528 - update_task - INFO - reverse_completion_from_review completed for task_id=58
+2025-05-10 17:43:13,528 - update_task - INFO - Task 59 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 17:43:35,227 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 17:43:35,227 - update_task - INFO - User 5 is updating Task 59 | Creator=True, Assignee=True
+2025-05-10 17:43:35,242 - update_task - INFO - Starting propagate_completion_upwards for task_id=59
+2025-05-10 17:43:35,242 - update_task - INFO - Marking child task 58 as Completed
+2025-05-10 17:43:35,258 - update_task - INFO - Child task 58 of review task 59 marked as Completed
+2025-05-10 17:43:35,265 - update_task - INFO - propagate_completion_upwards completed for task_id=58
+2025-05-10 17:43:35,275 - update_task - INFO - Task 59 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 17:43:39,961 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 17:43:39,963 - update_task - INFO - User 5 is updating Task 59 | Creator=True, Assignee=True
+2025-05-10 17:43:39,978 - update_task - INFO - Starting reverse_completion_from_review for task_id=59
+2025-05-10 17:43:39,984 - update_task - INFO - Review task 59 reverted to TaskStatus.To_Do
+2025-05-10 17:43:39,995 - update_task - INFO - Reverting normal task 58 from Completed to TaskStatus.In_Review
+2025-05-10 17:43:40,003 - update_task - INFO - reverse_completion_from_review completed for task_id=58
+2025-05-10 17:43:40,011 - update_task - INFO - Task 59 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 17:43:44,523 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 17:43:44,523 - update_task - INFO - User 5 is updating Task 59 | Creator=True, Assignee=True
+2025-05-10 17:43:44,537 - update_task - INFO - Starting propagate_completion_upwards for task_id=59
+2025-05-10 17:43:44,537 - update_task - INFO - Marking child task 58 as Completed
+2025-05-10 17:43:44,553 - update_task - INFO - Child task 58 of review task 59 marked as Completed
+2025-05-10 17:43:44,556 - update_task - INFO - propagate_completion_upwards completed for task_id=58
+2025-05-10 17:43:44,561 - update_task - INFO - Task 59 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:26:32,296 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:26:32,299 - update_task - INFO - User 5 is updating Task 62 | Creator=True, Assignee=False
+2025-05-10 18:26:32,313 - update_task - WARNING - Only the final review task can mark is_reviewed=True
+2025-05-10 18:26:40,270 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:26:40,270 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:26:40,283 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:26:40,287 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:26:40,303 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:26:40,315 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:26:40,320 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:26:40,320 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:27:46,972 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:27:46,974 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:27:46,984 - update_task - INFO - Starting reverse_completion_from_review for task_id=63
+2025-05-10 18:27:46,991 - update_task - INFO - Review task 63 reverted to TaskStatus.To_Do
+2025-05-10 18:27:46,995 - update_task - INFO - Review task 62 reverted to TaskStatus.In_Review
+2025-05-10 18:27:47,001 - update_task - INFO - Review task 61 reverted to TaskStatus.In_Review
+2025-05-10 18:27:47,010 - update_task - INFO - Reverting normal task 60 from Completed to TaskStatus.To_Do
+2025-05-10 18:27:47,014 - update_task - INFO - reverse_completion_from_review completed for task_id=60
+2025-05-10 18:27:47,018 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:30:07,077 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:30:07,077 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:30:07,098 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:30:07,107 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:30:07,115 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:30:07,125 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:30:07,130 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:30:07,132 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:30:18,300 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:30:18,300 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:30:18,307 - update_task - INFO - Starting reverse_completion_from_review for task_id=63
+2025-05-10 18:30:18,317 - update_task - INFO - Review task 63 reverted to TaskStatus.To_Do
+2025-05-10 18:30:18,324 - update_task - INFO - Review task 62 reverted to TaskStatus.In_Review
+2025-05-10 18:30:18,333 - update_task - INFO - Review task 61 reverted to TaskStatus.In_Review
+2025-05-10 18:30:18,338 - update_task - INFO - Reverting normal task 60 from Completed to TaskStatus.To_Do
+2025-05-10 18:30:18,341 - update_task - INFO - reverse_completion_from_review completed for task_id=60
+2025-05-10 18:30:18,350 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:30:25,479 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:30:25,489 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:30:25,496 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:30:25,505 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:30:25,513 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:30:25,522 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:30:25,525 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:30:25,530 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:31:37,316 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:31:37,318 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:31:37,342 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:31:37,358 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:31:37,361 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:31:37,371 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:31:37,378 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:31:37,388 - update_task - ERROR - Unexpected error while updating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 155, in update_task
+    result = set(result.get("updated_tasks", []))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+2025-05-10 18:34:02,815 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:34:02,822 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:34:02,842 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:34:02,856 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:34:02,862 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:34:02,870 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:34:02,874 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:34:02,883 - update_task - ERROR - Unexpected error while updating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 155, in update_task
+    result = deduplicate_tasks(result)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\functions.py", line 137, in deduplicate_tasks
+    task_id = task.get("task_id")
+              ^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+2025-05-10 18:34:37,787 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:34:37,787 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:34:37,799 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:34:37,810 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:34:37,820 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:34:37,820 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:34:37,828 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:34:37,832 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:34:37,840 - update_task - ERROR - Unexpected error while updating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 166, in update_task
+    return {"message": "Task updated successfully", "updated_fields": update_fields,"status": task.status, "updated_tasks": result.get("updated_tasks", [])}
+                                                                                                                            ^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+2025-05-10 18:36:23,479 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:36:23,486 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:36:23,507 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:36:23,507 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:36:23,517 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:36:23,523 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:36:23,530 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:36:23,537 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:36:33,646 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:36:33,651 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:36:33,667 - update_task - INFO - Starting reverse_completion_from_review for task_id=63
+2025-05-10 18:36:33,671 - update_task - INFO - Review task 63 reverted to TaskStatus.Completed
+2025-05-10 18:36:33,680 - update_task - INFO - Review task 62 reverted to TaskStatus.Completed
+2025-05-10 18:36:33,691 - update_task - INFO - Review task 61 reverted to TaskStatus.Completed
+2025-05-10 18:36:33,694 - update_task - INFO - Reverting normal task 60 from Completed to TaskStatus.Completed
+2025-05-10 18:36:33,705 - update_task - INFO - reverse_completion_from_review completed for task_id=60
+2025-05-10 18:36:33,711 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:37:12,601 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:37:12,615 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:37:12,651 - update_task - INFO - Starting propagate_completion_upwards for task_id=63
+2025-05-10 18:37:12,660 - update_task - INFO - Child task 62 of review task 63 marked as Completed
+2025-05-10 18:37:12,666 - update_task - INFO - Child task 61 of review task 62 marked as Completed
+2025-05-10 18:37:12,677 - update_task - INFO - Child task 60 of review task 61 marked as Completed
+2025-05-10 18:37:12,685 - update_task - INFO - propagate_completion_upwards completed for task_id=60
+2025-05-10 18:37:12,695 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:37:21,421 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:37:21,421 - update_task - INFO - User 5 is updating Task 63 | Creator=True, Assignee=False
+2025-05-10 18:37:21,435 - update_task - INFO - Starting reverse_completion_from_review for task_id=63
+2025-05-10 18:37:21,440 - update_task - INFO - Review task 63 reverted to TaskStatus.Completed
+2025-05-10 18:37:21,451 - update_task - INFO - Review task 62 reverted to TaskStatus.Completed
+2025-05-10 18:37:21,454 - update_task - INFO - Review task 61 reverted to TaskStatus.Completed
+2025-05-10 18:37:21,470 - update_task - INFO - Reverting normal task 60 from Completed to TaskStatus.Completed
+2025-05-10 18:37:21,477 - update_task - INFO - reverse_completion_from_review completed for task_id=60
+2025-05-10 18:37:21,484 - update_task - INFO - Task 63 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:38:30,309 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:38:30,318 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:38:30,325 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:38:30,341 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:38:30,341 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:38:30,351 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:38:37,181 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:38:37,181 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:38:37,208 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:38:37,214 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:38:37,231 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:38:37,240 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:38:37,251 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:38:43,621 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:38:43,621 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:38:43,635 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:38:43,652 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:38:43,658 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:38:43,663 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:38:48,673 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:38:48,673 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:38:48,684 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:38:48,690 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:38:48,690 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:38:48,699 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:38:48,706 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:38:53,595 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:38:53,595 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:38:53,617 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:38:53,627 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:38:53,627 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:38:53,637 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:39:00,049 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:39:00,061 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:39:00,077 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:39:00,084 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:39:00,093 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:39:00,098 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:39:00,109 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:41:08,714 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:41:08,727 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:41:08,761 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:41:08,774 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:41:08,784 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:41:08,789 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:43:30,773 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:43:30,783 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:43:30,806 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:43:30,806 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:43:30,816 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:43:30,823 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:43:30,837 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:43:30,839 - update_task - ERROR - Unexpected error while updating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 171, in update_task
+    logger.info(f"Task {task_id} updated successfully with changes: {update_fields}")
+                                                                                      
+NameError: name 'status' is not defined
+2025-05-10 18:43:36,980 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:43:36,989 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:43:37,001 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:43:37,009 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:43:37,016 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:43:37,023 - update_task - ERROR - Unexpected error while updating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 166, in update_task
+    result  = result.remove(task.task_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: list.remove(x): x not in list
+2025-05-10 18:44:34,074 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:44:34,077 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:44:34,105 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:44:34,108 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:44:34,115 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:44:34,127 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:44:56,624 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:44:56,628 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:44:56,666 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:44:56,678 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:44:56,678 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:44:56,711 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:45:26,638 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:45:26,644 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:45:26,652 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:45:26,664 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:45:26,671 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:45:26,678 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:45:26,688 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:45:36,098 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:45:36,098 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:45:36,130 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:45:36,146 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:45:36,146 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:45:36,146 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:46:13,891 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:46:13,902 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:46:13,925 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:46:13,934 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:46:13,942 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:46:13,950 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:46:13,959 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:46:20,197 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:46:20,211 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:46:20,214 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:46:20,230 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:46:20,230 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:46:20,247 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-10 18:46:26,830 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:46:26,830 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:46:26,846 - update_task - INFO - Starting reverse_completion_from_review for task_id=65
+2025-05-10 18:46:26,846 - update_task - INFO - Review task 65 reverted to TaskStatus.New
+2025-05-10 18:46:26,862 - update_task - INFO - Reverting normal task 64 from Completed to TaskStatus.To_Do
+2025-05-10 18:46:26,870 - update_task - INFO - reverse_completion_from_review completed for task_id=64
+2025-05-10 18:46:26,882 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': False}
+2025-05-10 18:46:33,774 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-10 18:46:33,774 - update_task - INFO - User 5 is updating Task 65 | Creator=True, Assignee=True
+2025-05-10 18:46:33,791 - update_task - INFO - Starting propagate_completion_upwards for task_id=65
+2025-05-10 18:46:33,808 - update_task - INFO - Child task 64 of review task 65 marked as Completed
+2025-05-10 18:46:33,811 - update_task - INFO - propagate_completion_upwards completed for task_id=64
+2025-05-10 18:46:33,825 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}

@@ -1274,3 +1274,23 @@ UnboundLocalError: cannot access local variable 'old_status' where it is not ass
 2025-05-10 16:02:22,114 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=53, task_type=TaskType.Normal
 2025-05-10 16:02:22,114 - mark_checklist_complete - INFO - Checklist 95 marked as completed
 2025-05-10 16:02:22,150 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 17:42:20,514 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 17:42:20,527 - mark_checklist_complete - INFO - Checklist 109 found, current status: False
+2025-05-10 17:42:20,533 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=58, task_type=TaskType.Normal
+2025-05-10 17:42:20,552 - mark_checklist_complete - INFO - Checklist 109 marked as completed
+2025-05-10 17:42:20,606 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 17:42:30,020 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 17:42:30,033 - mark_checklist_complete - INFO - Checklist 110 found, current status: False
+2025-05-10 17:42:30,037 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=58, task_type=TaskType.Normal
+2025-05-10 17:42:30,037 - mark_checklist_complete - INFO - Checklist 110 marked as completed
+2025-05-10 17:42:30,072 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 17:42:35,763 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 17:42:35,763 - mark_checklist_complete - INFO - Checklist 111 found, current status: False
+2025-05-10 17:42:35,775 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=58, task_type=TaskType.Normal
+2025-05-10 17:42:35,776 - mark_checklist_complete - INFO - Checklist 111 marked as completed
+2025-05-10 17:42:35,826 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-10 19:00:24,212 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
+2025-05-10 19:00:24,212 - mark_checklist_complete - INFO - Checklist 121 found, current status: False
+2025-05-10 19:00:24,229 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=68, task_type=TaskType.Normal
+2025-05-10 19:00:24,245 - mark_checklist_complete - INFO - Checklist 121 marked as completed
+2025-05-10 19:00:24,296 - mark_checklist_complete - INFO - Checklist status updated and committed successfully

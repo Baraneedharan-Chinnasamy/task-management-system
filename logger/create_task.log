@@ -763,3 +763,45 @@ fastapi.exceptions.HTTPException: 403: Task not found or unauthorized
 2025-05-10 16:11:25,000 - create_task - INFO - Checklist 108 linked to task 57
 2025-05-10 16:11:25,003 - create_task - INFO - Subtask 57 linked to checklist 93
 2025-05-10 16:11:25,020 - create_task - INFO - Task and dependencies committed successfully
+2025-05-10 17:42:04,275 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-10 17:42:04,308 - create_task - INFO - Main task created with ID=58
+2025-05-10 17:42:04,340 - create_task - INFO - Checklist 109 linked to task 58
+2025-05-10 17:42:04,344 - create_task - INFO - Checklist 110 linked to task 58
+2025-05-10 17:42:04,360 - create_task - INFO - Checklist 111 linked to task 58
+2025-05-10 17:42:04,386 - create_task - INFO - Task and dependencies committed successfully
+2025-05-10 18:25:39,603 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-10 18:25:39,624 - create_task - INFO - Main task created with ID=60
+2025-05-10 18:25:39,653 - create_task - INFO - Checklist 112 linked to task 60
+2025-05-10 18:25:39,674 - create_task - INFO - Checklist 113 linked to task 60
+2025-05-10 18:25:39,682 - create_task - INFO - Checklist 114 linked to task 60
+2025-05-10 18:25:39,705 - create_task - INFO - Task and dependencies committed successfully
+2025-05-10 18:38:15,645 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-10 18:38:15,658 - create_task - INFO - Main task created with ID=64
+2025-05-10 18:38:15,664 - create_task - INFO - Checklist 115 linked to task 64
+2025-05-10 18:38:15,674 - create_task - INFO - Checklist 116 linked to task 64
+2025-05-10 18:38:15,679 - create_task - INFO - Checklist 117 linked to task 64
+2025-05-10 18:38:15,695 - create_task - INFO - Task and dependencies committed successfully
+2025-05-10 18:59:32,574 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-10 18:59:32,576 - create_task - INFO - Main task created with ID=66
+2025-05-10 18:59:32,581 - create_task - INFO - Checklist 118 linked to task 66
+2025-05-10 18:59:32,583 - create_task - INFO - Checklist 119 linked to task 66
+2025-05-10 18:59:32,585 - create_task - INFO - Checklist 120 linked to task 66
+2025-05-10 18:59:32,593 - create_task - ERROR - Unexpected error while creating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Create_Task.py", line 138, in add_checklist_subtask
+    TaskChecklistLink.parent_task_id == parent_task.task_id,
+                                        ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'parent_task' where it is not associated with a value
+2025-05-10 19:00:05,669 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-10 19:00:05,669 - create_task - INFO - Main task created with ID=68
+2025-05-10 19:00:05,678 - create_task - INFO - Checklist 121 linked to task 68
+2025-05-10 19:00:05,682 - create_task - INFO - Checklist 122 linked to task 68
+2025-05-10 19:00:05,684 - create_task - INFO - Checklist 123 linked to task 68
+2025-05-10 19:00:05,690 - create_task - INFO - Task and dependencies committed successfully
+2025-05-10 19:00:41,426 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-10 19:00:41,426 - create_task - INFO - Main task created with ID=70
+2025-05-10 19:00:41,443 - create_task - INFO - Checklist 124 linked to task 70
+2025-05-10 19:00:41,443 - create_task - INFO - Checklist 125 linked to task 70
+2025-05-10 19:00:41,443 - create_task - INFO - Checklist 126 linked to task 70
+2025-05-10 19:00:41,460 - create_task - INFO - Subtask 70 linked to checklist 121
+2025-05-10 19:00:41,543 - create_task - INFO - Task and dependencies committed successfully

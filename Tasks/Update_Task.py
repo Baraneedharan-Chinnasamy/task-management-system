@@ -7,7 +7,7 @@ from Logs.functions import log_task_field_change, log_checklist_field_change
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
 from Tasks.inputs import UpdateTaskRequest, SendForReview
-from Tasks.functions import reverse_completion_from_review, propagate_completion_upwards
+from Tasks.functions import reverse_completion_from_review, propagate_completion_upwards,deduplicate_tasks
 from logger.logger import get_logger
 
 router = APIRouter()
@@ -87,6 +87,8 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                         update_fields['is_review_required'] = True
                     else:
                         task.is_review_required = False
+                        if task.status == TaskStatus.In_Review:
+                            task.status = TaskStatus.Completed.name    
                         update_fields['is_review_required'] = False
                         review_task = db.query(Task).filter(
                             Task.parent_task_id == task_id,
@@ -151,17 +153,27 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     log_task_field_change(db, task.task_id, "is_reviewed", False, True, Current_user.employee_id)
                     task.previous_status = task.status
                     task.status = TaskStatus.Completed.name
-                    propagate_completion_upwards(task, db, Current_user.employee_id, logger, Current_user)
+                    result = propagate_completion_upwards(task, db, Current_user.employee_id, logger, Current_user)
+                    updated_tasks_raw = result.get("updated_tasks", [])
+                    result = deduplicate_tasks(updated_tasks_raw)
+                    print(task.task_id)
+                    result = [item for item in result if item.get("task_id") != task.task_id]
+
+                    
                 else:
                     task.is_reviewed = False
                     log_task_field_change(db, task.task_id, "is_reviewed", True, False, Current_user.employee_id)
-                    reverse_completion_from_review(task, db, Current_user.employee_id, logger, Current_user)
+                    result =reverse_completion_from_review(task, db, Current_user.employee_id, logger, Current_user)
+                    updated_tasks_raw = result.get("updated_tasks", [])
+                    result = deduplicate_tasks(updated_tasks_raw)
+                    result = [item for item in result if item.get("task_id") != task.task_id]
+
                 
                 update_fields['is_reviewed'] = task_data.is_reviewed
         
         db.commit()
         logger.info(f"Task {task_id} updated successfully with changes: {update_fields}")
-        return {"message": "Task updated successfully", "updated_fields": update_fields}
+        return {"message": "Task updated successfully", "updated_fields": update_fields,"status":task.status, "parent_task_chain": result}
 
     except Exception as e:
         db.rollback()
@@ -220,7 +232,7 @@ def send_for_review(data: SendForReview, db: Session = Depends(get_db), Current_
         db.commit()
         logger.info(f"Review task {review_task.task_id} created successfully")
 
-        return {"message": "Review task created successfully", "review_task_id": review_task.task_id}
+        return {"message": "Review task created successfully", "review_task_id": review_task.task_id,"status":task.status}
 
     except Exception as e:
         db.rollback()

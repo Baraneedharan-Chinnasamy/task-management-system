@@ -106,18 +106,7 @@ def add_checklist_subtask(
                 sub_task_id=new_task.task_id
             ))
 
-            # Parent task checklist progress
-            parent_task_checklists = db.query(TaskChecklistLink).filter(
-                TaskChecklistLink.parent_task_id == parent_task.task_id,
-                TaskChecklistLink.checklist_id.isnot(None)
-            ).all()
-
-            checklist_ids = [link.checklist_id for link in parent_task_checklists]
-            checklists = db.query(Checklist).filter(Checklist.checklist_id.in_(checklist_ids)).all()
-
-            completed = sum(1 for c in checklists if c.is_completed)
-            total = len(checklists)
-            parent_checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
+            
 
             logger.info(f"Subtask {new_task.task_id} linked to checklist {data.checklist_id}")
             # Trigger status/checklist propagation
@@ -128,6 +117,34 @@ def add_checklist_subtask(
                 
                 propagate_incomplete_upwards(data.checklist_id, db, Current_user)
         db.commit()
+        if data.checklist_id is not None:
+            link = db.query(TaskChecklistLink).filter(
+                TaskChecklistLink.checklist_id == data.checklist_id,
+                TaskChecklistLink.parent_task_id.isnot(None)
+            ).first()
+            if not link:
+                raise HTTPException(status_code=404, detail="Checklist not found")
+
+            parent_task = db.query(Task).filter(
+                Task.task_id == link.parent_task_id,
+                or_(
+                    Task.created_by == Current_user.employee_id,
+                    Task.assigned_to == Current_user.employee_id
+                ),
+                Task.is_delete == False
+            ).first()
+            # Parent task checklist progress
+            parent_task_checklists = db.query(TaskChecklistLink).filter(
+                TaskChecklistLink.parent_task_id == parent_task.task_id,
+                TaskChecklistLink.checklist_id.isnot(None)
+            ).all()
+
+            checklist_ids = [link.checklist_id for link in parent_task_checklists]
+            checklists = db.query(Checklist).filter(Checklist.checklist_id.in_(checklist_ids),Checklist.is_delete == False).all()
+
+            completed = sum(1 for c in checklists if c.is_completed)
+            total = len(checklists)
+            parent_checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
         
 
         users = db.query(User).filter().all()
@@ -137,6 +154,7 @@ def add_checklist_subtask(
             "message": "Task created successfully",
             "Checklist_id_parent": data.checklist_id if data.checklist_id else None,
             "checkbox_status": False if data.checklist_id else True,
+            "is_completed": False if data.checklist_id else None,
             "parent_task_status":parent_task.status if data.checklist_id else None,
             "parent_checklist_progress": parent_checklist_progress if data.checklist_id else None,
             "task_id": new_task.task_id,
