@@ -1,14 +1,15 @@
 import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from sqlalchemy.sql import or_
-from models.models import Task, TaskStatus, TaskType, TaskChecklistLink, Checklist
+from sqlalchemy.sql import or_, desc
+from models.models import Task, TaskStatus, TaskType, TaskChecklistLink, Checklist, TaskTimeLog
 from Logs.functions import log_task_field_change, log_checklist_field_change
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
 from Tasks.inputs import UpdateTaskRequest, SendForReview
 from Tasks.functions import reverse_completion_from_review, propagate_completion_upwards,deduplicate_tasks
 from logger.logger import get_logger
+from datetime import datetime
 
 router = APIRouter()
 
@@ -154,6 +155,9 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     log_task_field_change(db, task.task_id, "is_reviewed", False, True, Current_user.employee_id)
                     task.previous_status = task.status
                     task.status = TaskStatus.Completed.name
+                    time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+                    time.end_time = None
+                    db.flush()
                     result = propagate_completion_upwards(task, db, Current_user.employee_id, logger, Current_user)
                     updated_tasks_raw = result.get("updated_tasks", [])
                     result = deduplicate_tasks(updated_tasks_raw)
@@ -213,6 +217,10 @@ def send_for_review(data: SendForReview, db: Session = Depends(get_db), Current_
 
         task.is_review_required = True
         task.status = TaskStatus.In_Review
+        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
+        if time is not None:
+            time.end_time = datetime.now()
+            db.flush()
         logger.info(f"Marked task {task.task_id} as in review")
 
         review_task = Task(

@@ -960,3 +960,22 @@ ValueError: list.remove(x): x not in list
 2025-05-10 18:46:33,808 - update_task - INFO - Child task 64 of review task 65 marked as Completed
 2025-05-10 18:46:33,811 - update_task - INFO - propagate_completion_upwards completed for task_id=64
 2025-05-10 18:46:33,825 - update_task - INFO - Task 65 updated successfully with changes: {'is_reviewed': True}
+2025-05-12 10:26:30,565 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-12 10:26:30,582 - update_task - INFO - User 5 is updating Task 72 | Creator=True, Assignee=False
+2025-05-12 10:26:30,582 - update_task - INFO - Assigned_to updated
+2025-05-12 10:26:30,616 - update_task - INFO - Task 72 updated successfully with changes: {'assigned_to': 2}
+2025-05-12 11:28:19,694 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-12 11:28:19,697 - update_task - INFO - User 5 is updating Task 73 | Creator=True, Assignee=True
+2025-05-12 11:28:19,701 - update_task - INFO - Task 73 updated successfully with changes: {}
+2025-05-12 11:28:43,340 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-12 11:28:43,342 - update_task - INFO - User 5 is updating Task 73 | Creator=True, Assignee=True
+2025-05-12 11:28:43,345 - update_task - INFO - Task 73 updated successfully with changes: {}
+2025-05-12 11:29:22,627 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-12 11:29:22,631 - update_task - INFO - User 5 is updating Task 73 | Creator=True, Assignee=True
+2025-05-12 11:29:22,633 - update_task - INFO - Task 73 updated successfully with changes: {}
+2025-05-12 11:29:53,769 - update_task - INFO - POST /update_task called by user_id=5
+2025-05-12 11:29:53,769 - update_task - INFO - User 5 is updating Task 73 | Creator=True, Assignee=True
+2025-05-12 11:29:53,796 - update_task - INFO - Starting propagate_completion_upwards for task_id=73
+2025-05-12 11:29:53,796 - update_task - INFO - Child task 72 of review task 73 marked as Completed
+2025-05-12 11:29:53,813 - update_task - INFO - propagate_completion_upwards completed for task_id=72
+2025-05-12 11:29:53,819 - update_task - INFO - Task 73 updated successfully with changes: {'is_reviewed': True}

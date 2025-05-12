@@ -13,6 +13,7 @@ from Delete.delete import router as delete_router
 from Authentication.authy import router as auth_router
 from Chat.chat import router as chat_router
 from Logs.logs import router as logs_router
+from Tasks.time_traking import router as time_tracking_router
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -47,3 +48,5 @@ app.include_router(update_checklist_router, prefix=f"{API_PREFIX}/checklist", ta
 app.include_router(checklist_status_router, prefix=f"{API_PREFIX}/checklist", tags=["Checklist"])
 app.include_router(delete_router, prefix=f"{API_PREFIX}/delete", tags=["Delete"])
 app.include_router(logs_router, prefix=f"{API_PREFIX}/logs", tags=["Logs"])
+app.include_router(time_tracking_router, prefix=f"{API_PREFIX}/tasks", tags=["Tasks"])
+

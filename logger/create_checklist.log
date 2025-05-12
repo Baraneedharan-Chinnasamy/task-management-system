@@ -157,3 +157,8 @@ UnboundLocalError: cannot access local variable 'checklist_progress' where it is
 2025-05-10 15:50:27,094 - create_checklist - INFO - Checklist created with ID=83
 2025-05-10 15:50:27,123 - create_checklist - INFO - Checklist created with ID=84
 2025-05-10 15:50:27,158 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-12 11:30:11,411 - create_checklist - INFO - POST /add_checklist called by user_id=5
+2025-05-12 11:30:11,411 - create_checklist - INFO - Task found: task_id=73, type=TaskType.Review
+2025-05-12 11:30:11,427 - create_checklist - INFO - Review task 73 status updated to In_ReEdit
+2025-05-12 11:30:11,429 - create_checklist - INFO - Checklist created with ID=128
+2025-05-12 11:30:11,444 - create_checklist - INFO - All checklists created and task updates committed successfully

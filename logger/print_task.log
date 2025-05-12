@@ -94,3 +94,111 @@ TypeError: 'Task' object is not iterable
 2025-05-10 15:23:51,608 - print_task - INFO - Returning task details for task_id=38
 2025-05-10 15:23:58,876 - print_task - INFO - GET /task/task_id called - task_id=37 by user_id=5
 2025-05-10 15:23:58,931 - print_task - INFO - Returning task details for task_id=37
+2025-05-12 10:36:18,769 - print_task - INFO - GET /task/task_id called - task_id=72 by user_id=5
+2025-05-12 10:36:18,802 - print_task - INFO - Returning task details for task_id=72
+2025-05-12 10:37:14,933 - print_task - INFO - GET /task/task_id called - task_id=72 by user_id=5
+2025-05-12 10:37:14,937 - print_task - ERROR - Error retrieving task details for task_id=72: cannot access local variable 'checklists' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Print_Task.py", line 275, in task_details
+    if checklists.created_at == Task.created_at:
+       ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'checklists' where it is not associated with a value
+2025-05-12 10:38:58,819 - print_task - INFO - GET /task/task_id called - task_id=72 by user_id=5
+2025-05-12 10:38:58,822 - print_task - ERROR - Error retrieving task details for task_id=72: cannot access local variable 'checklists' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Print_Task.py", line 275, in task_details
+    if checklists.created_at == subtask.created_at:
+       ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'checklists' where it is not associated with a value
+2025-05-12 10:39:18,858 - print_task - INFO - GET /task/task_id called - task_id=72 by user_id=5
+2025-05-12 10:39:18,869 - print_task - ERROR - Error retrieving task details for task_id=72: cannot access local variable 'subtask' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Print_Task.py", line 275, in task_details
+    if checklist.created_at == subtask.created_at:
+                               ^^^^^^^
+UnboundLocalError: cannot access local variable 'subtask' where it is not associated with a value
+2025-05-12 10:40:27,572 - print_task - INFO - GET /task/task_id called - task_id=72 by user_id=5
+2025-05-12 10:40:27,583 - print_task - ERROR - Error retrieving task details for task_id=72: cannot access local variable 'group' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Print_Task.py", line 291, in task_details
+    "group": group
+             ^^^^^
+UnboundLocalError: cannot access local variable 'group' where it is not associated with a value
+2025-05-12 11:12:29,325 - print_task - INFO - GET /task/task_id called - task_id=72 by user_id=5
+2025-05-12 11:12:29,348 - print_task - INFO - Returning task details for task_id=72
+2025-05-12 11:13:00,291 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:13:00,307 - print_task - ERROR - Error retrieving task details for task_id=73: 'list' object has no attribute 'created_at'
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Print_Task.py", line 385, in task_details
+    if checklists.created_at == review_task.created_at:
+       ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'created_at'
+2025-05-12 11:14:25,029 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:14:25,063 - print_task - ERROR - Error retrieving task details for task_id=73: cannot access local variable 'checklist' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Print_Task.py", line 385, in task_details
+    if checklist.created_at == review_task.created_at:
+       ^^^^^^^^^
+UnboundLocalError: cannot access local variable 'checklist' where it is not associated with a value
+2025-05-12 11:15:04,249 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:15:04,268 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:18:05,027 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:18:05,038 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:19:01,092 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:19:01,108 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:20:22,509 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:20:22,556 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:20:55,916 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:20:55,931 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:21:25,869 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:21:25,888 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:21:50,252 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:21:50,267 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:22:55,978 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:22:55,986 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:24:29,730 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:24:29,745 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:25:19,760 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:25:19,789 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 11:30:22,236 - print_task - INFO - GET /task/task_id called - task_id=73 by user_id=5
+2025-05-12 11:30:22,253 - print_task - INFO - Returning task details for task_id=73
+2025-05-12 15:27:52,771 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:27:52,771 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:27:52,771 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=None, is_reviewed=None, is_review_required=None
+2025-05-12 15:27:52,771 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:28:26,216 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:28:26,216 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:28:26,216 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=None, is_reviewed=None, is_review_required=None
+2025-05-12 15:28:26,216 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:29:57,269 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:29:57,269 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:29:57,269 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=on, is_reviewed=None, is_review_required=None
+2025-05-12 15:29:57,269 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:30:10,180 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:30:10,181 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:30:10,181 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=ongoing, is_reviewed=None, is_review_required=None
+2025-05-12 15:30:10,181 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:30:14,551 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:30:14,551 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:30:14,564 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=ongoing, is_reviewed=None, is_review_required=None
+2025-05-12 15:30:14,564 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:30:21,356 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:30:21,356 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:30:21,356 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=None, is_reviewed=None, is_review_required=None
+2025-05-12 15:30:21,366 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:32:54,167 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:32:54,167 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:32:54,167 - print_task - INFO - Filters - task_name=None, description=None, status=None, due_date=None, task_type=ongoing, is_reviewed=None, is_review_required=None
+2025-05-12 15:32:54,167 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:33:48,444 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 15:33:48,447 - print_task - INFO - Pagination: Page=1, Limit=50
+2025-05-12 15:33:48,447 - print_task - INFO - Filters - task_name=None, description=None, status=ongoing, due_date=None, task_type=None, is_reviewed=None, is_review_required=None
+2025-05-12 15:33:48,447 - print_task - INFO - Sorting by: due_date DESC
+2025-05-12 15:40:06,985 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-05-12 16:00:00,647 - print_task - INFO - GET /task/task_id called - task_id=1 by user_id=3
+2025-05-12 16:00:00,675 - print_task - INFO - Returning task details for task_id=1
+2025-05-12 16:00:21,706 - print_task - INFO - GET /task/task_id called - task_id=1 by user_id=3
+2025-05-12 16:00:21,723 - print_task - INFO - Returning task details for task_id=1
+2025-05-12 16:09:56,122 - print_task - INFO - GET /task/task_id called - task_id=8 by user_id=3
+2025-05-12 16:09:56,155 - print_task - INFO - Returning task details for task_id=8
+2025-05-12 16:10:53,770 - print_task - INFO - GET /tasks - Called by user_id=3

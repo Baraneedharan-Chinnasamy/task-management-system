@@ -1,10 +1,11 @@
 from passlib.context import CryptContext
-from models.models import Task, Checklist, TaskChecklistLink, TaskStatus, TaskType
+from models.models import Task, Checklist, TaskChecklistLink, TaskStatus, TaskType,TaskTimeLog
 from enum import Enum
 from fastapi import Depends
-from sqlalchemy import select, or_, update
+from sqlalchemy import select, or_, update, desc
 from dotenv import load_dotenv
 from Logs.functions import log_task_field_change,log_checklist_field_change
+from datetime import datetime
 from logger.logger import get_logger
 
 
@@ -34,6 +35,10 @@ def update_parent_task_status(task_id, db,Current_user):
             print(f"Marking task {task_id} as {new_status}")
             task.status = new_status
             log_task_field_change(db, task.task_id,"status", old_status, task.status,2)
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
+            if time is not None:
+                time.end_time = datetime.now()
+                db.flush()
             
             review_task = db.query(Task).filter(Task.parent_task_id == task.task_id).first()
             if review_task is not None:
@@ -156,22 +161,22 @@ def propagate_incomplete_upwards(checklist_id, db,Current_user, visited_checklis
         total_count = len(checklists)
 
         old_status = task.status
+        if old_status == TaskStatus.Completed or old_status == TaskStatus.In_Review:
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+            time.end_time = None
+            db.flush()
 
-        if completed_count == 0:
-            new_status = "To_Do"
-        elif completed_count == total_count:
-            if task.task_type == TaskType.Normal:
-                if task.is_review_required:
-                    new_status = "In_Review"
-                else:
-                    new_status = "Completed"
-        else:
-            new_status = "In_Progress"
+            if completed_count == 0:
+                new_status = "To_Do"
+            
+            else:
+                new_status = "In_Progress"
 
-        task.previous_status = task.status
-        task.status = new_status
-        log_task_field_change(db, task.task_id, "status", old_status, new_status, 2)
-        db.flush()
+            task.previous_status = task.status
+            task.status = new_status
+            log_task_field_change(db, task.task_id, "status", old_status, new_status, 2)
+            db.flush()
+
 
         if task.is_review_required:
             review_task = db.query(Task).filter(Task.parent_task_id == task.task_id).first()
@@ -182,6 +187,10 @@ def propagate_incomplete_upwards(checklist_id, db,Current_user, visited_checklis
                 review_task.previous_status = cur
                 log_task_field_change(db, task.task_id, "status", review_task.status, TaskStatus.To_Do, 2)
                 db.flush()
+                if old == TaskStatus.Completed or old == TaskStatus.In_Review:
+                    time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+                    time.end_time = None
+                    db.flush()
 
 
     parent_checklists = db.query(TaskChecklistLink.checklist_id).filter(

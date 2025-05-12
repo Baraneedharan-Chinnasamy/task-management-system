@@ -805,3 +805,28 @@ UnboundLocalError: cannot access local variable 'parent_task' where it is not as
 2025-05-10 19:00:41,443 - create_task - INFO - Checklist 126 linked to task 70
 2025-05-10 19:00:41,460 - create_task - INFO - Subtask 70 linked to checklist 121
 2025-05-10 19:00:41,543 - create_task - INFO - Task and dependencies committed successfully
+2025-05-12 10:26:08,711 - create_task - INFO - Create Task endpoint hit by user_id=5
+2025-05-12 10:26:08,732 - create_task - INFO - Main task created with ID=72
+2025-05-12 10:26:08,763 - create_task - INFO - Checklist 127 linked to task 72
+2025-05-12 10:26:08,780 - create_task - INFO - Task and dependencies committed successfully
+2025-05-12 15:01:57,996 - create_task - INFO - Create Task endpoint hit by user_id=3
+2025-05-12 15:01:58,006 - create_task - INFO - Main task created with ID=1
+2025-05-12 15:01:58,029 - create_task - INFO - Checklist 1 linked to task 1
+2025-05-12 15:01:58,050 - create_task - INFO - Task and dependencies committed successfully
+2025-05-12 15:02:18,547 - create_task - INFO - Create Task endpoint hit by user_id=3
+2025-05-12 15:02:18,547 - create_task - INFO - Main task created with ID=3
+2025-05-12 15:02:18,563 - create_task - INFO - Checklist 2 linked to task 3
+2025-05-12 15:02:18,580 - create_task - INFO - Task and dependencies committed successfully
+2025-05-12 15:02:19,299 - create_task - INFO - Create Task endpoint hit by user_id=3
+2025-05-12 15:02:19,309 - create_task - INFO - Main task created with ID=5
+2025-05-12 15:02:19,314 - create_task - INFO - Checklist 3 linked to task 5
+2025-05-12 15:02:19,331 - create_task - INFO - Task and dependencies committed successfully
+2025-05-12 15:02:28,097 - create_task - INFO - Create Task endpoint hit by user_id=3
+2025-05-12 15:02:28,102 - create_task - INFO - Main task created with ID=7
+2025-05-12 15:02:28,102 - create_task - INFO - Checklist 4 linked to task 7
+2025-05-12 15:02:28,118 - create_task - INFO - Task and dependencies committed successfully
+2025-05-12 16:09:10,550 - create_task - INFO - Create Task endpoint hit by user_id=3
+2025-05-12 16:09:10,550 - create_task - INFO - Main task created with ID=8
+2025-05-12 16:09:10,567 - create_task - INFO - Checklist 5 linked to task 8
+2025-05-12 16:09:10,575 - create_task - INFO - Checklist 6 linked to task 8
+2025-05-12 16:09:10,584 - create_task - INFO - Task and dependencies committed successfully

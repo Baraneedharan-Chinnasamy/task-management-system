@@ -2,13 +2,14 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import or_
-from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, User
+from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, User,TaskTimeLog
 from Logs.functions import log_task_field_change
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
 from Checklist.inputs import CreateChecklistRequest
 from logger.logger import get_logger
 from Checklist.functions import propagate_incomplete_upwards
+from datetime import datetime
 
 
 router = APIRouter()
@@ -33,6 +34,7 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
         target_task = None
 
         if task.task_type == TaskType.Review:
+            
             parent_task = db.query(Task).filter(Task.task_id == task.parent_task_id, Task.is_delete == False).first()
             if not parent_task:
                 logger.warning(f"Parent task {task.parent_task_id} for review not found")
@@ -50,6 +52,10 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
                 task.status = TaskStatus.In_ReEdit
                 log_task_field_change(db, task.task_id, "status", old_status, task.status, Current_user.employee_id)
                 logger.info(f"Review task {task.task_id} status updated to In_ReEdit")
+                time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
+                if time is not None:
+                    time.end_time = datetime.now()
+                    db.flush()
 
         elif task.task_type == TaskType.Normal:
             if task.created_by != Current_user.employee_id and task.assigned_to != Current_user.employee_id:
@@ -114,7 +120,7 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
             "task_name": task.task_name,
             "status":task.status,
             "checklist_progress": checklist_progress,
-        }
+            "group": "Review Checklist" if task.task_type == TaskType.Review else None}
 
     except HTTPException:
         db.rollback()

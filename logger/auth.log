@@ -10,3 +10,15 @@
 2025-05-10 10:03:41,279 - auth - INFO - Login successful for user_id=5, username=string
 2025-05-10 12:24:24,424 - auth - INFO - Login attempt for username='string'
 2025-05-10 12:24:24,998 - auth - INFO - Login successful for user_id=5, username=string
+2025-05-12 10:25:53,119 - auth - INFO - Login attempt for username='string'
+2025-05-12 10:25:53,729 - auth - INFO - Login successful for user_id=5, username=string
+2025-05-12 14:58:43,352 - auth - INFO - Signup attempt for username='Baranee', email='baranee@example.com'
+2025-05-12 14:58:44,066 - auth - INFO - New user created: user_id=1, username=Baranee
+2025-05-12 14:59:09,025 - auth - INFO - Signup attempt for username='advart', email='advart@example.com'
+2025-05-12 14:59:09,649 - auth - INFO - New user created: user_id=2, username=advart
+2025-05-12 14:59:19,456 - auth - INFO - Signup attempt for username='string', email='string@example.com'
+2025-05-12 14:59:20,015 - auth - INFO - New user created: user_id=3, username=string
+2025-05-12 15:01:35,713 - auth - INFO - Login attempt for username='string'
+2025-05-12 15:01:36,342 - auth - WARNING - Login failed for username='string'
+2025-05-12 15:01:43,169 - auth - INFO - Login attempt for username='string'
+2025-05-12 15:01:43,713 - auth - INFO - Login successful for user_id=3, username=string

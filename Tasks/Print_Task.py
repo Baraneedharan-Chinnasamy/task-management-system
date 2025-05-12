@@ -1,16 +1,15 @@
 from fastapi import APIRouter, Depends, Query, Request
 from sqlalchemy.orm import Session, joinedload
-from sqlalchemy.sql import or_, update, asc, desc, not_,func,case
+from sqlalchemy.sql import or_, desc, asc, func, case
 from database.database import get_db
-from datetime import date, datetime
+from datetime import date
 from typing import Optional
 from collections import defaultdict
 from Currentuser.currentUser import get_current_user
-from models.models import Task, User, ChatRoom, ChatMessage, ChatMessageRead, Checklist, TaskChecklistLink,TaskType
+from models.models import Task, User, ChatRoom, Checklist, TaskChecklistLink, TaskType, TaskTimeLog
 from logger.logger import get_logger
 
 router = APIRouter()
-
 
 @router.get("/tasks")
 def get_tasks_by_employees(
@@ -24,7 +23,7 @@ def get_tasks_by_employees(
     is_review_required: Optional[bool] = Query(None),
     sort_by: Optional[str] = Query("due_date"),
     sort_order: Optional[str] = Query("desc"),
-    filter_by: Optional[str] = Query(None, regex="^(created_by|assigned_to)$"),
+    filter_by: Optional[str] = Query(None, regex="^(created_by|assigned_to)?$"),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -33,12 +32,6 @@ def get_tasks_by_employees(
 
     limit = 50
     offset = (page - 1) * limit
-    
-
-
-    logger.info("Pagination: Page=%d, Limit=%d", page, limit)
-    logger.info("Filters - task_name=%s, description=%s, status=%s, due_date=%s, task_type=%s, is_reviewed=%s, is_review_required=%s",
-                task_name, description, status, due_date, task_type, is_reviewed, is_review_required)
 
     valid_sort_fields = {
         "created_at": Task.created_at,
@@ -50,11 +43,17 @@ def get_tasks_by_employees(
 
     sort_column = valid_sort_fields.get(sort_by, Task.created_at)
     order = desc(sort_column) if sort_order.lower() == "desc" else asc(sort_column)
-    logger.info("Sorting by: %s %s", sort_by, sort_order.upper())
 
-    query = db.query(Task).options(
-        joinedload(Task.chat_room),
-    ).filter(
+    # Detect ongoing tasks
+    ongoing_task_ids = {
+        row[0] for row in db.query(TaskTimeLog.task_id).filter(
+            TaskTimeLog.user_id == current_user.employee_id,
+            TaskTimeLog.end_time == None
+        ).distinct().all()
+    }
+
+    # Base query
+    query = db.query(Task).options(joinedload(Task.chat_room)).filter(
         or_(
             Task.created_by == current_user.employee_id,
             Task.assigned_to == current_user.employee_id
@@ -62,15 +61,39 @@ def get_tasks_by_employees(
         Task.is_delete == False
     )
 
-    # Apply filter for created_by or assigned_to
+    # Apply filter_by
     if filter_by == "created_by":
         query = query.filter(Task.created_by == current_user.employee_id)
-        logger.info("Filter applied: created_by")
     elif filter_by == "assigned_to":
         query = query.filter(Task.assigned_to == current_user.employee_id)
-        logger.info("Filter applied: assigned_to")
 
-    # New: Task name search (case-insensitive, prioritized startswith)
+    # Normalize status input
+    if status:
+        status = status.title()
+        if status == "Ongoing":
+            if ongoing_task_ids:
+                query = query.filter(Task.task_id.in_(ongoing_task_ids))
+            else:
+                return {
+                    "page": page,
+                    "limit": limit,
+                    "has_more": False,
+                    "total": 0,
+                    "tasks": [],
+                    "summary": {
+                        "created_by_me": {"total": 0, "status_counts": {}},
+                        "assigned_to_me": {"total": 0, "status_counts": {}}
+                    }
+                }
+        else:
+            query = query.filter(Task.status == status)
+            if ongoing_task_ids:
+                query = query.filter(~Task.task_id.in_(ongoing_task_ids))
+    else:
+        if ongoing_task_ids:
+            query = query.filter(~Task.task_id.in_(ongoing_task_ids))
+
+    # Task name filter
     if task_name:
         prefix_match = f"{task_name.lower()}%"
         contains_match = f"%{task_name.lower()}%"
@@ -82,16 +105,12 @@ def get_tasks_by_employees(
             ),
             order
         )
-        logger.info("Filtered by task_name: %s", task_name)
 
-    # New: Description search (case-insensitive, contains)
+    # Description filter
     if description:
         query = query.filter(func.lower(Task.description).like(f"%{description.lower()}%"))
-        logger.info("Filtered by description: %s", description)
 
-    # Standard filters
-    if status:
-        query = query.filter(Task.status == status)
+    # Other filters
     if due_date:
         query = query.filter(Task.due_date == due_date)
     if task_type:
@@ -104,34 +123,29 @@ def get_tasks_by_employees(
     total_count = query.count()
     tasks = query.offset(offset).limit(limit).all()
     has_more = (page * limit) < total_count
-    logger.info("Total filtered tasks: %d, Returned: %d", total_count, len(tasks))
 
-   
-    user_map = {}
-    users = db.query(User).filter().all()
+    # Users for name lookup
+    users = db.query(User).all()
     user_map = {u.employee_id: u.username for u in users}
 
-    # Checklist processing
+    # Checklist progress
     checklist_counts = defaultdict(lambda: {"total": 0, "completed": 0})
     checklist_links = db.query(TaskChecklistLink).filter(
         TaskChecklistLink.parent_task_id.in_([t.task_id for t in tasks])
     ).all()
-
     checklist_ids = [link.checklist_id for link in checklist_links if link.checklist_id]
     checklist_map = {}
     if checklist_ids:
         checklists = db.query(Checklist).filter(Checklist.checklist_id.in_(checklist_ids)).all()
         checklist_map = {c.checklist_id: c for c in checklists}
-
         for link in checklist_links:
-            if link.parent_task_id and link.checklist_id:
-                checklist = checklist_map.get(link.checklist_id)
-                if checklist:
-                    checklist_counts[link.parent_task_id]["total"] += 1
-                    if checklist.is_completed:
-                        checklist_counts[link.parent_task_id]["completed"] += 1
+            checklist = checklist_map.get(link.checklist_id)
+            if checklist:
+                checklist_counts[link.parent_task_id]["total"] += 1
+                if checklist.is_completed:
+                    checklist_counts[link.parent_task_id]["completed"] += 1
 
-    # Summary info
+    # Summary generation
     created_by_me_tasks = db.query(Task).filter(
         Task.created_by == current_user.employee_id,
         Task.is_delete == False
@@ -142,28 +156,35 @@ def get_tasks_by_employees(
     ).all()
 
     created_by_me_summary = defaultdict(int)
-    for t in created_by_me_tasks:
-        created_by_me_summary[t.status] += 1
-
     assigned_to_me_summary = defaultdict(int)
-    for t in assigned_to_me_tasks:
-        assigned_to_me_summary[t.status] += 1
 
-    # Build response
+    for t in created_by_me_tasks:
+        if t.task_id in ongoing_task_ids:
+            created_by_me_summary["Ongoing"] += 1
+        else:
+            created_by_me_summary[t.status] += 1
+
+    for t in assigned_to_me_tasks:
+        if t.task_id in ongoing_task_ids:
+            assigned_to_me_summary["Ongoing"] += 1
+        else:
+            assigned_to_me_summary[t.status] += 1
+
     result = []
     for task in tasks:
         completed = checklist_counts[task.task_id]["completed"]
         total = checklist_counts[task.task_id]["total"]
         checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
         delete_allow = filter_by == "created_by"
+        temp_status = "Ongoing" if task.task_id in ongoing_task_ids else task.status
 
         result.append({
             "task_id": task.task_id,
             "task_name": task.task_name,
-            "due_date": task.due_date if task.due_date else None,
+            "due_date": task.due_date,
             "assigned_to_name": user_map.get(task.assigned_to),
             "created_by_name": user_map.get(task.created_by),
-            "status": task.status,
+            "status": temp_status,
             "task_type": task.task_type,
             "checklist_progress": checklist_progress,
             "delete_allow": delete_allow
@@ -188,6 +209,8 @@ def get_tasks_by_employees(
     }
 
 
+
+
 @router.get("/task/task_id")
 def task_details(
     task_id: int,
@@ -209,9 +232,23 @@ def task_details(
         users = db.query(User).filter().all()
         user_map = {u.employee_id: u.username for u in users}
 
+        # ⏱️ Time Log Handling (NEW)
+        latest_time_log = db.query(TaskTimeLog).filter(
+            TaskTimeLog.task_id == task.task_id,
+            TaskTimeLog.user_id == current_user.employee_id
+        ).order_by(TaskTimeLog.start_time.desc()).first()
+
+        if latest_time_log:
+            is_ongoing = latest_time_log.end_time is None
+            ongoing_start_time = latest_time_log.start_time.isoformat()
+            ongoing_end_time = latest_time_log.end_time.isoformat() if latest_time_log.end_time else None
+        else:
+            is_ongoing = None
+            ongoing_start_time = None
+            ongoing_end_time = None
+
         # ---------------- Checklist processing for given task ----------------
         checklist_data = []
-
         checklist_links = db.query(TaskChecklistLink).filter(
             TaskChecklistLink.parent_task_id == task_id
         ).all()
@@ -221,12 +258,10 @@ def task_details(
                 Checklist.checklist_id == link.checklist_id,
                 Checklist.is_delete == False
             ).first()
-
             if not checklist:
                 continue
 
             subtasks = []
-
             subtask_links = db.query(TaskChecklistLink).filter(
                 TaskChecklistLink.checklist_id == checklist.checklist_id,
                 TaskChecklistLink.sub_task_id.isnot(None)
@@ -282,14 +317,15 @@ def task_details(
                 "subtasks": subtasks,
                 "checkbox_status": delete_allow_checklist,
                 "created_by_name": user_map.get(checklist.created_by),
-                "created_by": checklist.created_by
+                "created_by": checklist.created_by,
+                "created_at": checklist.created_at
             })
 
         completed = sum(1 for c in checklist_data if c["is_completed"])
         total = len(checklist_data)
         checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
 
-        # ---------------- Parent Task Chain with Checklists ----------------
+        # ---------------- Parent Task Chain ----------------
         parent_task_chain = []
 
         def get_parent_chain(current_task_id):
@@ -302,7 +338,6 @@ def task_details(
             ).first()
 
             if current_task:
-                checklists = []
                 checklist_links = db.query(TaskChecklistLink).filter(
                     TaskChecklistLink.parent_task_id == current_task.task_id
                 ).all()
@@ -314,7 +349,6 @@ def task_details(
                         Checklist.checklist_id == link.checklist_id,
                         Checklist.is_delete == False
                     ).first()
-
                     if checklist:
                         total_count += 1
                         if checklist.is_completed:
@@ -332,7 +366,7 @@ def task_details(
                     "assigned_to_name": user_map.get(current_task.assigned_to),
                     "created_by": current_task.created_by,
                     "created_by_name": user_map.get(current_task.created_by),
-                    "due_date": current_task.due_date if current_task.due_date else None,
+                    "due_date": current_task.due_date,
                     "is_reviewed": current_task.is_reviewed,
                     "output": current_task.output,
                     "created_at": current_task.created_at,
@@ -353,45 +387,35 @@ def task_details(
             output = None
             description = None
 
-        
-        # ---------------- Review Checklist Collection ----------------
-        
+        # ---------------- Review Checklists ----------------
         review_checklists = []
-
-        review_tasks = db.query(Task).filter(
+        review_task = db.query(Task).filter(
             Task.task_id == task.parent_task_id,
             Task.is_delete == False
-        ).all()
-        
-        if review_tasks:
-            for review_task in review_tasks:
-                # Fetch checklist links for the review task
-                checklist_links = db.query(TaskChecklistLink).filter(
-                    TaskChecklistLink.parent_task_id == review_task.task_id).all()
+        ).first()
 
-                checklist_ids = [link.checklist_id for link in checklist_links if link.checklist_id]
+        if review_task:
+            checklist_links = db.query(TaskChecklistLink).filter(
+                TaskChecklistLink.parent_task_id == review_task.task_id).all()
+            checklist_ids = [link.checklist_id for link in checklist_links if link.checklist_id]
+            checklists = db.query(Checklist).filter(
+                Checklist.checklist_id.in_(checklist_ids),
+                Checklist.created_by == task.assigned_to,
+                Checklist.is_delete == False
+            ).all()
+            for checklist in checklists:
+                group = "Initial Checklist" if checklist.created_at == review_task.created_at else "Review Checklist"
+                review_checklists.append({
+                    "checklist_id": checklist.checklist_id,
+                    "checklist_name": checklist.checklist_name,
+                    "is_completed": checklist.is_completed,
+                    "created_by": checklist.created_by,
+                    "created_by_name": user_map.get(checklist.created_by),
+                    "created_at": checklist.created_at,
+                    "group": group
+                })
 
-                print(f"Checklist IDs for review task {review_task.task_id}: {checklist_ids}")
-
-                # Fetch only checklists created by the reviewer (assigned_to)
-                checklists = db.query(Checklist).filter(
-                    Checklist.checklist_id.in_(checklist_ids),
-                    Checklist.created_by == review_task.assigned_to,
-                    Checklist.is_delete == False
-                ).all()
-
-                
-                for checklist in checklists:
-                    review_checklists.append({
-                        "checklist_id": checklist.checklist_id,
-                        "checklist_name": checklist.checklist_name,
-                        "is_completed": checklist.is_completed,
-                        "created_by": checklist.created_by,
-                        "created_by_name": user_map.get(checklist.created_by),
-                        "created_at": checklist.created_at
-                    })
-
-        # ---------------- Last Review Status ----------------
+        # ---------------- Last Review ----------------
         is_last_review = False
         if task.task_type == TaskType.Review:
             newer_review_tasks = db.query(Task).filter(
@@ -407,7 +431,7 @@ def task_details(
             "task_id": task.task_id,
             "task_name": task.task_name,
             "description": task.description if task.task_type == TaskType.Normal else description,
-            "due_date": task.due_date if task.due_date else None,
+            "due_date": task.due_date,
             "assigned_to": task.assigned_to,
             "assigned_to_name": user_map.get(task.assigned_to),
             "created_by": task.created_by,
@@ -424,7 +448,12 @@ def task_details(
             "delete_allow": delete_allow,
             "parent_task_chain": parent_task_chain,
             "last_review": is_last_review,
-            "review_checklist": review_checklists if review_checklists else None # ✅ Added section
+            "review_checklist": review_checklists if review_checklists else None,
+
+            # ⏱️ Time Log (NEW)
+            "is_ongoing": is_ongoing,
+            "ongoing_start_time": ongoing_start_time,
+            "ongoing_end_time": ongoing_end_time
         }
 
     except Exception as e:
