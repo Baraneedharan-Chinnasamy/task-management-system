@@ -177,6 +177,7 @@ def add_checklist_subtask(
         "checklist_name": c.checklist_name,
         "created_by": c.created_by,
         "created_by_name": user_map.get(c.created_by)
+        
     }
     for c in checklists_created
 ]

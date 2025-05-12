@@ -390,9 +390,6 @@ def task_details(
                         "created_by_name": user_map.get(checklist.created_by),
                         "created_at": checklist.created_at
                     })
-                    
-
-            
 
         # ---------------- Last Review Status ----------------
         is_last_review = False

@@ -19,6 +19,7 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
     logger.debug(f"Task update request: {task_data}")
 
     try:
+        result = []
         if not task_data.task_id:
             logger.warning("Task ID not provided")
             return {"message": "Task ID is required"}

@@ -11,7 +11,7 @@ from Delete.functions import get_related_tasks_checklists_logic
 from Logs.functions import log_checklist_field_change,log_task_field_change
 from logger.logger import get_logger
 from datetime import datetime
-from Tasks.functions import propagate_incomplete_upwards
+from Tasks.functions import update_parent_task_status
 
 router = APIRouter()
 
@@ -97,10 +97,10 @@ def delete_related_items(
         link = db.query(TaskChecklistLink.checklist_id).filter(
             TaskChecklistLink.sub_task_id == delete_request.task_id).first()
         if link:
-            propagate_incomplete_upwards(link.checklist_id,db,Current_user)
+            update_parent_task_status(link.checklist_id,db,Current_user)
 
     if delete_request.checklist_id:
-        propagate_incomplete_upwards(delete_request.checklist_id, db, Current_user)
+        update_parent_task_status(delete_request.checklist_id, db, Current_user)
         db.flush()
             
         logger.info(f"Marked checklists as deleted: {checklists_to_delete}")
