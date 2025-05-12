@@ -1,9 +1,6 @@
 from passlib.context import CryptContext
 from models.models import Task, Checklist, TaskChecklistLink, TaskStatus, TaskType,TaskTimeLog
-from enum import Enum
-from fastapi import Depends
-from sqlalchemy import select, or_, update, desc
-from dotenv import load_dotenv
+from sqlalchemy import  desc
 from Logs.functions import log_task_field_change,log_checklist_field_change
 from datetime import datetime
 from logger.logger import get_logger
@@ -34,7 +31,7 @@ def update_parent_task_status(task_id, db,Current_user):
                 task.previous_status = task.status
             print(f"Marking task {task_id} as {new_status}")
             task.status = new_status
-            log_task_field_change(db, task.task_id,"status", old_status, task.status,2)
+            log_task_field_change(db, task.task_id,"status", old_status, task.status,1)
             time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
             if time is not None:
                 time.end_time = datetime.now()
@@ -45,7 +42,7 @@ def update_parent_task_status(task_id, db,Current_user):
                 print("re",review_task.task_id)
                 review_task.previous_status = review_task.status 
                 review_task.status = TaskStatus.To_Do
-                log_task_field_change(db, task.task_id,"status",review_task.status, TaskStatus.To_Do,2)
+                log_task_field_change(db, task.task_id,"status",review_task.status, TaskStatus.To_Do,1)
             db.flush()
             
             print(task.status)
@@ -65,7 +62,7 @@ def update_parent_task_status(task_id, db,Current_user):
             print(f"Marking task {task_id} as In_Progress")
             
             task.status = "In_Progress"
-            log_task_field_change(db, task.task_id,"status", old_status, task.status,2)
+            log_task_field_change(db, task.task_id,"status", old_status, task.status,1)
             db.flush()
 
 
@@ -101,7 +98,7 @@ def update_checklist_for_subtask_completion(checklist_id, db,Current_user):
         if checklist and not checklist.is_completed:
             print(f"Marking checklist {checklist_id} as completed")
 
-            log_checklist_field_change(db,checklist_id,"is_completed",checklist.is_completed,True,Current_user.employee_id)
+            log_checklist_field_change(db,checklist_id,"is_completed",checklist.is_completed,True,1)
 
             checklist.is_completed = True
             db.flush()
@@ -174,7 +171,7 @@ def propagate_incomplete_upwards(checklist_id, db,Current_user, visited_checklis
 
             task.previous_status = task.status
             task.status = new_status
-            log_task_field_change(db, task.task_id, "status", old_status, new_status, 2)
+            log_task_field_change(db, task.task_id, "status", old_status, new_status, 1)
             db.flush()
 
 
@@ -185,7 +182,7 @@ def propagate_incomplete_upwards(checklist_id, db,Current_user, visited_checklis
                 old = review_task.previous_status
                 review_task.status = old
                 review_task.previous_status = cur
-                log_task_field_change(db, task.task_id, "status", review_task.status, TaskStatus.To_Do, 2)
+                log_task_field_change(db, task.task_id, "status", review_task.status, TaskStatus.To_Do, 1)
                 db.flush()
                 if old == TaskStatus.Completed or old == TaskStatus.In_Review:
                     time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()

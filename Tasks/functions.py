@@ -30,7 +30,7 @@ def propagate_completion_upwards(task, db, updated_by, logger, Current_user):
                 time.end_time = datetime.now()
                 db.flush()
             db.flush()
-            log_task_field_change(db, child.task_id, "status", child.previous_status, child.status, updated_by)
+            log_task_field_change(db, child.task_id, "status", child.previous_status, child.status, 1)
             logger.info(f"Child task {child.task_id} of review task {t.task_id} marked as Completed")
 
             updated_tasks.append({  # ✅ Add to list
@@ -65,7 +65,7 @@ def propagate_completion_upwards(task, db, updated_by, logger, Current_user):
                 if all(sub_task.status == TaskStatus.Completed for sub_task in sub_tasks):
                     if not checklist.is_completed:
                         checklist.is_completed = True
-                        log_checklist_field_change(db, checklist.checklist_id, "is_completed", False, True, updated_by)
+                        log_checklist_field_change(db, checklist.checklist_id, "is_completed", False, True, 1)
                         logger.info(f"Checklist {checklist.checklist_id} marked as completed")
 
                         parent_link = db.query(TaskChecklistLink).filter(
@@ -102,8 +102,8 @@ def reverse_completion_from_review(task, db, updated_by, logger, Current_user):
                     time.end_time = None
                     db.flush()
 
-            log_task_field_change(db, task.task_id, "is_reviewed", True, False, updated_by)
-            log_task_field_change(db, task.task_id, "status", task.previous_status, task.status, updated_by)
+            log_task_field_change(db, task.task_id, "is_reviewed", True, False, 1)
+            log_task_field_change(db, task.task_id, "status", task.previous_status, task.status, 1)
             logger.info(f"Review task {task.task_id} reverted to {task.status}")
 
             reverted_tasks.append({ "task_id": task.task_id, "status": task.status })  # ✅ collect
@@ -131,7 +131,7 @@ def reverse_completion_from_review(task, db, updated_by, logger, Current_user):
                 checklist = db.query(Checklist).filter(Checklist.checklist_id == Link.checklist_id, Checklist.is_delete == False).first()
                 if checklist and checklist.is_completed:
                     checklist.is_completed = False
-                    log_checklist_field_change(db, checklist.checklist_id, "is_completed", True, False, updated_by)
+                    log_checklist_field_change(db, checklist.checklist_id, "is_completed", True, False, 1)
                     logger.info(f"Checklist {checklist.checklist_id} reverted to incomplete")
                     propagate_incomplete_upwards(checklist.checklist_id, db, Current_user)
 

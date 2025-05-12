@@ -22,3 +22,8 @@
 2025-05-12 15:01:36,342 - auth - WARNING - Login failed for username='string'
 2025-05-12 15:01:43,169 - auth - INFO - Login attempt for username='string'
 2025-05-12 15:01:43,713 - auth - INFO - Login successful for user_id=3, username=string
+2025-05-12 17:09:48,531 - auth - INFO - Login attempt for username='Advart'
+2025-05-12 17:10:15,376 - auth - INFO - Signup attempt for username='string', email='user@example.com'
+2025-05-12 17:10:15,802 - auth - INFO - New user created: user_id=2, username=string
+2025-05-12 17:10:30,508 - auth - INFO - Login attempt for username='string'
+2025-05-12 17:10:30,909 - auth - INFO - Login successful for user_id=2, username=string
