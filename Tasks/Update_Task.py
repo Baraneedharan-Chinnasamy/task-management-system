@@ -2,6 +2,7 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import or_, desc
+from sqlalchemy import func
 from models.models import Task, TaskStatus, TaskType, TaskChecklistLink, Checklist, TaskTimeLog
 from Logs.functions import log_task_field_change, log_checklist_field_change
 from database.database import get_db
@@ -182,10 +183,40 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
 
                 
                 update_fields['is_reviewed'] = task_data.is_reviewed
+
+            
         
         db.commit()
         logger.info(f"Task {task_id} updated successfully with changes: {update_fields}")
-        return {"message": "Task updated successfully", "updated_fields": update_fields,"status":task.status, "parent_task_chain": result}
+
+        def get_latest_time_log_info(task_id: int) -> dict:
+            latest_log_subq = db.query(
+                func.max(TaskTimeLog.start_time)
+            ).filter(
+                TaskTimeLog.task_id == task_id,
+                TaskTimeLog.user_id == Current_user.employee_id
+            ).scalar_subquery()
+
+            log = db.query(TaskTimeLog).filter(
+                TaskTimeLog.task_id == task_id,
+                TaskTimeLog.user_id == Current_user.employee_id,
+                TaskTimeLog.start_time == latest_log_subq
+            ).first()
+
+            if log:
+                return {
+                    "is_ongoing": log.end_time is None,
+                    "ongoing_start_time": log.start_time.isoformat(),
+                    "ongoing_end_time": log.end_time.isoformat() if log.end_time else None
+                }
+            else:
+                return {
+                    "is_ongoing": None,
+                    "ongoing_start_time": None,
+                    "ongoing_end_time": None
+                }
+        time_log_info = get_latest_time_log_info(task.task_id)
+        return {"message": "Task updated successfully", "updated_fields": update_fields,"status":task.status, "parent_task_chain": result,**time_log_info}
 
     except Exception as e:
         db.rollback()

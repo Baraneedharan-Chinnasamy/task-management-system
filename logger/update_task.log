@@ -409,3 +409,38 @@ ValueError: list.remove(x): x not in list
 2025-05-13 10:38:11,502 - update_task - INFO - Child task 5 of review task 6 marked as Completed
 2025-05-13 10:38:11,506 - update_task - INFO - propagate_completion_upwards completed for task_id=5
 2025-05-13 10:38:11,506 - update_task - INFO - Task 6 updated successfully with changes: {'is_reviewed': True}
+2025-05-13 10:46:16,273 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:46:16,278 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:46:16,308 - update_task - INFO - Starting reverse_completion_from_review for task_id=6
+2025-05-13 10:46:16,320 - update_task - INFO - Review task 6 reverted to TaskStatus.To_Do
+2025-05-13 10:46:16,323 - update_task - INFO - Reverting normal task 5 from Completed to TaskStatus.In_Review
+2025-05-13 10:46:16,323 - update_task - INFO - reverse_completion_from_review completed for task_id=5
+2025-05-13 10:46:16,340 - update_task - INFO - Task 6 updated successfully with changes: {'is_reviewed': False}
+2025-05-13 10:46:16,350 - update_task - ERROR - Unexpected error while updating task
+Traceback (most recent call last):
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 217, in update_task
+    time_log_info = get_latest_time_log_info(task.task_id)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\BARANEEDHARAN\Downloads\Task-Management-System-Final-main\Task-Management-System-Final-main\Tasks\Update_Task.py", line 193, in get_latest_time_log_info
+    func.max(TaskTimeLog.start_time)
+    ^^^^
+NameError: name 'func' is not defined
+2025-05-13 10:46:36,890 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:46:36,903 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:46:36,914 - update_task - INFO - Starting reverse_completion_from_review for task_id=6
+2025-05-13 10:46:36,914 - update_task - INFO - Review task 6 reverted to TaskStatus.To_Do
+2025-05-13 10:46:36,919 - update_task - INFO - reverse_completion_from_review completed for task_id=5
+2025-05-13 10:46:36,919 - update_task - INFO - Task 6 updated successfully with changes: {'is_reviewed': False}
+2025-05-13 10:47:15,072 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:47:15,073 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:47:15,090 - update_task - INFO - Starting propagate_completion_upwards for task_id=6
+2025-05-13 10:47:15,112 - update_task - INFO - Child task 5 of review task 6 marked as Completed
+2025-05-13 10:47:15,122 - update_task - INFO - propagate_completion_upwards completed for task_id=5
+2025-05-13 10:47:15,125 - update_task - INFO - Task 6 updated successfully with changes: {'is_reviewed': True}
+2025-05-13 10:47:27,232 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:47:27,232 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:47:27,251 - update_task - INFO - Starting reverse_completion_from_review for task_id=6
+2025-05-13 10:47:27,257 - update_task - INFO - Review task 6 reverted to TaskStatus.To_Do
+2025-05-13 10:47:27,266 - update_task - INFO - Reverting normal task 5 from Completed to TaskStatus.In_Review
+2025-05-13 10:47:27,266 - update_task - INFO - reverse_completion_from_review completed for task_id=5
+2025-05-13 10:47:27,283 - update_task - INFO - Task 6 updated successfully with changes: {'is_reviewed': False}
