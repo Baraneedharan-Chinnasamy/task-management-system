@@ -129,6 +129,10 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                 update_fields['output'] = task_data.output
         if is_assignee or is_creator:
             if task_data.is_reviewed is not None and task.task_type == TaskType.Review:
+                if task_data.is_reviewed:
+                    time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+                    if time is None:
+                        return {"Start time": "No active time tracking found for this task."}
                 checklists = db.query(Checklist).join(TaskChecklistLink).filter(
                     TaskChecklistLink.parent_task_id == task.task_id,
                     Checklist.is_delete == False
@@ -166,6 +170,9 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
 
                     
                 else:
+                    time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+                    if time is None:
+                        return {"Start time": "No active time tracking found for this task."}
                     task.is_reviewed = False
                     log_task_field_change(db, task.task_id, "is_reviewed", True, False, Current_user.employee_id)
                     result =reverse_completion_from_review(task, db, Current_user.employee_id, logger, Current_user)

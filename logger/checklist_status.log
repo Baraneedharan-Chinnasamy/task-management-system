@@ -777,3 +777,21 @@ AttributeError: 'UpdateStatus' object has no attribute 'task_id'
 2025-05-13 09:41:15,395 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=3, task_type=TaskType.Normal
 2025-05-13 09:41:15,411 - mark_checklist_complete - INFO - Checklist 7 marked as completed
 2025-05-13 09:41:15,445 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-13 10:33:21,666 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 10:33:21,666 - mark_checklist_complete - INFO - Checklist 8 found, current status: False
+2025-05-13 10:33:21,687 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=3, task_type=TaskType.Normal
+2025-05-13 10:33:21,699 - mark_checklist_complete - INFO - Checklist 8 marked as completed
+2025-05-13 10:33:21,749 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-13 10:35:39,100 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 10:35:39,103 - mark_checklist_complete - INFO - Checklist 3 found, current status: True
+2025-05-13 10:35:39,103 - mark_checklist_complete - INFO - Checklist 3 already completed
+2025-05-13 10:35:44,066 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 10:35:44,082 - mark_checklist_complete - INFO - Checklist 2 found, current status: False
+2025-05-13 10:35:44,087 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=1, task_type=TaskType.Normal
+2025-05-13 10:35:44,090 - mark_checklist_complete - INFO - Checklist 2 marked as completed
+2025-05-13 10:35:44,101 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-13 10:35:52,757 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 10:35:52,760 - mark_checklist_complete - INFO - Checklist 4 found, current status: False
+2025-05-13 10:35:52,764 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=5, task_type=TaskType.Normal
+2025-05-13 10:35:52,767 - mark_checklist_complete - INFO - Checklist 4 marked as completed
+2025-05-13 10:35:52,781 - mark_checklist_complete - INFO - Checklist status updated and committed successfully

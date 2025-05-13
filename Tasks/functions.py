@@ -93,14 +93,13 @@ def reverse_completion_from_review(task, db, updated_by, logger, Current_user):
 
     def revert_review_chain_until_normal(task):
         while task and task.task_type == TaskType.Review:
+            if task.status == TaskStatus.Completed or task.status == TaskStatus.In_Review:
+                time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+                time.end_time = None
+                db.flush()
             task.is_reviewed = False
             task.status = task.previous_status
             db.flush()
-            if task.previous_status == TaskStatus.Completed or task.previous_status == TaskStatus.In_Review:
-                time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
-                if time is not None:
-                    time.end_time = None
-                    db.flush()
 
             log_task_field_change(db, task.task_id, "is_reviewed", True, False, 1)
             log_task_field_change(db, task.task_id, "status", task.previous_status, task.status, 1)
@@ -122,9 +121,7 @@ def reverse_completion_from_review(task, db, updated_by, logger, Current_user):
             logger.info(f"Reverting normal task {task.task_id} from Completed to {task.previous_status}")
             task.status = task.previous_status
             reverted_tasks.append({ "task_id": task.task_id, "status": task.status })
-            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
-            time.end_time = None
-            db.flush()
+            
 
             Link = db.query(TaskChecklistLink).filter(TaskChecklistLink.sub_task_id == task.task_id).first()
             if Link:
