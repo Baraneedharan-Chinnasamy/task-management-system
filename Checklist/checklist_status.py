@@ -60,9 +60,14 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
             Task.is_delete == False
         ).first()
 
-        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
-        if time is None:
-            return {"Start time": "No active time tracking found for this task."}
+        if data.is_completed:
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+            if time is None:
+                return {"Start time": "No active time tracking found for this task."}
+        else:
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+            if time is not None:
+                return {"End time": "No active time tracking found for this task."}
 
         if not parent_task:
             logger.warning(f"User {Current_user.employee_id} has no access to parent task {parent_task_id}")

@@ -1,30 +1,3 @@
-Traceback (most recent call last):
-  File "D:\Task Management System Final code\Checklist\Create_Checklist.py", line 79, in add_checklist
-    propagate_status_upwards(target_task)
-TypeError: propagate_status_upwards() missing 2 required positional arguments: 'task' and 'Current_user'
-Traceback (most recent call last):
-  File "D:\Task Management System Final code\Checklist\Create_Checklist.py", line 77, in add_checklist
-    log_task_field_change(db, target_task.task_id, "status", old_status, target_task.status, updated_by=Current_user.employee_id)
-TypeError: log_task_field_change() got an unexpected keyword argument 'updated_by'
-Traceback (most recent call last):
-  File "D:\Task Management System Final code\Checklist\Create_Checklist.py", line 43, in add_checklist
-    log_task_field_change(db, task.task_id, "status", old_status, task.status, updated_by=Current_user.employee_id)
-TypeError: log_task_field_change() got an unexpected keyword argument 'updated_by'
-Traceback (most recent call last):
-  File "D:\Task Management System Final code\Checklist\Create_Checklist.py", line 79, in add_checklist
-    propagate_incomplete_upwards(checklist.checklist_id, db,Current_user)
-  File "D:\Task Management System Final code\Checklist\functions.py", line 133, in propagate_incomplete_upwards
-    parent_task_id = parent_tasks[0]
-                     ~~~~~~~~~~~~^^^
-TypeError: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "D:\Task Management System Final code\Checklist\Create_Checklist.py", line 79, in add_checklist
-    if target_task.task_type == TaskType.Normal and (target_task.status == TaskStatus.Completed or target_task.status == TaskStatus.In_Review):
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Task Management System Final code\Checklist\functions.py", line 133, in propagate_incomplete_upwards
-    parent_task_id = parent_tasks[0]
-                     ~~~~~~~~~~~~^^^
-TypeError: 'NoneType' object is not subscriptable
 2025-05-10 10:05:02,919 - create_checklist - INFO - POST /add_checklist called by user_id=5
 2025-05-10 10:05:27,218 - create_checklist - INFO - POST /add_checklist called by user_id=5
 2025-05-10 10:05:27,221 - create_checklist - INFO - Task found: task_id=22, type=TaskType.Normal
@@ -162,3 +135,24 @@ UnboundLocalError: cannot access local variable 'checklist_progress' where it is
 2025-05-12 11:30:11,427 - create_checklist - INFO - Review task 73 status updated to In_ReEdit
 2025-05-12 11:30:11,429 - create_checklist - INFO - Checklist created with ID=128
 2025-05-12 11:30:11,444 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-13 09:33:57,232 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-13 09:33:57,248 - create_checklist - INFO - Task found: task_id=4, type=TaskType.Review
+2025-05-13 09:33:57,253 - create_checklist - INFO - Review task 4 status updated to In_ReEdit
+2025-05-13 09:33:57,265 - create_checklist - INFO - Checklist created with ID=6
+2025-05-13 09:33:57,282 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-13 09:39:05,177 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-13 09:39:05,192 - create_checklist - INFO - Task found: task_id=4, type=TaskType.Review
+2025-05-13 09:39:18,098 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-13 09:39:18,114 - create_checklist - INFO - Task found: task_id=4, type=TaskType.Review
+2025-05-13 09:39:18,132 - create_checklist - INFO - Review task 4 status updated to In_ReEdit
+2025-05-13 09:39:18,142 - create_checklist - INFO - Checklist created with ID=7
+2025-05-13 09:39:18,164 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-13 09:39:30,890 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-13 09:39:30,892 - create_checklist - INFO - Task found: task_id=4, type=TaskType.Review
+2025-05-13 10:09:28,000 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-13 10:09:28,005 - create_checklist - INFO - Task found: task_id=4, type=TaskType.Review
+2025-05-13 10:10:02,648 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-13 10:10:02,648 - create_checklist - INFO - Task found: task_id=4, type=TaskType.Review
+2025-05-13 10:10:02,658 - create_checklist - INFO - Review task 4 status updated to In_ReEdit
+2025-05-13 10:10:02,676 - create_checklist - INFO - Checklist created with ID=8
+2025-05-13 10:10:02,705 - create_checklist - INFO - All checklists created and task updates committed successfully

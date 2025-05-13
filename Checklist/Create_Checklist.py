@@ -2,6 +2,7 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import or_
+from sqlalchemy import desc
 from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, User,TaskTimeLog
 from Logs.functions import log_task_field_change
 from database.database import get_db
@@ -34,6 +35,9 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
         target_task = None
 
         if task.task_type == TaskType.Review:
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+            if time is None:
+                return {"Start time": "No active time tracking found for this task."}
             
             parent_task = db.query(Task).filter(Task.task_id == task.parent_task_id, Task.is_delete == False).first()
             if not parent_task:
@@ -52,7 +56,7 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
                 task.status = TaskStatus.In_ReEdit
                 log_task_field_change(db, task.task_id, "status", old_status, task.status, Current_user.employee_id)
                 logger.info(f"Review task {task.task_id} status updated to In_ReEdit")
-                time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
+                time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
                 if time is not None:
                     time.end_time = datetime.now()
                     db.flush()

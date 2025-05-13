@@ -44,15 +44,27 @@ def get_tasks_by_employees(
     sort_column = valid_sort_fields.get(sort_by, Task.created_at)
     order = desc(sort_column) if sort_order.lower() == "desc" else asc(sort_column)
 
-    # Detect ongoing tasks
-    ongoing_task_ids = {
-        row[0] for row in db.query(TaskTimeLog.task_id).filter(
-            TaskTimeLog.user_id == current_user.employee_id,
-            TaskTimeLog.end_time == None
-        ).distinct().all()
-    }
+    # Step 1: Get ongoing task IDs based on latest time log where end_time is NULL
+    latest_logs = db.query(
+        TaskTimeLog.task_id,
+        func.max(TaskTimeLog.start_time).label("max_start")
+    ).filter(
+        TaskTimeLog.user_id == current_user.employee_id
+    ).group_by(
+        TaskTimeLog.task_id
+    ).subquery()
 
-    # Base query
+    latest_active_logs = db.query(TaskTimeLog.task_id).join(
+        latest_logs,
+        (TaskTimeLog.task_id == latest_logs.c.task_id) &
+        (TaskTimeLog.start_time == latest_logs.c.max_start)
+    ).filter(
+        TaskTimeLog.end_time == None
+    ).all()
+
+    ongoing_task_ids = {row.task_id for row in latest_active_logs}
+
+    # Step 2: Base task query
     query = db.query(Task).options(joinedload(Task.chat_room)).filter(
         or_(
             Task.created_by == current_user.employee_id,
@@ -61,13 +73,13 @@ def get_tasks_by_employees(
         Task.is_delete == False
     )
 
-    # Apply filter_by
+    # Step 3: Apply filter_by
     if filter_by == "created_by":
         query = query.filter(Task.created_by == current_user.employee_id)
     elif filter_by == "assigned_to":
         query = query.filter(Task.assigned_to == current_user.employee_id)
 
-    # Normalize status input
+    # Step 4: Apply status filter
     if status:
         status = status.title()
         if status == "Ongoing":
@@ -93,7 +105,7 @@ def get_tasks_by_employees(
         if ongoing_task_ids:
             query = query.filter(~Task.task_id.in_(ongoing_task_ids))
 
-    # Task name filter
+    # Step 5: Task name search
     if task_name:
         prefix_match = f"{task_name.lower()}%"
         contains_match = f"%{task_name.lower()}%"
@@ -106,11 +118,9 @@ def get_tasks_by_employees(
             order
         )
 
-    # Description filter
+    # Step 6: Other filters
     if description:
         query = query.filter(func.lower(Task.description).like(f"%{description.lower()}%"))
-
-    # Other filters
     if due_date:
         query = query.filter(Task.due_date == due_date)
     if task_type:
@@ -124,11 +134,11 @@ def get_tasks_by_employees(
     tasks = query.offset(offset).limit(limit).all()
     has_more = (page * limit) < total_count
 
-    # Users for name lookup
+    # Step 7: Get users
     users = db.query(User).all()
     user_map = {u.employee_id: u.username for u in users}
 
-    # Checklist progress
+    # Step 8: Checklist progress
     checklist_counts = defaultdict(lambda: {"total": 0, "completed": 0})
     checklist_links = db.query(TaskChecklistLink).filter(
         TaskChecklistLink.parent_task_id.in_([t.task_id for t in tasks])
@@ -145,7 +155,7 @@ def get_tasks_by_employees(
                 if checklist.is_completed:
                     checklist_counts[link.parent_task_id]["completed"] += 1
 
-    # Summary generation
+    # Step 9: Summary
     created_by_me_tasks = db.query(Task).filter(
         Task.created_by == current_user.employee_id,
         Task.is_delete == False
@@ -170,13 +180,32 @@ def get_tasks_by_employees(
         else:
             assigned_to_me_summary[t.status] += 1
 
+    # Step 10: Get latest time log per task
+    latest_time_logs_subquery = db.query(
+        TaskTimeLog.task_id,
+        func.max(TaskTimeLog.start_time).label("max_start")
+    ).filter(
+        TaskTimeLog.user_id == current_user.employee_id,
+        TaskTimeLog.task_id.in_([t.task_id for t in tasks])
+    ).group_by(TaskTimeLog.task_id).subquery()
+
+    latest_time_logs = db.query(TaskTimeLog).join(
+        latest_time_logs_subquery,
+        (TaskTimeLog.task_id == latest_time_logs_subquery.c.task_id) &
+        (TaskTimeLog.start_time == latest_time_logs_subquery.c.max_start)
+    ).all()
+
+    time_log_map = {log.task_id: {"start_time": log.start_time, "end_time": log.end_time} for log in latest_time_logs}
+
+    # Step 11: Construct result
     result = []
     for task in tasks:
         completed = checklist_counts[task.task_id]["completed"]
         total = checklist_counts[task.task_id]["total"]
         checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
-        delete_allow = filter_by == "created_by"
-        temp_status = "Ongoing" if task.task_id in ongoing_task_ids else task.status
+        is_ongoing = task.task_id in ongoing_task_ids
+        delete_allow = task.created_by == current_user.employee_id
+        latest_time = time_log_map.get(task.task_id, {"start_time": None, "end_time": None})
 
         result.append({
             "task_id": task.task_id,
@@ -184,10 +213,13 @@ def get_tasks_by_employees(
             "due_date": task.due_date,
             "assigned_to_name": user_map.get(task.assigned_to),
             "created_by_name": user_map.get(task.created_by),
-            "status": temp_status,
+            "status": task.status,
+            "is_ongoing": is_ongoing,
             "task_type": task.task_type,
             "checklist_progress": checklist_progress,
-            "delete_allow": delete_allow
+            "delete_allow": delete_allow,
+            "start_time": latest_time["start_time"],
+            "end_time": latest_time["end_time"]
         })
 
     return {
@@ -211,6 +243,8 @@ def get_tasks_by_employees(
 
 
 
+
+
 @router.get("/task/task_id")
 def task_details(
     task_id: int,
@@ -229,25 +263,40 @@ def task_details(
 
         delete_allow = task.created_by == current_user.employee_id
 
-        users = db.query(User).filter().all()
+        users = db.query(User).all()
         user_map = {u.employee_id: u.username for u in users}
 
-        # ⏱️ Time Log Handling (NEW)
-        latest_time_log = db.query(TaskTimeLog).filter(
-            TaskTimeLog.task_id == task.task_id,
-            TaskTimeLog.user_id == current_user.employee_id
-        ).order_by(TaskTimeLog.start_time.desc()).first()
+        # 🔁 Helper function for time log info
+        def get_latest_time_log_info(task_id: int) -> dict:
+            latest_log_subq = db.query(
+                func.max(TaskTimeLog.start_time)
+            ).filter(
+                TaskTimeLog.task_id == task_id,
+                TaskTimeLog.user_id == current_user.employee_id
+            ).scalar_subquery()
 
-        if latest_time_log:
-            is_ongoing = latest_time_log.end_time is None
-            ongoing_start_time = latest_time_log.start_time.isoformat()
-            ongoing_end_time = latest_time_log.end_time.isoformat() if latest_time_log.end_time else None
-        else:
-            is_ongoing = None
-            ongoing_start_time = None
-            ongoing_end_time = None
+            log = db.query(TaskTimeLog).filter(
+                TaskTimeLog.task_id == task_id,
+                TaskTimeLog.user_id == current_user.employee_id,
+                TaskTimeLog.start_time == latest_log_subq
+            ).first()
 
-        # ---------------- Checklist processing for given task ----------------
+            if log:
+                return {
+                    "is_ongoing": log.end_time is None,
+                    "ongoing_start_time": log.start_time.isoformat(),
+                    "ongoing_end_time": log.end_time.isoformat() if log.end_time else None
+                }
+            else:
+                return {
+                    "is_ongoing": None,
+                    "ongoing_start_time": None,
+                    "ongoing_end_time": None
+                }
+
+        main_task_time_info = get_latest_time_log_info(task.task_id)
+
+        # ---------------- Checklist processing ----------------
         checklist_data = []
         checklist_links = db.query(TaskChecklistLink).filter(
             TaskChecklistLink.parent_task_id == task_id
@@ -290,6 +339,7 @@ def task_details(
                     st_completed = sum(1 for c in subtask_checklist_data if c.is_completed)
                     st_total = len(subtask_checklist_data)
                     st_checklist_progress = f"{st_completed}/{st_total}" if st_total > 0 else "0/0"
+
                     subtasks.append({
                         "task_id": subtask.task_id,
                         "task_name": subtask.task_name,
@@ -301,11 +351,11 @@ def task_details(
                         "created_by": subtask.created_by,
                         "created_by_name": user_map.get(subtask.created_by),
                         "created_at": subtask.created_at,
-                        "updated_at": subtask.updated_at,
                         "task_type": subtask.task_type,
                         "is_review_required": subtask.is_review_required,
                         "output": subtask.output,
-                        "checklist_progress": st_checklist_progress
+                        "checklist_progress": st_checklist_progress,
+                        **get_latest_time_log_info(subtask.task_id)
                     })
 
             delete_allow_checklist = False if subtasks else True
@@ -370,8 +420,8 @@ def task_details(
                     "is_reviewed": current_task.is_reviewed,
                     "output": current_task.output,
                     "created_at": current_task.created_at,
-                    "updated_at": current_task.updated_at,
-                    "checklist_progress": checklist_progress
+                    "checklist_progress": checklist_progress,
+                    **get_latest_time_log_info(current_task.task_id)
                 })
 
                 if current_task.parent_task_id:
@@ -379,6 +429,7 @@ def task_details(
 
         get_parent_chain(task.parent_task_id)
         parent_task_chain = parent_task_chain[::-1]
+
         if parent_task_chain:
             first_task = parent_task_chain[0]
             output = first_task.get("output")
@@ -396,7 +447,8 @@ def task_details(
 
         if review_task:
             checklist_links = db.query(TaskChecklistLink).filter(
-                TaskChecklistLink.parent_task_id == review_task.task_id).all()
+                TaskChecklistLink.parent_task_id == review_task.task_id
+            ).all()
             checklist_ids = [link.checklist_id for link in checklist_links if link.checklist_id]
             checklists = db.query(Checklist).filter(
                 Checklist.checklist_id.in_(checklist_ids),
@@ -439,7 +491,6 @@ def task_details(
             "status": task.status,
             "output": task.output if task.task_type == TaskType.Normal else output,
             "created_at": task.created_at,
-            "updated_at": task.updated_at,
             "task_type": task.task_type,
             "is_review_required": task.is_review_required,
             "is_reviewed": task.is_reviewed,
@@ -449,11 +500,7 @@ def task_details(
             "parent_task_chain": parent_task_chain,
             "last_review": is_last_review,
             "review_checklist": review_checklists if review_checklists else None,
-
-            # ⏱️ Time Log (NEW)
-            "is_ongoing": is_ongoing,
-            "ongoing_start_time": ongoing_start_time,
-            "ongoing_end_time": ongoing_end_time
+            **main_task_time_info
         }
 
     except Exception as e:
