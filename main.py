@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from models.models import Base
 from database.database import engine
-
 from Tasks.Create_Task import router as create_task_router
 from Tasks.Update_Task import router as update_task_router
 from Tasks.Print_Task import router as print_task_router

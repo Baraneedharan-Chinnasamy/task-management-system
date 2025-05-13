@@ -65,6 +65,11 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
             if task.created_by != Current_user.employee_id and task.assigned_to != Current_user.employee_id:
                 logger.warning(f"Unauthorized access for checklist addition on task {task.task_id}")
                 raise HTTPException(status_code=403, detail="You don't have permission to add checklists")
+            if task.assigned_to == Current_user.employee_id:
+                time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+                if task.status == TaskStatus.To_Do and task.previous_status == TaskStatus.To_Do and time is None:
+                    return {"Start time": "No active time tracking found for this task."}
+                
             parent_task_id = task.task_id
             target_task = task
 

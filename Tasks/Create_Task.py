@@ -105,9 +105,7 @@ def add_checklist_subtask(
                 checklist_id=data.checklist_id,
                 sub_task_id=new_task.task_id
             ))
-
             
-
             logger.info(f"Subtask {new_task.task_id} linked to checklist {data.checklist_id}")
             # Trigger status/checklist propagation
             checklist = db.query(Checklist).filter(Checklist.checklist_id == data.checklist_id,Checklist.is_completed == True).first()
@@ -171,18 +169,12 @@ def add_checklist_subtask(
             "task_type": new_task.task_type,
             "is_review_required": new_task.is_review_required,
             "checklist_progress":f"0/{len(data.checklist_names)}" if len(data.checklist_names) > 0 else 2,
-            "checklists_created": [
-    {
+            "checklists_created": [{
         "checklist_id": c.checklist_id,
         "checklist_name": c.checklist_name,
         "created_by": c.created_by,
-        "created_by_name": user_map.get(c.created_by)
-        
-    }
-    for c in checklists_created
-]
-
-        }
+        "created_by_name": user_map.get(c.created_by)}
+    for c in checklists_created]}
 
     except Exception as e:
         db.rollback()

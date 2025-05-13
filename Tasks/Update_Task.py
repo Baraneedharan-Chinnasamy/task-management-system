@@ -113,16 +113,25 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                             review_task.is_delete = True
                             logger.info(f"Review task {review_task.task_id} marked as deleted")
 
-                        if task_data.task_name is not None:
-                            log_task_field_change(db, task.task_id, "task_name", task.task_name, task_data.task_name, Current_user.employee_id)
-                            task.task_name = task_data.task_name
-                            update_fields['task_name'] = task_data.task_name
-        
+                        
         if is_assignee or is_creator:
             if task_data.description is not None:
+                if is_assignee:
+                    time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+                    if time is None:
+                        return {"Start time": "No active time tracking found for this task."}
                 log_task_field_change(db, task.task_id, "description", task.description, task_data.description, Current_user.employee_id)
                 task.description = task_data.description
                 update_fields['description'] = task_data.description
+            if task_data.task_name is not None:
+                    if is_assignee:
+                        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+                        if time is None:
+                            return {"Start time": "No active time tracking found for this task."}
+                    log_task_field_change(db, task.task_id, "task_name", task.task_name, task_data.task_name, Current_user.employee_id)
+                    task.task_name = task_data.task_name
+                    update_fields['task_name'] = task_data.task_name
+        
         if is_assignee:
             if task_data.output is not None:
                 log_task_field_change(db, task.task_id, "output", task.output, task_data.output, Current_user.employee_id)
@@ -166,10 +175,7 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     result = propagate_completion_upwards(task, db, Current_user.employee_id, logger, Current_user)
                     updated_tasks_raw = result.get("updated_tasks", [])
                     result = deduplicate_tasks(updated_tasks_raw)
-                    print(task.task_id)
                     result = [item for item in result if item.get("task_id") != task.task_id]
-
-                    
                 else:
                     time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
                     if time is None:
@@ -180,12 +186,8 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     updated_tasks_raw = result.get("updated_tasks", [])
                     result = deduplicate_tasks(updated_tasks_raw)
                     result = [item for item in result if item.get("task_id") != task.task_id]
-
-                
                 update_fields['is_reviewed'] = task_data.is_reviewed
 
-            
-        
         db.commit()
         logger.info(f"Task {task_id} updated successfully with changes: {update_fields}")
 
@@ -238,11 +240,19 @@ def send_for_review(data: SendForReview, db: Session = Depends(get_db), Current_
         if not task:
             logger.warning(f"Task not found or unauthorized for user {Current_user.employee_id}")
             return {"message": "Task not found or unauthorized"}
+        
+        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+        if time is None:
+            return {"Start time": "No active time tracking found for this task."}
 
         if task.task_type != TaskType.Review:
             logger.warning("Attempted to send a non-review task for review")
             return {"message": "Only review tasks can send for further review."}
 
+        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
+        if time is not None:
+            time.end_time = datetime.now()
+            db.flush()
         next_review = db.query(Task).filter(
             Task.parent_task_id == task.task_id,
             Task.task_type == TaskType.Review,

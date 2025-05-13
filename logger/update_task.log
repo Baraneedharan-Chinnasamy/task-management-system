@@ -444,3 +444,23 @@ NameError: name 'func' is not defined
 2025-05-13 10:47:27,266 - update_task - INFO - Reverting normal task 5 from Completed to TaskStatus.In_Review
 2025-05-13 10:47:27,266 - update_task - INFO - reverse_completion_from_review completed for task_id=5
 2025-05-13 10:47:27,283 - update_task - INFO - Task 6 updated successfully with changes: {'is_reviewed': False}
+2025-05-13 10:48:19,576 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:48:19,590 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:48:19,591 - update_task - INFO - Task 6 updated successfully with changes: {}
+2025-05-13 10:49:41,178 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:49:41,181 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:49:41,182 - update_task - INFO - Task 6 updated successfully with changes: {}
+2025-05-13 10:50:10,065 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:50:10,067 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=True
+2025-05-13 10:50:10,069 - update_task - INFO - Assigned_to updated
+2025-05-13 10:50:10,076 - update_task - INFO - Task 6 updated successfully with changes: {'assigned_to': 1}
+2025-05-13 10:50:17,861 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 10:50:17,863 - update_task - INFO - User 2 is updating Task 6 | Creator=True, Assignee=False
+2025-05-13 10:50:17,864 - update_task - INFO - Assigned_to updated
+2025-05-13 10:50:17,869 - update_task - INFO - Task 6 updated successfully with changes: {'assigned_to': 2}
+2025-05-13 14:28:11,079 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 14:28:11,105 - update_task - INFO - User 2 is updating Task 3 | Creator=True, Assignee=True
+2025-05-13 14:28:11,156 - update_task - INFO - Task 3 updated successfully with changes: {'task_name': 'hi'}
+2025-05-13 14:30:11,113 - update_task - INFO - POST /update_task called by user_id=2
+2025-05-13 14:30:11,129 - update_task - INFO - User 2 is updating Task 3 | Creator=True, Assignee=True
+2025-05-13 14:30:11,149 - update_task - INFO - Task 3 updated successfully with changes: {'description': 'hi'}

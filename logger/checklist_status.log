@@ -1,16 +1,3 @@
-2025-05-08 16:19:58,686 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
-2025-05-08 16:19:58,686 - mark_checklist_complete - INFO - Checklist 1 found, current status: True
-2025-05-08 16:19:58,703 - mark_checklist_complete - WARNING - User 5 has no access to parent task 1
-2025-05-08 16:20:27,232 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
-2025-05-08 16:20:27,244 - mark_checklist_complete - INFO - Checklist 29 found, current status: False
-2025-05-08 16:20:27,248 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=19, task_type=TaskType.Normal
-2025-05-08 16:20:27,263 - mark_checklist_complete - INFO - Checklist 29 marked as completed
-2025-05-08 16:20:27,313 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
-2025-05-08 16:20:48,075 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
-2025-05-08 16:20:48,075 - mark_checklist_complete - INFO - Checklist 29 found, current status: True
-2025-05-08 16:20:48,091 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=19, task_type=TaskType.Normal
-2025-05-08 16:20:48,091 - mark_checklist_complete - INFO - Checklist 29 marked as incomplete
-2025-05-08 16:20:48,126 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
 2025-05-10 10:06:39,647 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=5
 2025-05-10 10:06:39,647 - mark_checklist_complete - INFO - Checklist 31 found, current status: False
 2025-05-10 10:06:39,663 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=22, task_type=TaskType.Normal
@@ -795,3 +782,18 @@ AttributeError: 'UpdateStatus' object has no attribute 'task_id'
 2025-05-13 10:35:52,764 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=5, task_type=TaskType.Normal
 2025-05-13 10:35:52,767 - mark_checklist_complete - INFO - Checklist 4 marked as completed
 2025-05-13 10:35:52,781 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-13 17:54:38,450 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 17:54:38,450 - mark_checklist_complete - INFO - Checklist 1 found, current status: False
+2025-05-13 17:54:38,483 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=1, task_type=TaskType.Normal
+2025-05-13 17:54:38,500 - mark_checklist_complete - INFO - Checklist 1 marked as completed
+2025-05-13 17:54:38,586 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-13 17:54:50,159 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 17:54:50,176 - mark_checklist_complete - INFO - Checklist 1 found, current status: True
+2025-05-13 17:54:50,189 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=1, task_type=TaskType.Normal
+2025-05-13 17:54:50,189 - mark_checklist_complete - INFO - Checklist 1 marked as incomplete
+2025-05-13 17:54:50,237 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-13 17:54:59,050 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-13 17:54:59,050 - mark_checklist_complete - INFO - Checklist 1 found, current status: False
+2025-05-13 17:54:59,067 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=1, task_type=TaskType.Normal
+2025-05-13 17:54:59,077 - mark_checklist_complete - INFO - Checklist 1 marked as completed
+2025-05-13 17:54:59,113 - mark_checklist_complete - INFO - Checklist status updated and committed successfully

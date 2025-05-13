@@ -64,9 +64,9 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
             time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
             if time is None:
                 return {"Start time": "No active time tracking found for this task."}
-        else:
+        if data.is_completed == False:
             time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
-            if time is not None:
+            if not time:
                 return {"End time": "No active time tracking found for this task."}
 
         if not parent_task:
