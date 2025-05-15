@@ -57,6 +57,17 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                 update_fields['due_date'] = task_data.due_date
                 logger.info("Due date updated")
 
+            if task_data.task_name is not None:
+                    log_task_field_change(db, task.task_id, "task_name", task.task_name, task_data.task_name, Current_user.employee_id)
+                    task.task_name = task_data.task_name
+                    update_fields['task_name'] = task_data.task_name
+            
+            if task_data.description is not None:
+                log_task_field_change(db, task.task_id, "description", task.description, task_data.description, Current_user.employee_id)
+                task.description = task_data.description
+                update_fields['description'] = task_data.description
+        
+
             if task_data.is_review_required is not None:
                 log_task_field_change(db, task.task_id, "is_review_required", task.is_review_required, task_data.is_review_required, Current_user.employee_id)
                 if task.task_type == TaskType.Normal:
@@ -112,26 +123,7 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                             log_task_field_change(db, review_task.task_id, "is_delete", False, True, Current_user.employee_id)
                             review_task.is_delete = True
                             logger.info(f"Review task {review_task.task_id} marked as deleted")
-
-                        
-        if is_assignee or is_creator:
-            if task_data.description is not None:
-                if is_assignee:
-                    time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
-                    if time is None:
-                        return {"Start time": "No active time tracking found for this task."}
-                log_task_field_change(db, task.task_id, "description", task.description, task_data.description, Current_user.employee_id)
-                task.description = task_data.description
-                update_fields['description'] = task_data.description
-            if task_data.task_name is not None:
-                    if is_assignee:
-                        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
-                        if time is None:
-                            return {"Start time": "No active time tracking found for this task."}
-                    log_task_field_change(db, task.task_id, "task_name", task.task_name, task_data.task_name, Current_user.employee_id)
-                    task.task_name = task_data.task_name
-                    update_fields['task_name'] = task_data.task_name
-        
+ 
         if is_assignee:
             if task_data.output is not None:
                 log_task_field_change(db, task.task_id, "output", task.output, task_data.output, Current_user.employee_id)

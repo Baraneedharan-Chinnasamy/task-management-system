@@ -1,8 +1,8 @@
 import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from sqlalchemy.sql import or_
-from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, ChatRoom, User
+from sqlalchemy.sql import or_, desc
+from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, ChatRoom, User, TaskTimeLog
 from Logs.functions import log_task_field_change,log_checklist_field_change
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
@@ -97,6 +97,10 @@ def add_checklist_subtask(
 
             if not parent_task:
                 raise HTTPException(status_code=403, detail="Task not found or unauthorized")
+            
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
+            if time is None:
+                return {"Start time": "No active time tracking found for this task."}
 
             if parent_task.task_type == TaskType.Review:
                 raise HTTPException(status_code=400, detail="Cannot add subtask to a review task")
@@ -127,8 +131,7 @@ def add_checklist_subtask(
                 Task.task_id == link.parent_task_id,
                 or_(
                     Task.created_by == Current_user.employee_id,
-                    Task.assigned_to == Current_user.employee_id
-                ),
+                    Task.assigned_to == Current_user.employee_id),
                 Task.is_delete == False
             ).first()
             # Parent task checklist progress

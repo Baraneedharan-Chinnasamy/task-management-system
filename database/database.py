@@ -27,10 +27,4 @@ def get_db():
     finally:
         db.close()
 
-# Function to get the database session dynamically (without yield)
-def get_dynamic_db():
-    db = SessionLocal()  # Create session
-    try:
-        return db  # Return the session directly
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database connection failed: {e}")
+
