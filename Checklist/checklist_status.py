@@ -99,7 +99,7 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
         )
         checklist.is_completed = data.is_completed
         logger.info(f"Checklist {data.checklist_id} marked as {'completed' if data.is_completed else 'incomplete'}")
-        print(parent_task.task_type)   
+         
         
         if parent_task.task_type == TaskType.Normal:
             logger.debug(f"Normal task - Propagating checklist change for parent_task_id={parent_task_id}")

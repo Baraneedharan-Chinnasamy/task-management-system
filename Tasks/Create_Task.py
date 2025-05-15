@@ -42,7 +42,7 @@ def add_checklist_subtask(
 
         db.add(ChatRoom(task_id=new_task.task_id))
         log_task_field_change(db, new_task.task_id, "status", None, "To_Do", 2)
-        print(len(data.checklist_names))
+       
         # Create checklists
         checklists_created = []
         for name in data.checklist_names:
