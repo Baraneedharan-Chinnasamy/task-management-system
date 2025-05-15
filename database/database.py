@@ -13,7 +13,7 @@ DB_PASSWORD = urllib.parse.quote_plus(os.getenv("DB_PASSWORD"))
 DB_HOST = os.getenv("DB_HOST")
 
 # Database connection URL (Fixed for employeee_task)
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/employeee_task"
+DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/task_db"
 
 # Create the engine and session maker
 engine = create_engine(DATABASE_URL,pool_size=80,max_overflow=20,pool_pre_ping=True)
