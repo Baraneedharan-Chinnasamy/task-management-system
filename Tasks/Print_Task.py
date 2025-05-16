@@ -21,6 +21,7 @@ def get_tasks_by_employees(
     task_type: Optional[str] = Query(None),
     is_reviewed: Optional[bool] = Query(None),
     is_review_required: Optional[bool] = Query(None),
+    is_ongoing: Optional[bool] = Query(None),  # ✅ NEW PARAMETER
     sort_by: Optional[str] = Query("due_date"),
     sort_order: Optional[str] = Query("desc"),
     filter_by: Optional[str] = Query(None, regex="^(created_by|assigned_to)?$"),
@@ -81,27 +82,25 @@ def get_tasks_by_employees(
 
     # Step 4: Apply status filter
     if status:
-        status = status.title()
-        if status == "Ongoing":
-            if ongoing_task_ids:
-                query = query.filter(Task.task_id.in_(ongoing_task_ids))
-            else:
-                return {
-                    "page": page,
-                    "limit": limit,
-                    "has_more": False,
-                    "total": 0,
-                    "tasks": [],
-                    "summary": {
-                        "created_by_me": {"total": 0, "status_counts": {}},
-                        "assigned_to_me": {"total": 0, "status_counts": {}}
-                    }
-                }
+        query = query.filter(Task.status == status.title())
+
+    # Step 4.1: Apply is_ongoing filter independently
+    if is_ongoing is True:
+        if ongoing_task_ids:
+            query = query.filter(Task.task_id.in_(ongoing_task_ids))
         else:
-            query = query.filter(Task.status == status)
-            if ongoing_task_ids:
-                query = query.filter(~Task.task_id.in_(ongoing_task_ids))
-    else:
+            return {
+                "page": page,
+                "limit": limit,
+                "has_more": False,
+                "total": 0,
+                "tasks": [],
+                "summary": {
+                    "created_by_me": {"total": 0, "status_counts": {}},
+                    "assigned_to_me": {"total": 0, "status_counts": {}}
+                }
+            }
+    elif is_ongoing is False:
         if ongoing_task_ids:
             query = query.filter(~Task.task_id.in_(ongoing_task_ids))
 
@@ -169,16 +168,11 @@ def get_tasks_by_employees(
     assigned_to_me_summary = defaultdict(int)
 
     for t in created_by_me_tasks:
-        if t.task_id in ongoing_task_ids:
-            created_by_me_summary["Ongoing"] += 1
-        else:
-            created_by_me_summary[t.status] += 1
+        created_by_me_summary[t.status] += 1
 
     for t in assigned_to_me_tasks:
-        if t.task_id in ongoing_task_ids:
-            assigned_to_me_summary["Ongoing"] += 1
-        else:
-            assigned_to_me_summary[t.status] += 1
+        assigned_to_me_summary[t.status] += 1
+
 
     # Step 10: Get latest time log per task
     latest_time_logs_subquery = db.query(
@@ -203,7 +197,7 @@ def get_tasks_by_employees(
         completed = checklist_counts[task.task_id]["completed"]
         total = checklist_counts[task.task_id]["total"]
         checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
-        is_ongoing = task.task_id in ongoing_task_ids
+        is_ongoing_task = task.task_id in ongoing_task_ids
         delete_allow = task.created_by == current_user.employee_id
         latest_time = time_log_map.get(task.task_id, {"start_time": None, "end_time": None})
 
@@ -214,7 +208,7 @@ def get_tasks_by_employees(
             "assigned_to_name": user_map.get(task.assigned_to),
             "created_by_name": user_map.get(task.created_by),
             "status": task.status,
-            "is_ongoing": is_ongoing,
+            "is_ongoing": is_ongoing_task,
             "task_type": task.task_type,
             "checklist_progress": checklist_progress,
             "delete_allow": delete_allow,
@@ -239,11 +233,6 @@ def get_tasks_by_employees(
             }
         }
     }
-
-
-
-
-
 
 @router.get("/task/task_id")
 def task_details(

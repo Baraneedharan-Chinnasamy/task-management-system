@@ -17,8 +17,7 @@ from Tasks.time_traking import router as time_tracking_router
 # Create all tables
 Base.metadata.create_all(bind=engine)
 
-# Initialize app
-app = FastAPI()
+app = FastAPI(root_path="/taskmanager")
 
 # Enable CORS
 app.add_middleware(
@@ -26,12 +25,16 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:8000",
-        "http://0.0.0.0:8001"
+        "http://0.0.0.0:8001",
+        "http://0.0.0.0:8101",
+        "http://34.47.234.234/taskmanager/docs",
+        "http://task.advartit.in/taskmanager/docs"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Prefix for all routes
 API_PREFIX = "/api/v1"

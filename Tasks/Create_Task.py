@@ -41,7 +41,7 @@ def add_checklist_subtask(
         logger.info(f"Main task created with ID={new_task.task_id}")
 
         db.add(ChatRoom(task_id=new_task.task_id))
-        log_task_field_change(db, new_task.task_id, "status", None, "To_Do", 2)
+        log_task_field_change(db, new_task.task_id, "status", None, "To_Do", 1)
        
         # Create checklists
         checklists_created = []
@@ -75,7 +75,7 @@ def add_checklist_subtask(
             )
             db.add(review_task)
             db.flush()
-            log_task_field_change(db, review_task.task_id, "status", None, "New", 2)
+            log_task_field_change(db, review_task.task_id, "status", None, "New", 1)
 
         # Handle if it's a subtask being linked to an existing checklist
         if data.checklist_id is not None:
@@ -127,13 +127,7 @@ def add_checklist_subtask(
             if not link:
                 raise HTTPException(status_code=404, detail="Checklist not found")
 
-            parent_task = db.query(Task).filter(
-                Task.task_id == link.parent_task_id,
-                or_(
-                    Task.created_by == Current_user.employee_id,
-                    Task.assigned_to == Current_user.employee_id),
-                Task.is_delete == False
-            ).first()
+            parent_task = db.query(Task).filter(Task.task_id == link.parent_task_id,or_(Task.created_by == Current_user.employee_id,Task.assigned_to == Current_user.employee_id),Task.is_delete == False).first()
             # Parent task checklist progress
             parent_task_checklists = db.query(TaskChecklistLink).filter(
                 TaskChecklistLink.parent_task_id == parent_task.task_id,
