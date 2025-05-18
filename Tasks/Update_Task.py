@@ -61,12 +61,12 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     log_task_field_change(db, task.task_id, "task_name", task.task_name, task_data.task_name, Current_user.employee_id)
                     task.task_name = task_data.task_name
                     update_fields['task_name'] = task_data.task_name
-            
+
             if task_data.description is not None:
                 log_task_field_change(db, task.task_id, "description", task.description, task_data.description, Current_user.employee_id)
                 task.description = task_data.description
                 update_fields['description'] = task_data.description
-        
+
 
             if task_data.is_review_required is not None:
                 log_task_field_change(db, task.task_id, "is_review_required", task.is_review_required, task_data.is_review_required, Current_user.employee_id)
@@ -102,7 +102,7 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     else:
                         task.is_review_required = False
                         if task.status == TaskStatus.In_Review:
-                            task.status = TaskStatus.Completed.name    
+                            task.status = TaskStatus.Completed.name
                         update_fields['is_review_required'] = False
                         review_task = db.query(Task).filter(
                             Task.parent_task_id == task_id,
@@ -123,7 +123,7 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                             log_task_field_change(db, review_task.task_id, "is_delete", False, True, Current_user.employee_id)
                             review_task.is_delete = True
                             logger.info(f"Review task {review_task.task_id} marked as deleted")
- 
+
         if is_assignee:
             if task_data.output is not None:
                 log_task_field_change(db, task.task_id, "output", task.output, task_data.output, Current_user.employee_id)
@@ -232,7 +232,7 @@ def send_for_review(data: SendForReview, db: Session = Depends(get_db), Current_
         if not task:
             logger.warning(f"Task not found or unauthorized for user {Current_user.employee_id}")
             return {"message": "Task not found or unauthorized"}
-        
+
         time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
         if time is None:
             return {"Start time": "No active time tracking found for this task."}

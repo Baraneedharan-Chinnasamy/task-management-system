@@ -17,24 +17,27 @@ from Tasks.time_traking import router as time_tracking_router
 # Create all tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(root_path="/taskmanager")
+# Initialize app
+app = FastAPI()
 
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:8000",
-        "http://0.0.0.0:8001",
-        "http://0.0.0.0:8101",
-        "http://34.47.234.234/taskmanager/docs",
-        "http://task.advartit.in/taskmanager/docs"
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "http://0.0.0.0:8001",
+    "http://0.0.0.0:8101",
+    "http://34.47.234.234",
+    "https://34.47.234.234",
+    "http://task.advartit.in",
+    "https://task.advartit.in",
+    "https://dot-v1-test-1.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # Prefix for all routes
 API_PREFIX = "/api/v1"
@@ -51,4 +54,3 @@ app.include_router(checklist_status_router, prefix=f"{API_PREFIX}/checklist", ta
 app.include_router(delete_router, prefix=f"{API_PREFIX}/delete", tags=["Delete"])
 app.include_router(logs_router, prefix=f"{API_PREFIX}/logs", tags=["Logs"])
 app.include_router(time_tracking_router, prefix=f"{API_PREFIX}/tasks", tags=["Tasks"])
-

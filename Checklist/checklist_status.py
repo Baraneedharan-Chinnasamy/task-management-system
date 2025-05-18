@@ -22,7 +22,7 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
     logger.debug(f"Request data: checklist_id={data.checklist_id}, is_completed={data.is_completed}")
 
     try:
-        
+
         # Step 1: Fetch checklist
         checklist = db.query(Checklist).filter(
             Checklist.checklist_id == data.checklist_id,
@@ -37,7 +37,7 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
 
         if checklist.is_completed == data.is_completed:
             logger.info(f"Checklist {data.checklist_id} already {'completed' if data.is_completed else 'incomplete'}")
-            
+
 
         # Step 2: Validate and fetch parent task
         parent_link = db.query(TaskChecklistLink).filter(
@@ -99,15 +99,15 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
         )
         checklist.is_completed = data.is_completed
         logger.info(f"Checklist {data.checklist_id} marked as {'completed' if data.is_completed else 'incomplete'}")
-         
-        
+
+
         if parent_task.task_type == TaskType.Normal:
             logger.debug(f"Normal task - Propagating checklist change for parent_task_id={parent_task_id}")
-            
+
             if data.is_completed:
                 update_parent_task_status(parent_task_id, db, Current_user)
             else:
-                
+
                 propagate_incomplete_upwards(data.checklist_id, db, Current_user)
 
         elif parent_task.task_type == TaskType.Review:
@@ -169,7 +169,7 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
         completed_count = sum(1 for c in parent_checklists if c.is_completed)
         total_count = len(parent_checklists)
         parent_checklist_progress = f"{completed_count}/{total_count}" if total_count > 0 else "0/0"
-        
+
         logger.info(f"Checklist status updated and committed successfully")
         # ⏱️ Add ongoing time details for the parent task (if any)
         latest_time_log = db.query(TaskTimeLog).filter(
@@ -203,8 +203,3 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
         db.rollback()
         logger.exception(f"Unexpected error while updating checklist {data.checklist_id}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
-    
-
-
-
-

@@ -23,7 +23,7 @@ def delete_related_items(
 ):
     logger = get_logger('delete', 'delete.log')
     logger.info(f"DELETE requested by user_id={Current_user.employee_id}")
-    
+
     task_id = delete_request.task_id
     checklist_id = delete_request.checklist_id
 
@@ -89,9 +89,9 @@ def delete_related_items(
             "updated_by": Current_user.employee_id,
             "updated_at": datetime.now()
         } for c_id in checklists_to_delete]
-        
+
         db.bulk_insert_mappings(ChecklistUpdateLog, logs)
-        
+
     db.flush()
     if delete_request.task_id:
         link = db.query(TaskChecklistLink.checklist_id).filter(
@@ -102,9 +102,9 @@ def delete_related_items(
     if delete_request.checklist_id:
         update_parent_task_status(delete_request.checklist_id, db, Current_user)
         db.flush()
-            
+
         logger.info(f"Marked checklists as deleted: {checklists_to_delete}")
-    
+
         parent_task_checklists = db.query(TaskChecklistLink).filter(
                 TaskChecklistLink.parent_task_id.isnot(None),
                 TaskChecklistLink.checklist_id==delete_request.checklist_id,
@@ -128,6 +128,8 @@ def delete_related_items(
 
     db.commit()
     logger.info("Deletion process completed successfully.")
+    parent_task = None  # ✅ Ensure variable is always defined
+    checklist_progress = None
     return {
         "message": "Related tasks and checklists marked as deleted",
         "tasks": list(tasks_to_delete),

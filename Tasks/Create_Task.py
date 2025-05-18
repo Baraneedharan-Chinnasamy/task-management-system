@@ -1,4 +1,3 @@
-import logging
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import or_, desc
@@ -23,7 +22,7 @@ def add_checklist_subtask(
     logger.info(f"Create Task endpoint hit by user_id={Current_user.employee_id}")
     logger.debug(f"Received data: {data}")
 
-    
+
     try:
         # Create main task
         new_task = Task(
@@ -42,7 +41,7 @@ def add_checklist_subtask(
 
         db.add(ChatRoom(task_id=new_task.task_id))
         log_task_field_change(db, new_task.task_id, "status", None, "To_Do", 1)
-       
+
         # Create checklists
         checklists_created = []
         for name in data.checklist_names:
@@ -97,7 +96,7 @@ def add_checklist_subtask(
 
             if not parent_task:
                 raise HTTPException(status_code=403, detail="Task not found or unauthorized")
-            
+
             time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == parent_task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
             if time is None:
                 return {"Start time": "No active time tracking found for this task."}
@@ -109,14 +108,14 @@ def add_checklist_subtask(
                 checklist_id=data.checklist_id,
                 sub_task_id=new_task.task_id
             ))
-            
+
             logger.info(f"Subtask {new_task.task_id} linked to checklist {data.checklist_id}")
             # Trigger status/checklist propagation
             checklist = db.query(Checklist).filter(Checklist.checklist_id == data.checklist_id,Checklist.is_completed == True).first()
             if checklist:
                 checklist.is_completed == False
                 log_checklist_field_change(db,checklist.checklist_id,"is_completed",True,False,Current_user.employee_id)
-                
+
                 propagate_incomplete_upwards(data.checklist_id, db, Current_user)
         db.commit()
         if data.checklist_id is not None:
@@ -127,7 +126,13 @@ def add_checklist_subtask(
             if not link:
                 raise HTTPException(status_code=404, detail="Checklist not found")
 
-            parent_task = db.query(Task).filter(Task.task_id == link.parent_task_id,or_(Task.created_by == Current_user.employee_id,Task.assigned_to == Current_user.employee_id),Task.is_delete == False).first()
+            parent_task = db.query(Task).filter(
+                Task.task_id == link.parent_task_id,
+                or_(
+                    Task.created_by == Current_user.employee_id,
+                    Task.assigned_to == Current_user.employee_id),
+                Task.is_delete == False
+            ).first()
             # Parent task checklist progress
             parent_task_checklists = db.query(TaskChecklistLink).filter(
                 TaskChecklistLink.parent_task_id == parent_task.task_id,
@@ -140,7 +145,7 @@ def add_checklist_subtask(
             completed = sum(1 for c in checklists if c.is_completed)
             total = len(checklists)
             parent_checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
-        
+
 
         users = db.query(User).filter().all()
         user_map = {u.employee_id: u.username for u in users}
