@@ -1,0 +1,4 @@
+2025-05-19 14:47:55,250 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-19 14:47:55,278 - create_task - INFO - Main task created with ID=25
+2025-05-19 14:47:55,309 - create_task - INFO - Checklist 18 linked to task 25
+2025-05-19 14:47:55,352 - create_task - INFO - Task and dependencies committed successfully

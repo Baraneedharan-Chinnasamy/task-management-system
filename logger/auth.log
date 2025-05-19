@@ -1,0 +1,6 @@
+2025-05-19 14:46:25,651 - auth - INFO - Signup attempt for username='string', email='user@example.com'
+2025-05-19 14:46:25,679 - auth - WARNING - Signup failed: Username or email already exists - string / user@example.com
+2025-05-19 14:46:35,162 - auth - INFO - Signup attempt for username='string1', email='usezfbvr@example.com'
+2025-05-19 14:46:35,493 - auth - INFO - New user created: user_id=6, username=string1
+2025-05-19 14:47:36,037 - auth - INFO - Login attempt for username='string'
+2025-05-19 14:47:36,724 - auth - INFO - Login successful for user_id=2, username=string

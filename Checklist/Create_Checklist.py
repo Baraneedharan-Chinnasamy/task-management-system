@@ -104,6 +104,7 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
                 "checklist_created_by_id": checklist.created_by,
                 "checklist_created_by_name": user_map.get(checklist.created_by),
                 "is_completed": checklist.is_completed,
+                "created_at": checklist.created_at
             })
 
         db.commit()
@@ -129,6 +130,7 @@ def add_checklist(data: CreateChecklistRequest, db: Session = Depends(get_db), C
             "task_name": task.task_name,
             "status":task.status,
             "checklist_progress": checklist_progress,
+            
             "group": "Review Checklist" if task.task_type == TaskType.Review else None}
 
     except HTTPException:
