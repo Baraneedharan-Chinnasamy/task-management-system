@@ -119,39 +119,51 @@ async def chat_websocket(
 def get_chat_history(
     task_id: int,
     user_id: int,
+    page: int = 1,
     limit: int = 30,
     before_timestamp: Optional[datetime] = None,
     db: Session = Depends(get_db)
 ):
-    user_map = {}
-    users = db.query(User).filter().all()
+    if page < 1:
+        raise HTTPException(status_code=400, detail="Page number must be >= 1")
+
+    # Build user map
+    users = db.query(User).all()
     user_map = {u.employee_id: u.username for u in users}
-    task = db.query(Task).filter(Task.task_id==task_id).first()
+
+    # Get task and related chat room
+    task = db.query(Task).filter(Task.task_id == task_id).first()
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+
     if task.task_type == TaskType.Review:
         original_task = get_original_normal_task(db, task_id)
         task_ids = original_task.task_id
     else:
         task_ids = task.task_id
+
     chat_room = db.query(ChatRoom).filter(ChatRoom.task_id == task_ids).first()
     if not chat_room:
         raise HTTPException(status_code=404, detail="Chat room not found")
 
     chat_room_id = chat_room.chat_room_id
+
+    # Build query
     query = db.query(ChatMessage).filter(ChatMessage.chat_room_id == chat_room_id)
     if before_timestamp:
         query = query.filter(ChatMessage.timestamp < before_timestamp)
 
-    messages = query.order_by(ChatMessage.timestamp.desc()).limit(limit).all()
+    offset = (page - 1) * limit
+    fetched_messages = query.order_by(ChatMessage.timestamp.desc()).offset(offset).limit(limit + 1).all()
+
+    has_more = len(fetched_messages) > limit
+    messages = fetched_messages[:limit]
     messages.reverse()
 
     read_message_ids = {
         r.message_id for r in db.query(ChatMessageRead.message_id)
-        .filter_by(user_id=user_id)
-        .all()
+        .filter_by(user_id=user_id).all()
     }
-    user_map = {}
-    users = db.query(User).filter().all()
-    user_map = {u.employee_id: u.username for u in users}
 
     visible_messages = []
     for msg in messages:
@@ -159,7 +171,7 @@ def get_chat_history(
             visible_messages.append({
                 "message_id": msg.message_id,
                 "sender_id": msg.sender_id,
-                "sender_name" : user_map.get(msg.sender_id),
+                "sender_name": user_map.get(msg.sender_id),
                 "message": msg.message,
                 "timestamp": msg.timestamp.isoformat(),
                 "seen": msg.message_id in read_message_ids
@@ -169,4 +181,10 @@ def get_chat_history(
                 db.add(ChatMessageRead(message_id=msg.message_id, user_id=user_id))
 
     db.commit()
-    return visible_messages
+
+    return {
+        "messages": visible_messages,
+        "has_more": has_more,
+        "page": page,
+        "limit": limit
+    }
