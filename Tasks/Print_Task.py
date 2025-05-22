@@ -145,7 +145,7 @@ def get_tasks_by_employees(
     checklist_ids = [link.checklist_id for link in checklist_links if link.checklist_id]
     checklist_map = {}
     if checklist_ids:
-        checklists = db.query(Checklist).filter(Checklist.checklist_id.in_(checklist_ids)).all()
+        checklists = db.query(Checklist).filter(Checklist.checklist_id.in_(checklist_ids),Checklist.is_delete== False).all()
         checklist_map = {c.checklist_id: c for c in checklists}
         for link in checklist_links:
             checklist = checklist_map.get(link.checklist_id)
@@ -157,11 +157,13 @@ def get_tasks_by_employees(
     # Step 9: Summary
     created_by_me_tasks = db.query(Task).filter(
         Task.created_by == current_user.employee_id,
-        Task.is_delete == False
+        Task.is_delete == False,
+        Task.status != "New"
     ).all()
     assigned_to_me_tasks = db.query(Task).filter(
         Task.assigned_to == current_user.employee_id,
-        Task.is_delete == False
+        Task.is_delete == False,
+        Task.status != "New"
     ).all()
 
     created_by_me_summary = defaultdict(int)
@@ -261,12 +263,10 @@ def task_details(
                 func.max(TaskTimeLog.start_time)
             ).filter(
                 TaskTimeLog.task_id == task_id,
-                TaskTimeLog.user_id == current_user.employee_id
             ).scalar_subquery()
 
             log = db.query(TaskTimeLog).filter(
                 TaskTimeLog.task_id == task_id,
-                TaskTimeLog.user_id == current_user.employee_id,
                 TaskTimeLog.start_time == latest_log_subq
             ).first()
 

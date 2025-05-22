@@ -1,0 +1,148 @@
+2025-05-21 15:10:39,963 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-21 15:10:39,970 - create_checklist - INFO - Task found: task_id=27, type=TaskType.Normal
+2025-05-21 15:10:52,690 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 15:10:52,696 - create_checklist - INFO - Task found: task_id=27, type=TaskType.Normal
+2025-05-21 15:10:52,699 - create_checklist - INFO - Checklist created with ID=20
+2025-05-21 15:10:52,720 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 15:10:55,937 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 15:10:55,942 - create_checklist - INFO - Task found: task_id=27, type=TaskType.Normal
+2025-05-21 15:10:55,945 - create_checklist - INFO - Checklist created with ID=21
+2025-05-21 15:10:55,963 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 15:13:05,139 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 15:13:05,145 - create_checklist - INFO - Task found: task_id=28, type=TaskType.Review
+2025-05-21 15:13:05,155 - create_checklist - INFO - Review task 28 status updated to In_ReEdit
+2025-05-21 15:13:05,157 - create_checklist - INFO - Checklist created with ID=22
+2025-05-21 15:13:05,169 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 15:18:56,180 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 15:18:56,186 - create_checklist - INFO - Task found: task_id=28, type=TaskType.Review
+2025-05-21 15:18:56,197 - create_checklist - INFO - Review task 28 status updated to In_ReEdit
+2025-05-21 15:18:56,200 - create_checklist - INFO - Checklist created with ID=23
+2025-05-21 15:18:56,216 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 16:15:19,906 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-21 16:15:19,909 - create_checklist - INFO - Task found: task_id=27, type=TaskType.Normal
+2025-05-21 16:15:19,918 - create_checklist - INFO - Checklist created with ID=24
+2025-05-21 16:15:19,982 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 16:15:38,199 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 16:15:38,201 - create_checklist - INFO - Task found: task_id=28, type=TaskType.Review
+2025-05-21 16:15:38,218 - create_checklist - INFO - Review task 28 status updated to In_ReEdit
+2025-05-21 16:15:38,226 - create_checklist - INFO - Checklist created with ID=25
+2025-05-21 16:15:38,244 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 17:04:43,464 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 17:04:43,473 - create_checklist - INFO - Task found: task_id=28, type=TaskType.Review
+2025-05-21 17:04:43,504 - create_checklist - INFO - Review task 28 status updated to In_ReEdit
+2025-05-21 17:04:43,512 - create_checklist - INFO - Checklist created with ID=26
+2025-05-21 17:04:43,528 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 17:29:28,181 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-21 17:29:28,193 - create_checklist - INFO - Task found: task_id=29, type=TaskType.Normal
+2025-05-21 17:29:44,018 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 17:29:44,018 - create_checklist - INFO - Task found: task_id=29, type=TaskType.Normal
+2025-05-21 17:29:44,032 - create_checklist - INFO - Checklist created with ID=28
+2025-05-21 17:29:44,053 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 17:29:45,981 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 17:29:45,985 - create_checklist - INFO - Task found: task_id=29, type=TaskType.Normal
+2025-05-21 17:29:45,985 - create_checklist - INFO - Checklist created with ID=29
+2025-05-21 17:29:46,009 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 18:07:43,864 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 18:07:43,880 - create_checklist - INFO - Task found: task_id=30, type=TaskType.Review
+2025-05-21 18:07:43,915 - create_checklist - INFO - Review task 30 status updated to In_ReEdit
+2025-05-21 18:07:43,915 - create_checklist - INFO - Checklist created with ID=30
+2025-05-21 18:07:43,961 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 18:08:31,750 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 18:08:31,759 - create_checklist - INFO - Task found: task_id=30, type=TaskType.Review
+2025-05-21 18:08:31,776 - create_checklist - INFO - Checklist created with ID=31
+2025-05-21 18:08:31,799 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 18:24:03,163 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 18:24:03,170 - create_checklist - INFO - Task found: task_id=31, type=TaskType.Normal
+2025-05-21 18:24:03,170 - create_checklist - INFO - Checklist created with ID=33
+2025-05-21 18:24:03,274 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 18:27:18,693 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-21 18:27:18,710 - create_checklist - INFO - Task found: task_id=31, type=TaskType.Normal
+2025-05-21 18:27:18,726 - create_checklist - INFO - Checklist created with ID=34
+2025-05-21 18:27:18,758 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 18:28:28,108 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-21 18:28:28,117 - create_checklist - INFO - Task found: task_id=31, type=TaskType.Normal
+2025-05-21 18:28:28,119 - create_checklist - INFO - Checklist created with ID=35
+2025-05-21 18:28:28,148 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-21 18:29:33,086 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-21 18:29:33,094 - create_checklist - INFO - Task found: task_id=31, type=TaskType.Normal
+2025-05-21 18:29:33,103 - create_checklist - INFO - Checklist created with ID=36
+2025-05-21 18:29:33,158 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 09:46:47,323 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 09:46:47,331 - create_checklist - INFO - Task found: task_id=32, type=TaskType.Normal
+2025-05-22 09:46:47,331 - create_checklist - INFO - Checklist created with ID=38
+2025-05-22 09:46:47,359 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 09:46:51,025 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 09:46:51,025 - create_checklist - INFO - Task found: task_id=32, type=TaskType.Normal
+2025-05-22 09:46:51,039 - create_checklist - INFO - Checklist created with ID=39
+2025-05-22 09:46:51,066 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 09:47:45,299 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 09:47:45,305 - create_checklist - INFO - Task found: task_id=33, type=TaskType.Review
+2025-05-22 09:47:45,320 - create_checklist - INFO - Review task 33 status updated to In_ReEdit
+2025-05-22 09:47:45,324 - create_checklist - INFO - Checklist created with ID=40
+2025-05-22 09:47:45,349 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 09:48:09,567 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 09:48:09,583 - create_checklist - INFO - Task found: task_id=33, type=TaskType.Review
+2025-05-22 09:48:09,588 - create_checklist - INFO - Checklist created with ID=41
+2025-05-22 09:48:09,615 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 09:48:14,549 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 09:48:14,555 - create_checklist - INFO - Task found: task_id=33, type=TaskType.Review
+2025-05-22 09:48:14,561 - create_checklist - INFO - Checklist created with ID=42
+2025-05-22 09:48:14,576 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 09:49:49,511 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 09:49:49,518 - create_checklist - INFO - Task found: task_id=34, type=TaskType.Review
+2025-05-22 09:49:49,532 - create_checklist - INFO - Review task 34 status updated to In_ReEdit
+2025-05-22 09:49:49,536 - create_checklist - INFO - Checklist created with ID=43
+2025-05-22 09:49:49,544 - create_checklist - INFO - Checklist created with ID=44
+2025-05-22 09:49:49,558 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 10:48:03,814 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 10:48:03,814 - create_checklist - INFO - Task found: task_id=32, type=TaskType.Normal
+2025-05-22 10:48:03,827 - create_checklist - INFO - Checklist created with ID=45
+2025-05-22 10:48:03,848 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 10:50:22,400 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 10:50:22,406 - create_checklist - INFO - Task found: task_id=32, type=TaskType.Normal
+2025-05-22 10:50:22,406 - create_checklist - INFO - Checklist created with ID=46
+2025-05-22 10:50:22,447 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 10:58:34,295 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 10:58:34,302 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 10:58:34,307 - create_checklist - INFO - Checklist created with ID=49
+2025-05-22 10:58:34,329 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 10:58:35,725 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 10:58:35,732 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 10:58:35,737 - create_checklist - INFO - Checklist created with ID=50
+2025-05-22 10:58:35,747 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 10:58:37,512 - create_checklist - INFO - POST /add_checklist called by user_id=8
+2025-05-22 10:58:37,520 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 10:58:37,527 - create_checklist - INFO - Checklist created with ID=51
+2025-05-22 10:58:37,560 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:02:39,862 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:02:39,868 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:02:39,880 - create_checklist - INFO - Checklist created with ID=52
+2025-05-22 11:02:39,913 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:02:43,468 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:02:43,476 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:02:43,484 - create_checklist - INFO - Checklist created with ID=53
+2025-05-22 11:02:43,502 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:08:00,948 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:08:00,952 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:08:00,956 - create_checklist - INFO - Checklist created with ID=54
+2025-05-22 11:08:00,969 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:08:02,894 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:08:02,900 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:08:02,903 - create_checklist - INFO - Checklist created with ID=55
+2025-05-22 11:08:02,920 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:08:05,188 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:08:05,193 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:08:05,200 - create_checklist - INFO - Checklist created with ID=56
+2025-05-22 11:08:05,218 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:19:05,301 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:19:05,308 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:19:05,317 - create_checklist - INFO - Checklist created with ID=57
+2025-05-22 11:19:05,363 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:19:07,367 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:19:07,367 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:19:07,385 - create_checklist - INFO - Checklist created with ID=58
+2025-05-22 11:19:07,433 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 11:19:09,338 - create_checklist - INFO - POST /add_checklist called by user_id=2
+2025-05-22 11:19:09,346 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
+2025-05-22 11:19:09,356 - create_checklist - INFO - Checklist created with ID=59
+2025-05-22 11:19:09,399 - create_checklist - INFO - All checklists created and task updates committed successfully

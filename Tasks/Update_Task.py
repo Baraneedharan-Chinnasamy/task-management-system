@@ -124,12 +124,12 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                             review_task.is_delete = True
                             logger.info(f"Review task {review_task.task_id} marked as deleted")
 
-        if is_assignee:
+        if is_assignee or is_creator:
             if task_data.output is not None:
                 log_task_field_change(db, task.task_id, "output", task.output, task_data.output, Current_user.employee_id)
                 task.output = task_data.output
                 update_fields['output'] = task_data.output
-        if is_assignee or is_creator:
+        if is_assignee:
             if task_data.is_reviewed is not None and task.task_type == TaskType.Review:
                 if task_data.is_reviewed:
                     time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).order_by(desc(TaskTimeLog.start_time)).first()
@@ -154,15 +154,12 @@ def update_task(task_data: UpdateTaskRequest, db: Session = Depends(get_db), Cur
                     if checklists and not all(c.is_completed for c in checklists):
                         logger.warning("Not all checklists completed in review chain")
                         return {"message": "All checklists must be completed before marking reviewed"}
-                    if checklists:
-                        for checklist in checklists:
-                            log_checklist_field_change(db, checklist.checklist_id, "is_completed", checklist.is_completed, True, Current_user.employee_id)
                     task.is_reviewed = True
                     log_task_field_change(db, task.task_id, "is_reviewed", False, True, Current_user.employee_id)
                     task.previous_status = task.status
                     task.status = TaskStatus.Completed.name
                     time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
-                    time.end_time = None
+                    time.end_time = datetime.now()
                     db.flush()
                     result = propagate_completion_upwards(task, db, Current_user.employee_id, logger, Current_user)
                     updated_tasks_raw = result.get("updated_tasks", [])
@@ -241,10 +238,6 @@ def send_for_review(data: SendForReview, db: Session = Depends(get_db), Current_
             logger.warning("Attempted to send a non-review task for review")
             return {"message": "Only review tasks can send for further review."}
 
-        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
-        if time is not None:
-            time.end_time = datetime.now()
-            db.flush()
         next_review = db.query(Task).filter(
             Task.parent_task_id == task.task_id,
             Task.task_type == TaskType.Review,
@@ -257,10 +250,6 @@ def send_for_review(data: SendForReview, db: Session = Depends(get_db), Current_
 
         task.is_review_required = True
         task.status = TaskStatus.In_Review
-        time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
-        if time is not None:
-            time.end_time = datetime.now()
-            db.flush()
         logger.info(f"Marked task {task.task_id} as in review")
 
         review_task = Task(

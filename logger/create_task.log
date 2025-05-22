@@ -2,3 +2,50 @@
 2025-05-19 14:47:55,278 - create_task - INFO - Main task created with ID=25
 2025-05-19 14:47:55,309 - create_task - INFO - Checklist 18 linked to task 25
 2025-05-19 14:47:55,352 - create_task - INFO - Task and dependencies committed successfully
+2025-05-21 15:10:26,710 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-21 15:10:26,716 - create_task - INFO - Main task created with ID=27
+2025-05-21 15:10:26,728 - create_task - INFO - Checklist 19 linked to task 27
+2025-05-21 15:10:26,738 - create_task - INFO - Task and dependencies committed successfully
+2025-05-21 17:29:09,178 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-21 17:29:09,183 - create_task - INFO - Main task created with ID=29
+2025-05-21 17:29:09,195 - create_task - INFO - Checklist 27 linked to task 29
+2025-05-21 17:29:09,205 - create_task - INFO - Task and dependencies committed successfully
+2025-05-21 18:23:23,758 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-21 18:23:23,764 - create_task - INFO - Main task created with ID=31
+2025-05-21 18:23:23,773 - create_task - INFO - Checklist 32 linked to task 31
+2025-05-21 18:23:23,787 - create_task - INFO - Task and dependencies committed successfully
+2025-05-22 09:45:19,780 - create_task - INFO - Create Task endpoint hit by user_id=8
+2025-05-22 09:45:19,786 - create_task - INFO - Main task created with ID=32
+2025-05-22 09:45:19,795 - create_task - INFO - Checklist 37 linked to task 32
+2025-05-22 09:45:19,807 - create_task - INFO - Task and dependencies committed successfully
+2025-05-22 10:57:47,047 - create_task - INFO - Create Task endpoint hit by user_id=8
+2025-05-22 10:57:47,047 - create_task - INFO - Main task created with ID=35
+2025-05-22 10:57:47,063 - create_task - INFO - Checklist 47 linked to task 35
+2025-05-22 10:57:47,069 - create_task - INFO - Checklist 48 linked to task 35
+2025-05-22 10:57:47,079 - create_task - INFO - Task and dependencies committed successfully
+2025-05-22 11:19:26,708 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-22 11:19:26,715 - create_task - INFO - Main task created with ID=36
+2025-05-22 11:19:26,725 - create_task - INFO - Checklist 60 linked to task 36
+2025-05-22 11:19:26,733 - create_task - INFO - Subtask 36 linked to checklist 57
+2025-05-22 11:19:26,761 - create_task - INFO - Task and dependencies committed successfully
+2025-05-22 11:19:49,233 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-22 11:19:49,233 - create_task - INFO - Main task created with ID=37
+2025-05-22 11:19:49,248 - create_task - INFO - Checklist 61 linked to task 37
+2025-05-22 11:19:49,248 - create_task - INFO - Subtask 37 linked to checklist 57
+2025-05-22 11:19:49,280 - create_task - INFO - Task and dependencies committed successfully
+2025-05-22 11:23:41,686 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-22 11:23:41,693 - create_task - INFO - Main task created with ID=38
+2025-05-22 11:23:41,700 - create_task - INFO - Checklist 62 linked to task 38
+2025-05-22 11:23:41,710 - create_task - INFO - Subtask 38 linked to checklist 57
+2025-05-22 11:23:41,742 - create_task - INFO - Task and dependencies committed successfully
+2025-05-22 11:25:14,639 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-22 11:25:14,644 - create_task - INFO - Main task created with ID=39
+2025-05-22 11:25:14,652 - create_task - INFO - Checklist 63 linked to task 39
+2025-05-22 11:25:53,961 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-22 11:25:53,965 - create_task - INFO - Main task created with ID=40
+2025-05-22 11:25:53,974 - create_task - INFO - Checklist 64 linked to task 40
+2025-05-22 11:26:28,461 - create_task - INFO - Create Task endpoint hit by user_id=2
+2025-05-22 11:26:28,465 - create_task - INFO - Main task created with ID=41
+2025-05-22 11:26:28,473 - create_task - INFO - Checklist 65 linked to task 41
+2025-05-22 11:26:28,482 - create_task - INFO - Subtask 41 linked to checklist 57
+2025-05-22 11:26:28,532 - create_task - INFO - Task and dependencies committed successfully

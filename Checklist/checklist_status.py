@@ -22,7 +22,6 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
     logger.debug(f"Request data: checklist_id={data.checklist_id}, is_completed={data.is_completed}")
 
     try:
-
         # Step 1: Fetch checklist
         checklist = db.query(Checklist).filter(
             Checklist.checklist_id == data.checklist_id,
@@ -37,7 +36,6 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
 
         if checklist.is_completed == data.is_completed:
             logger.info(f"Checklist {data.checklist_id} already {'completed' if data.is_completed else 'incomplete'}")
-
 
         # Step 2: Validate and fetch parent task
         parent_link = db.query(TaskChecklistLink).filter(
@@ -112,6 +110,7 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
 
         elif parent_task.task_type == TaskType.Review:
             logger.debug(f"Review task - Processing checklist change for parent_task_id={parent_task_id}")
+            
             review_checklists = db.query(Checklist).join(
                 TaskChecklistLink,
                 TaskChecklistLink.checklist_id == Checklist.checklist_id
@@ -120,8 +119,9 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
                 Checklist.is_delete == False
             ).all()
 
-            all_complete = all(c.is_completed for c in review_checklists)
-            logger.info(f"All review checklists completed: {all_complete}")
+            completed_count = sum(1 for c in review_checklists if c.is_completed)
+            total = sum(1 for c in review_checklists)
+
 
             # Child task is the task being reviewed
             child_task = db.query(Task).filter(
@@ -130,29 +130,41 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
             ).first()
 
             if child_task:
-                if data.is_completed and all_complete:
-                    parent_task.status = TaskStatus.In_Review
-                    old_status = child_task.status
-                    if child_task.previous_status != old_status:
-                        child_task.previous_status = old_status
-                    child_task.status = TaskStatus.To_Do
-                    child_task.is_reviewed = False
-                    logger.info(f"All review checklists done, setting child_task {child_task.task_id} status to To_Do")
-                    log_task_field_change(db, child_task.task_id, "status", old_status, TaskStatus.To_Do, 2)
-
-
+                if data.is_completed:
+                    if completed_count == total:
+                        parent_task.status = TaskStatus.In_Review
+                        old_status = child_task.status
+                        if child_task.previous_status != old_status:
+                            child_task.previous_status = old_status
+                        child_task.status = TaskStatus.To_Do
+                        child_task.is_reviewed = False
+                        logger.info(f"All review checklists done, setting child_task {child_task.task_id} status to To_Do")
+                        parent_task.status
+                    if completed_count != total:
+                        old = parent_task.status
+                        parent_task.status = TaskStatus.In_Progress
+                        db.flush()
+                        if parent_task.status != old:
+                            parent_task.previous_status = old
+                        
+                
                 elif not data.is_completed:
                     logger.info(f"Checklist marked incomplete, reverting parent_task and child_task statuses")
-                    log_task_field_change(db, parent_task.task_id, "status", parent_task.status, parent_task.previous_status, Current_user.employee_id)
-                    parent_task.status = "To_Do"
+                    
+                    old = parent_task.status
+                    if completed_count == 0:
+                        parent_task.status = TaskStatus.To_Do
+                    elif completed_count != total:
+                        parent_task.status = TaskStatus.In_Progress
                     db.flush()
+                    log_task_field_change(db, parent_task.task_id, "status", old, parent_task.status, Current_user.employee_id)
 
-                    child_task.status = child_task.previous_status
-                    log_task_field_change(db, child_task.task_id, "status", child_task.status, child_task.previous_status, 2)
-                    logger.info(f"Child task {child_task.task_id} marked as {child_task.previous_status}")
-
+                    old = child_task.status
+                    child_task.status = TaskStatus.In_ReEdit
                     db.flush()
-
+                    
+                    log_task_field_change(db, child_task.task_id, "status", old, child_task.status,1)
+                    
         db.commit()
         # Step 6: Calculate checklist progress for the parent task
         parent_checklist_links = db.query(TaskChecklistLink).filter(

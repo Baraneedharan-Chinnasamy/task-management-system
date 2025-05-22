@@ -38,6 +38,9 @@ def update_checklist(data: UpdateChecklistRequest, db: Session = Depends(get_db)
             data.checklist_name,
             current_user.employee_id
         )
+
+
+            
         logger.info(f"Checklist {checklist.checklist_id} name updated from '{checklist.checklist_name}' to '{data.checklist_name}'")
         checklist.checklist_name = data.checklist_name
 

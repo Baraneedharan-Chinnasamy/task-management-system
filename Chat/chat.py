@@ -24,7 +24,6 @@ def get_original_normal_task(db: Session, task_id: int):
 router = APIRouter()
 chat_manager = ChatManager()
 
-
 @router.websocket("/chat")
 async def chat_websocket(
     websocket: WebSocket,
@@ -121,11 +120,12 @@ def get_chat_history(
     user_id: int,
     page: int = 1,
     limit: int = 30,
-    before_timestamp: Optional[datetime] = None,
     db: Session = Depends(get_db)
 ):
     if page < 1:
         raise HTTPException(status_code=400, detail="Page number must be >= 1")
+    if limit < 1:
+        raise HTTPException(status_code=400, detail="Limit must be >= 1")
 
     # Build user map
     users = db.query(User).all()
@@ -148,17 +148,22 @@ def get_chat_history(
 
     chat_room_id = chat_room.chat_room_id
 
-    # Build query
-    query = db.query(ChatMessage).filter(ChatMessage.chat_room_id == chat_room_id)
-    if before_timestamp:
-        query = query.filter(ChatMessage.timestamp < before_timestamp)
-
     offset = (page - 1) * limit
-    fetched_messages = query.order_by(ChatMessage.timestamp.desc()).offset(offset).limit(limit + 1).all()
+
+    # Query with stable ordering by timestamp desc, message_id desc for tie-break
+    query = (
+        db.query(ChatMessage)
+        .filter(ChatMessage.chat_room_id == chat_room_id)
+        .order_by(ChatMessage.timestamp.desc(), ChatMessage.message_id.desc())
+        .offset(offset)
+        .limit(limit + 1)
+    )
+
+    fetched_messages = query.all()
 
     has_more = len(fetched_messages) > limit
     messages = fetched_messages[:limit]
-    messages.reverse()
+    messages.reverse()  # oldest first for frontend display
 
     read_message_ids = {
         r.message_id for r in db.query(ChatMessageRead.message_id)

@@ -17,6 +17,7 @@ def update_task_status(task, new_status, db, current_user_id):
 
 
 def update_parent_task_status(task_id, db, Current_user):
+    
    
     if not task_id:
         return
@@ -35,14 +36,14 @@ def update_parent_task_status(task_id, db, Current_user):
     if all(cl.is_completed for cl in task_checklists):
         new_status = TaskStatus.In_Review if task.is_review_required else TaskStatus.Completed
         update_task_status(task, new_status, db, 1)
-
-        time = db.query(TaskTimeLog).filter(
-            TaskTimeLog.task_id == task.task_id,
-            TaskTimeLog.end_time == None
-        ).first()
-        if time is not None:
-            time.end_time = datetime.now()
-            db.flush()
+        if new_status == TaskStatus.Completed:
+            time = db.query(TaskTimeLog).filter(
+                TaskTimeLog.task_id == task.task_id,
+                TaskTimeLog.end_time == None
+            ).first()
+            if time is not None:
+                time.end_time = datetime.now()
+                db.flush()
 
         if task.is_review_required:
             review_task = db.query(Task).filter(Task.parent_task_id == task.task_id).first()
@@ -108,13 +109,12 @@ def update_checklist_for_subtask_completion(checklist_id, db, Current_user):
 
 
 def propagate_incomplete_upwards(checklist_id, db, Current_user, visited_checklists=None):
+    print("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
     if visited_checklists is None:
         visited_checklists = set()
     if checklist_id in visited_checklists:
         return
     visited_checklists.add(checklist_id)
-
-    
 
     checklist = db.query(Checklist).filter(
         Checklist.checklist_id == checklist_id,
@@ -122,7 +122,6 @@ def propagate_incomplete_upwards(checklist_id, db, Current_user, visited_checkli
     ).first()
 
     if checklist and checklist.is_completed:
-        
         log_checklist_field_change(db, checklist_id, "is_completed", checklist.is_completed, False, Current_user.employee_id)
         checklist.is_completed = False
         db.flush()
@@ -151,35 +150,38 @@ def propagate_incomplete_upwards(checklist_id, db, Current_user, visited_checkli
             total_count = len(checklists)
 
             old_status = task.status
-            if old_status in [TaskStatus.Completed, TaskStatus.In_Review]:
+
+            if old_status in [TaskStatus.Completed]:
+                
                 time = db.query(TaskTimeLog).filter(
                     TaskTimeLog.task_id == task.task_id
                 ).order_by(desc(TaskTimeLog.start_time)).first()
-
                 if time:
                     time.end_time = None
                     db.flush()
 
-                new_status = TaskStatus.To_Do if completed_count == 0 else TaskStatus.In_Progress
-                update_task_status(task, new_status, db, Current_user.employee_id)
+            new_status = TaskStatus.To_Do if completed_count == 0 else TaskStatus.In_Progress
+            update_task_status(task, new_status, db, Current_user.employee_id)
 
             if task.is_review_required:
                 review_task = db.query(Task).filter(Task.parent_task_id == task.task_id).first()
-                if review_task and review_task.previous_status:
+                if review_task:
                     cur = review_task.status
                     old = review_task.previous_status
-                    review_task.status = old
-                    review_task.previous_status = cur
+
+                    if completed_count == total_count:
+                        review_task.status = TaskStatus.To_Do
+                        next = TaskStatus.To_Do
+                    if completed_count != total_count:
+                        if old == TaskStatus.New:
+                            review_task.status = TaskStatus.New
+                            next = TaskStatus.New
+                        else:
+                            review_task.status = TaskStatus.In_ReEdit
+                            next = TaskStatus.In_ReEdit
+
                     log_task_field_change(db, task.task_id, "status", cur, old, Current_user.employee_id)
                     db.flush()
-
-                    if old in [TaskStatus.Completed, TaskStatus.In_Review]:
-                        time = db.query(TaskTimeLog).filter(
-                            TaskTimeLog.task_id == task.task_id
-                        ).order_by(desc(TaskTimeLog.start_time)).first()
-                        if time:
-                            time.end_time = None
-                            db.flush()
 
         parent_checklists = db.query(TaskChecklistLink.checklist_id).filter(
             TaskChecklistLink.sub_task_id == parent_task_id

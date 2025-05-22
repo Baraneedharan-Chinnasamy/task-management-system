@@ -12,8 +12,8 @@ router = APIRouter()
 def start_task_timer(
     task_id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(get_current_user)
-):
+    current_user: int = Depends(get_current_user)):
+
     # Check if task exists
     task = db.query(Task).filter(Task.task_id == task_id, Task.is_delete == False).first()
     if not task:
@@ -34,9 +34,9 @@ def start_task_timer(
         user_id=current_user.employee_id,
         start_time=datetime.now(),
         end_time=None,
-        is_paused=False
-    )
-
+        is_paused=False)
+    
+    
     db.add(time_log)
     
     db.commit()
@@ -47,5 +47,6 @@ def start_task_timer(
         "log_id": time_log.id,
         "task_id": time_log.task_id,
         "user_id": time_log.user_id,
-        "start_time": time_log.start_time
+        "start_time": time_log.start_time,
+        "is_ongoing": True
     }

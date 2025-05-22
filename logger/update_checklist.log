@@ -1,0 +1,3 @@
+2025-05-22 11:24:54,176 - update_checklist - INFO - POST /update_checklist called by user_id=2
+2025-05-22 11:24:54,183 - update_checklist - INFO - Checklist 57 name updated from 'zdfgh' to 'zdfghjhvh'
+2025-05-22 11:24:54,193 - update_checklist - INFO - Checklist 57 update committed to DB

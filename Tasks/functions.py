@@ -6,86 +6,99 @@ from datetime import datetime
 from sqlalchemy import desc
 
 def propagate_completion_upwards(task, db, updated_by, logger, Current_user):
+  
     logger.info(f"Starting propagate_completion_upwards for task_id={task.task_id}")
-    visited_tasks = set()
-    updated_tasks = []  # ✅ To collect updated task info
+    updated_tasks = []
 
-    def complete_task_and_children(t):
-        last_task = None
-        while t and t.task_type == TaskType.Review:
-            logger.debug(f"Review task: {t.task_id}")
-            child = db.query(Task).filter(
-                Task.task_id == t.parent_task_id,
-                Task.is_delete == False
-            ).first()
+    current_task = task
 
-            if not child:
-                logger.warning(f"No parent task found for review task {t.task_id}")
-                break
 
-            child.previous_status = child.status
-            child.status = TaskStatus.Completed
-            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id,TaskTimeLog.end_time == None).first()
-            if time is not None:
-                time.end_time = datetime.now()
-                db.flush()
+    # Step 1,2,3: Propagate completion upwards while current task is a parent of another task
+    while current_task:
+
+        # Find child task where current task is parent_task_id
+        child_task = db.query(Task).filter(
+            Task.task_id == current_task.parent_task_id,
+            Task.is_delete == False
+        ).first()
+        
+
+        if child_task:
+            # Mark child task completed and update end_time if applicable
+            child_task.previous_status = child_task.status
+            child_task.status = TaskStatus.Completed
             db.flush()
-            log_task_field_change(db, child.task_id, "status", child.previous_status, child.status, 1)
-            logger.info(f"Child task {child.task_id} of review task {t.task_id} marked as Completed")
 
-            updated_tasks.append({  # ✅ Add to list
-                "task_id": child.task_id,
-                "status": child.status
+            time_log = db.query(TaskTimeLog).filter(
+                TaskTimeLog.task_id == child_task.task_id,
+                TaskTimeLog.end_time == None
+            ).first()
+            if time_log:
+                time_log.end_time = datetime.now()
+                db.flush()
+
+            db.flush()
+
+            log_task_field_change(db, child_task.task_id, "status", child_task.previous_status, child_task.status, updated_by)
+            logger.info(f"Child task {child_task.task_id} marked as Completed as child of task {current_task.task_id}")
+
+            updated_tasks.append({
+                "task_id": child_task.task_id,
+                "status": child_task.status
             })
 
-            last_task = child
-            t = child  # Move upward
+            current_task = child_task  
+        else:
+            # No further child task found, stop loop
+            break
 
-        return last_task
+    # Step 4: Check if current_task is a sub-task to any checklist
+    link = db.query(TaskChecklistLink).filter(
+        TaskChecklistLink.sub_task_id == current_task.task_id
+    ).first()
 
-    def check_checklist_completion(task_id):
-        logger.debug(f"Checking checklist completion for task_id={task_id}")
-        link = db.query(TaskChecklistLink).filter(TaskChecklistLink.sub_task_id == task_id).first()
+    if link:
+        checklist = db.query(Checklist).filter(
+            Checklist.checklist_id == link.checklist_id,
+            Checklist.is_delete == False
+        ).first()
 
-        if link:
-            checklist = db.query(Checklist).filter(
-                Checklist.checklist_id == link.checklist_id,
-                Checklist.is_delete == False
-            ).first()
+        if checklist:
+            # Step 5: Check if all sub-tasks in checklist are completed
+            sub_tasks = db.query(Task).join(
+                TaskChecklistLink,
+                Task.task_id == TaskChecklistLink.sub_task_id
+            ).filter(
+                TaskChecklistLink.checklist_id == checklist.checklist_id,
+                Task.is_delete == False
+            ).all()
 
-            if checklist:
-                sub_tasks = db.query(Task).join(
-                    TaskChecklistLink,
-                    Task.task_id == TaskChecklistLink.sub_task_id
-                ).filter(
-                    TaskChecklistLink.checklist_id == checklist.checklist_id,
-                    Task.is_delete == False
-                ).all()
+            if all(sub_task.status == TaskStatus.Completed for sub_task in sub_tasks):
+                if not checklist.is_completed:
+                    checklist.is_completed = True
+                    log_checklist_field_change(db, checklist.checklist_id, "is_completed", False, True, updated_by)
+                    logger.info(f"Checklist {checklist.checklist_id} marked as completed")
 
-                if all(sub_task.status == TaskStatus.Completed for sub_task in sub_tasks):
-                    if not checklist.is_completed:
-                        checklist.is_completed = True
-                        log_checklist_field_change(db, checklist.checklist_id, "is_completed", False, True, 1)
-                        logger.info(f"Checklist {checklist.checklist_id} marked as completed")
+                    # Step 6: Propagate completion upwards for parent task of checklist
+                    parent_link = db.query(TaskChecklistLink).filter(
+                        TaskChecklistLink.checklist_id == checklist.checklist_id,
+                        TaskChecklistLink.parent_task_id.isnot(None)
+                    ).first()
 
-                        parent_link = db.query(TaskChecklistLink).filter(
-                            TaskChecklistLink.checklist_id == checklist.checklist_id,
-                            TaskChecklistLink.parent_task_id.isnot(None)
-                        ).first()
+                    if parent_link:
+                        update_parent_task_status(parent_link.parent_task_id, db, Current_user)
 
-                        if parent_link:
-                            update_parent_task_status(parent_link.parent_task_id, db, Current_user)
+    # Append the final current_task update if it wasn't already appended
+    updated_tasks.append({
+        "task_id": current_task.task_id,
+        "status": current_task.status
+    })
 
-    final_task = complete_task_and_children(task) if task.task_type == TaskType.Review else task
-
-    if final_task:
-        check_checklist_completion(final_task.task_id)
-        updated_tasks.append({ "task_id": final_task.task_id, "status": final_task.status })  # ✅ Add final
-        logger.info(f"propagate_completion_upwards completed for task_id={final_task.task_id}")
-        return { "message": "Task completion propagated successfully", "updated_tasks": updated_tasks }
-
-    return { "message": "No parent task found to propagate completion", "updated_tasks": [] }
-
+    logger.info(f"propagate_completion_upwards completed for task_id={current_task.task_id}")
+    return {
+        "message": "Task completion propagated successfully",
+        "updated_tasks": updated_tasks
+    }
 
 def reverse_completion_from_review(task, db, updated_by, logger, Current_user):
     logger.info(f"Starting reverse_completion_from_review for task_id={task.task_id}")
@@ -116,11 +129,15 @@ def reverse_completion_from_review(task, db, updated_by, logger, Current_user):
 
     def recurse_up_from_normal_task(task_id):
         task = db.query(Task).filter(Task.task_id == task_id, Task.is_delete == False).first()
+        
 
         if task and task.status == TaskStatus.Completed:
             logger.info(f"Reverting normal task {task.task_id} from Completed to {task.previous_status}")
             task.status = task.previous_status
             reverted_tasks.append({ "task_id": task.task_id, "status": task.status })
+            time = db.query(TaskTimeLog).filter(TaskTimeLog.task_id == task.task_id).order_by(desc(TaskTimeLog.start_time)).first()
+            time.end_time = None
+            db.flush()
             
 
             Link = db.query(TaskChecklistLink).filter(TaskChecklistLink.sub_task_id == task.task_id).first()
