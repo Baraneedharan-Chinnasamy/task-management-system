@@ -91,3 +91,28 @@
 2025-05-22 11:24:39,333 - delete - INFO - DELETE requested by user_id=2
 2025-05-22 11:24:39,386 - delete - INFO - Marked tasks as deleted: [38]
 2025-05-22 11:24:39,396 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:39:49,665 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:39:49,736 - delete - INFO - Marked tasks as deleted: [41]
+2025-05-22 11:39:49,742 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:40:18,870 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:40:18,891 - delete - INFO - Marked checklists as deleted: [59]
+2025-05-22 11:40:18,938 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:43:04,172 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:43:04,210 - delete - INFO - Marked checklists as deleted: [65, 57, 60, 61, 62]
+2025-05-22 11:43:04,235 - delete - INFO - Marked tasks as deleted: [41, 36, 37, 38]
+2025-05-22 11:43:04,244 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:43:34,463 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:43:34,489 - delete - INFO - Marked checklists as deleted: [66]
+2025-05-22 11:43:34,512 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:43:44,636 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:43:44,648 - delete - INFO - Marked checklists as deleted: [67]
+2025-05-22 11:43:44,674 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:46:29,300 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:46:29,358 - delete - INFO - Marked tasks as deleted: [43]
+2025-05-22 11:46:29,358 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:50:35,200 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:50:35,219 - delete - INFO - Marked tasks as deleted: [43]
+2025-05-22 11:50:35,228 - delete - INFO - Deletion process completed successfully.
+2025-05-22 11:51:32,023 - delete - INFO - DELETE requested by user_id=2
+2025-05-22 11:51:32,082 - delete - INFO - Marked tasks as deleted: [45]
+2025-05-22 11:51:32,088 - delete - INFO - Deletion process completed successfully.

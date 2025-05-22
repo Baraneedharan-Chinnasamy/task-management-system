@@ -736,3 +736,38 @@ sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1213, 'Deadlock
 2025-05-22 11:24:47,163 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
 2025-05-22 11:24:47,179 - mark_checklist_complete - INFO - Checklist 59 marked as completed
 2025-05-22 11:24:47,219 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:40:12,366 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:40:12,371 - mark_checklist_complete - INFO - Checklist 59 found, current status: True
+2025-05-22 11:40:12,392 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
+2025-05-22 11:40:12,401 - mark_checklist_complete - INFO - Checklist 59 marked as incomplete
+2025-05-22 11:40:12,469 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:42:48,984 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:42:48,999 - mark_checklist_complete - INFO - Checklist 58 found, current status: True
+2025-05-22 11:42:49,015 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
+2025-05-22 11:42:49,016 - mark_checklist_complete - INFO - Checklist 58 marked as incomplete
+2025-05-22 11:42:49,062 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:42:58,025 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:42:58,027 - mark_checklist_complete - INFO - Checklist 58 found, current status: False
+2025-05-22 11:42:58,035 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
+2025-05-22 11:42:58,039 - mark_checklist_complete - INFO - Checklist 58 marked as completed
+2025-05-22 11:42:58,059 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:43:23,473 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:43:23,486 - mark_checklist_complete - INFO - Checklist 66 found, current status: False
+2025-05-22 11:43:23,490 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
+2025-05-22 11:43:23,504 - mark_checklist_complete - INFO - Checklist 66 marked as completed
+2025-05-22 11:43:23,523 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:43:27,710 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:43:27,710 - mark_checklist_complete - INFO - Checklist 66 found, current status: True
+2025-05-22 11:43:27,725 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
+2025-05-22 11:43:27,732 - mark_checklist_complete - INFO - Checklist 66 marked as incomplete
+2025-05-22 11:43:27,767 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:43:57,182 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:43:57,183 - mark_checklist_complete - INFO - Checklist 68 found, current status: False
+2025-05-22 11:43:57,199 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=35, task_type=TaskType.Normal
+2025-05-22 11:43:57,199 - mark_checklist_complete - INFO - Checklist 68 marked as completed
+2025-05-22 11:43:57,240 - mark_checklist_complete - INFO - Checklist status updated and committed successfully
+2025-05-22 11:46:14,863 - mark_checklist_complete - INFO - POST /mark_checklist_complete called by user_id=2
+2025-05-22 11:46:14,863 - mark_checklist_complete - INFO - Checklist 70 found, current status: False
+2025-05-22 11:46:14,879 - mark_checklist_complete - INFO - Checklist is linked to parent_task_id=42, task_type=TaskType.Normal
+2025-05-22 11:46:14,879 - mark_checklist_complete - INFO - Checklist 70 marked as completed
+2025-05-22 11:46:14,929 - mark_checklist_complete - INFO - Checklist status updated and committed successfully

@@ -21,6 +21,9 @@ def delete_related_items(
     db: Session = Depends(get_db),
     Current_user: int = Depends(get_current_user)
 ):
+    parent_task = None
+    checklist_progress =None
+
     logger = get_logger('delete', 'delete.log')
     logger.info(f"DELETE requested by user_id={Current_user.employee_id}")
 
@@ -138,14 +141,8 @@ def delete_related_items(
 
     db.flush()
 
-   
-
-    
-
     db.commit()
     logger.info("Deletion process completed successfully.")
-    parent_task = None  # ✅ Ensure variable is always defined
-    checklist_progress = None
     return {
         "message": "Related tasks and checklists marked as deleted",
         "tasks": list(tasks_to_delete),
