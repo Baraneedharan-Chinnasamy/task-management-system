@@ -32,7 +32,9 @@ app.add_middleware(
     "https://34.47.234.234",
     "http://task.advartit.in",
     "https://task.advartit.in",
-    "https://dot-v1-test-1.vercel.app"
+    "http://app.advartit.in/",
+    "https://app.advartit.in/",
+    "https://app.advartit.in"
     ],
     allow_credentials=True,
     allow_methods=["*"],
