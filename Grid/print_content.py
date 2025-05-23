@@ -13,7 +13,7 @@ def get_paginated_content(
     db: Session = Depends(get_db),
     brand_name: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
-    sort_by: Optional[str] = Query("created_at"),  # Default: newest first
+    sort_by: Optional[str] = Query("created_at"),
     sort_order: Optional[str] = Query("desc"),
     offset: int = 0,
     limit: int = 50  # Default to 50 records
@@ -25,7 +25,7 @@ def get_paginated_content(
         query = query.filter(MarketingContent.brand_name.ilike(f"%{brand_name}%"))
     if status:
         query = query.filter(MarketingContent.status == status)
-
+        
     # Sorting
     sort_fields = {
         "id": MarketingContent.id,
