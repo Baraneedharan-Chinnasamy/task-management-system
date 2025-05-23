@@ -13,6 +13,10 @@ from Authentication.authy import router as auth_router
 from Chat.chat import router as chat_router
 from Logs.logs import router as logs_router
 from Tasks.time_traking import router as time_tracking_router
+from Grid.insert_values import router as Content
+from Grid.print_content import router as Print_Content
+from Grid.manage_dropdown import router as Manage_DropDown
+from Authentication.permission import router as Permission
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -34,7 +38,8 @@ app.add_middleware(
     "https://task.advartit.in",
     "http://app.advartit.in/",
     "https://app.advartit.in/",
-    "https://app.advartit.in"
+    "https://app.advartit.in",
+    "https://zw9ff3fs-3000.inc1.devtunnels.ms"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -56,3 +61,7 @@ app.include_router(checklist_status_router, prefix=f"{API_PREFIX}/checklist", ta
 app.include_router(delete_router, prefix=f"{API_PREFIX}/delete", tags=["Delete"])
 app.include_router(logs_router, prefix=f"{API_PREFIX}/logs", tags=["Logs"])
 app.include_router(time_tracking_router, prefix=f"{API_PREFIX}/tasks", tags=["Tasks"])
+app.include_router(Content, prefix=f"{API_PREFIX}/Content", tags=["Content"])
+app.include_router(Print_Content, prefix=f"{API_PREFIX}/Content", tags=["Content"])
+app.include_router(Manage_DropDown, prefix=f"{API_PREFIX}/Content", tags=["Content"])
+app.include_router(Permission, prefix=f"{API_PREFIX}/auth", tags=["Authentication"])

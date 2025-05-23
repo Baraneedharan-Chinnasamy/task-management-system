@@ -270,3 +270,67 @@ AttributeError: 'NoneType' object has no attribute 'task_id'
 2025-05-22 10:46:52,283 - update_task - INFO - Reverting normal task 32 from Completed to TaskStatus.In_Review
 2025-05-22 10:46:52,299 - update_task - INFO - reverse_completion_from_review completed for task_id=32
 2025-05-22 10:46:52,299 - update_task - INFO - Task 34 updated successfully with changes: {'is_reviewed': False}
+2025-05-22 18:17:19,864 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:17:19,874 - update_task - INFO - User 7 is updating Task 69 | Creator=True, Assignee=False
+2025-05-22 18:17:19,874 - update_task - INFO - is_review_required set to True
+2025-05-22 18:17:19,884 - update_task - INFO - Review task created: 70
+2025-05-22 18:17:19,897 - update_task - INFO - Task 69 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:19:34,374 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:19:34,377 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:19:34,378 - update_task - INFO - is_review_required set to True
+2025-05-22 18:19:34,383 - update_task - INFO - Review task created: 72
+2025-05-22 18:19:34,385 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:19:35,082 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:19:35,087 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:19:35,098 - update_task - INFO - Review task 72 marked as deleted
+2025-05-22 18:19:35,103 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': False}
+2025-05-22 18:19:44,741 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:19:44,744 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:19:44,746 - update_task - INFO - is_review_required set to True
+2025-05-22 18:19:44,751 - update_task - INFO - Re-enabled review task 72
+2025-05-22 18:19:44,757 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:19:45,316 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:19:45,318 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:19:45,323 - update_task - INFO - Review task 72 marked as deleted
+2025-05-22 18:19:45,328 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': False}
+2025-05-22 18:19:46,369 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:19:46,371 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:19:46,373 - update_task - INFO - is_review_required set to True
+2025-05-22 18:19:46,376 - update_task - INFO - Re-enabled review task 72
+2025-05-22 18:19:46,383 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:19:46,974 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:19:46,976 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:19:46,981 - update_task - INFO - Review task 72 marked as deleted
+2025-05-22 18:19:46,988 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': False}
+2025-05-22 18:21:35,029 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:35,031 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:35,033 - update_task - INFO - is_review_required set to True
+2025-05-22 18:21:35,038 - update_task - INFO - Re-enabled review task 72
+2025-05-22 18:21:35,044 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:21:35,391 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:35,394 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:35,401 - update_task - INFO - Review task 72 marked as deleted
+2025-05-22 18:21:35,407 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': False}
+2025-05-22 18:21:38,650 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:38,655 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:38,660 - update_task - INFO - is_review_required set to True
+2025-05-22 18:21:38,672 - update_task - INFO - Re-enabled review task 72
+2025-05-22 18:21:38,680 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:21:39,154 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:39,155 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:39,164 - update_task - INFO - Review task 72 marked as deleted
+2025-05-22 18:21:39,166 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': False}
+2025-05-22 18:21:44,741 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:44,742 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:44,744 - update_task - INFO - is_review_required set to True
+2025-05-22 18:21:44,753 - update_task - INFO - Re-enabled review task 72
+2025-05-22 18:21:44,759 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}
+2025-05-22 18:21:45,798 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:45,803 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:45,809 - update_task - INFO - Review task 72 marked as deleted
+2025-05-22 18:21:45,811 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': False}
+2025-05-22 18:21:46,620 - update_task - INFO - POST /update_task called by user_id=7
+2025-05-22 18:21:46,631 - update_task - INFO - User 7 is updating Task 58 | Creator=True, Assignee=True
+2025-05-22 18:21:46,632 - update_task - INFO - is_review_required set to True
+2025-05-22 18:21:46,638 - update_task - INFO - Re-enabled review task 72
+2025-05-22 18:21:46,641 - update_task - INFO - Task 58 updated successfully with changes: {'is_review_required': True}

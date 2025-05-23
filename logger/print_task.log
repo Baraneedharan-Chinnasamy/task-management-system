@@ -590,3 +590,171 @@
 2025-05-22 11:50:57,931 - print_task - INFO - Returning task details for task_id=35
 2025-05-22 11:51:40,242 - print_task - INFO - GET /task/task_id called - task_id=35 by user_id=2
 2025-05-22 11:51:40,295 - print_task - INFO - Returning task details for task_id=35
+2025-05-22 12:25:09,257 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 12:28:16,887 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 12:30:26,357 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 12:32:34,446 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 12:33:08,248 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 12:37:37,545 - print_task - INFO - GET /tasks - Called by user_id=8
+2025-05-22 12:37:40,887 - print_task - INFO - GET /tasks - Called by user_id=8
+2025-05-22 16:07:05,134 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 16:07:20,218 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 16:07:22,551 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:07:22,565 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:07:56,716 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:07:56,731 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:11:28,344 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:11:28,407 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:11:55,552 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:11:55,621 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:13:35,404 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 16:13:36,310 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:13:36,332 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:26:38,250 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:26:38,290 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:26:57,481 - print_task - INFO - GET /task/task_id called - task_id=49 by user_id=7
+2025-05-22 16:26:57,495 - print_task - INFO - Returning task details for task_id=49
+2025-05-22 16:27:00,476 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:27:00,520 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:28:03,007 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:28:03,038 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:28:29,348 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:28:29,382 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:28:34,221 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:28:34,251 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:30:56,447 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:30:56,484 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:32:14,847 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:32:14,874 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:32:51,842 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:32:51,873 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:45:29,891 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:45:29,924 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:47:28,544 - print_task - INFO - GET /task/task_id called - task_id=56 by user_id=7
+2025-05-22 16:47:28,563 - print_task - INFO - Returning task details for task_id=56
+2025-05-22 16:47:35,560 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:47:35,615 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:49:36,241 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:49:36,338 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:49:47,135 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:49:47,166 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:49:56,374 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:49:56,409 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:56:27,068 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:56:27,099 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 16:57:43,044 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 16:57:43,111 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 17:00:41,179 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:00:46,237 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:00:46,237 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:00:56,362 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:00:59,826 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:00:59,827 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:01:01,438 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:01:02,358 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 17:01:02,378 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 17:06:20,620 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 17:06:20,642 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 17:08:06,762 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 17:08:06,786 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 17:08:22,588 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 17:08:22,612 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 17:16:12,859 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:16:23,367 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:16:27,943 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:17:04,021 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 17:17:04,031 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 17:23:54,900 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 17:23:54,925 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 17:24:21,295 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 17:24:21,313 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 17:24:46,485 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:32:16,839 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:32:20,600 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:32:36,605 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:32:50,229 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:33:08,027 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 17:33:38,695 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:01:38,624 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:01:38,642 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:02:51,936 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:02:51,958 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:02:59,441 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:02:59,465 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:03:21,463 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:03:21,488 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:03:35,200 - print_task - INFO - GET /task/task_id called - task_id=65 by user_id=7
+2025-05-22 18:03:35,216 - print_task - INFO - Returning task details for task_id=65
+2025-05-22 18:03:38,051 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:03:38,096 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:03:58,121 - print_task - INFO - GET /task/task_id called - task_id=66 by user_id=7
+2025-05-22 18:03:58,134 - print_task - INFO - Returning task details for task_id=66
+2025-05-22 18:04:01,827 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:04:01,870 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:04:07,082 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:04:07,117 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:06:02,498 - print_task - INFO - GET /task/task_id called - task_id=68 by user_id=7
+2025-05-22 18:06:02,508 - print_task - INFO - Returning task details for task_id=68
+2025-05-22 18:06:09,860 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:06:09,890 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:06:14,394 - print_task - INFO - GET /task/task_id called - task_id=67 by user_id=7
+2025-05-22 18:06:14,409 - print_task - INFO - Returning task details for task_id=67
+2025-05-22 18:06:20,411 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:06:20,434 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:06:23,145 - print_task - INFO - GET /task/task_id called - task_id=67 by user_id=7
+2025-05-22 18:06:23,145 - print_task - INFO - Returning task details for task_id=67
+2025-05-22 18:06:27,975 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:06:27,993 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:06:32,701 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:06:32,736 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:07:24,500 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:07:40,791 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 18:07:40,850 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 18:09:43,741 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:10:43,276 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 18:10:43,303 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 18:10:58,286 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:11:23,182 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 18:11:23,213 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 18:15:56,899 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 18:16:15,534 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 18:16:21,140 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 18:16:47,914 - print_task - INFO - GET /tasks - Called by user_id=9
+2025-05-22 18:16:52,175 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:17:03,710 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:17:09,012 - print_task - INFO - GET /tasks - Called by user_id=9
+2025-05-22 18:17:10,529 - print_task - INFO - GET /task/task_id called - task_id=69 by user_id=9
+2025-05-22 18:17:10,552 - print_task - INFO - Returning task details for task_id=69
+2025-05-22 18:17:16,412 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:17:18,946 - print_task - INFO - GET /task/task_id called - task_id=69 by user_id=7
+2025-05-22 18:17:18,948 - print_task - INFO - Returning task details for task_id=69
+2025-05-22 18:17:44,670 - print_task - INFO - GET /task/task_id called - task_id=69 by user_id=7
+2025-05-22 18:17:44,683 - print_task - INFO - Returning task details for task_id=69
+2025-05-22 18:17:53,591 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:17:54,810 - print_task - INFO - GET /task/task_id called - task_id=70 by user_id=7
+2025-05-22 18:17:54,839 - print_task - INFO - Returning task details for task_id=70
+2025-05-22 18:18:13,562 - print_task - INFO - GET /tasks - Called by user_id=2
+2025-05-22 18:18:14,768 - print_task - INFO - GET /task/task_id called - task_id=71 by user_id=2
+2025-05-22 18:18:14,777 - print_task - INFO - Returning task details for task_id=71
+2025-05-22 18:18:27,113 - print_task - INFO - GET /task/task_id called - task_id=71 by user_id=2
+2025-05-22 18:18:27,141 - print_task - INFO - Returning task details for task_id=71
+2025-05-22 18:19:31,238 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:19:31,855 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:19:32,512 - print_task - INFO - GET /task/task_id called - task_id=58 by user_id=7
+2025-05-22 18:19:32,540 - print_task - INFO - Returning task details for task_id=58
+2025-05-22 18:24:08,913 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:24:59,055 - print_task - INFO - GET /task/task_id called - task_id=46 by user_id=7
+2025-05-22 18:24:59,086 - print_task - INFO - Returning task details for task_id=46
+2025-05-22 18:26:41,136 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:26:41,136 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:26:50,744 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:26:51,674 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:26:51,701 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:26:59,849 - print_task - INFO - GET /tasks - Called by user_id=7
+2025-05-22 18:28:01,959 - print_task - INFO - GET /tasks - Called by user_id=9
+2025-05-22 18:28:04,681 - print_task - INFO - GET /tasks - Called by user_id=9
+2025-05-22 18:28:06,282 - print_task - INFO - GET /task/task_id called - task_id=69 by user_id=9
+2025-05-22 18:28:06,296 - print_task - INFO - Returning task details for task_id=69
+2025-05-22 18:29:35,019 - print_task - INFO - GET /tasks - Called by user_id=9
+2025-05-22 18:29:52,572 - print_task - INFO - GET /tasks - Called by user_id=9
+2025-05-22 18:29:53,493 - print_task - INFO - GET /tasks - Called by user_id=9

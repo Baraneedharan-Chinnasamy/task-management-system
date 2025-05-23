@@ -63,7 +63,15 @@ def delete_related_items(
             if checklist_test:
                 checklist_test.is_completed = True
                 db.flush()
-        update_parent_task_status(delete_request.task_id,db,Current_user)
+
+        checklist_task = db.query(TaskChecklistLink).filter(TaskChecklistLink.sub_task_id == delete_request.task_id).first()
+        if checklist_task:
+            task_checklist = db.query(TaskChecklistLink).filter(TaskChecklistLink.checklist_id == checklist_task.checklist_id,TaskChecklistLink.sub_task_id.isnot(None)).all()
+            task_checklist_ids = [i.sub_task_id for i in task_checklist]
+            delete_task = db.query(Task).filter(Task.task_id.in_(task_checklist_ids),Task.is_delete == False).all()
+            task__ids = [i.task_id for i in delete_task]
+            if len(task__ids)>1:
+                update_parent_task_status(delete_request.task_id,db,Current_user)
 
     if delete_request.checklist_id:
         checklist_test = db.query(Checklist).filter(Checklist.checklist_id == delete_request.checklist_id).first()
@@ -140,8 +148,35 @@ def delete_related_items(
         db.bulk_insert_mappings(ChecklistUpdateLog, logs)
 
     db.flush()
-
     db.commit()
+    checkbox_status = True
+    if delete_request.task_id:
+        # Step 1: Get the checklist_id that links the parent task to this subtask
+        parent_task_link = db.query(TaskChecklistLink.checklist_id).filter(
+            TaskChecklistLink.sub_task_id == delete_request.task_id
+        ).first()
+
+        if parent_task_link:
+            # Step 2: Get all subtask links under the same checklist
+            sub_task_links = db.query(TaskChecklistLink).filter(
+                TaskChecklistLink.checklist_id == parent_task_link.checklist_id,
+                TaskChecklistLink.sub_task_id.isnot(None)
+            ).all()
+
+            # Step 3: Extract all subtask IDs
+            sub_task_ids = [link.sub_task_id for link in sub_task_links]
+
+            # Step 4: Query for active (not deleted) tasks matching these IDs
+            active_sub_tasks = db.query(Task).filter(
+                Task.task_id.in_(sub_task_ids),
+                Task.is_delete == False
+            ).all()
+
+            # Step 5: Logic based on whether active subtasks exist
+            if active_sub_tasks:
+                checkbox_status = False
+
+
     logger.info("Deletion process completed successfully.")
     return {
         "message": "Related tasks and checklists marked as deleted",
@@ -149,5 +184,6 @@ def delete_related_items(
         "checklists": list(checklists_to_delete),
         "parent_task_id": parent_task.task_id if parent_task else None,
         "parent_checklist_progress": checklist_progress if parent_task else None,
-        "parent_task_status": parent_task.status if parent_task else None
+        "parent_task_status": parent_task.status if parent_task else None,
+        "checkbox_status":checkbox_status
         }

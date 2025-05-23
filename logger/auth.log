@@ -207,3 +207,89 @@
 2025-05-22 11:50:40,545 - auth - INFO - Fetching all users for user_id=2
 2025-05-22 11:50:57,957 - auth - INFO - Fetching all users for user_id=2
 2025-05-22 11:51:40,323 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 12:25:09,265 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 12:29:59,002 - auth - INFO - Login attempt for username='stiring'
+2025-05-22 12:29:59,007 - auth - WARNING - Login failed for username='stiring'
+2025-05-22 12:30:24,366 - auth - INFO - Login attempt for username='string'
+2025-05-22 12:30:24,637 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-22 12:30:26,357 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 12:32:34,442 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 12:33:08,306 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 12:37:40,896 - auth - INFO - Fetching all users for user_id=8
+2025-05-22 15:56:21,433 - auth - INFO - Login attempt for username='string'
+2025-05-22 15:56:22,008 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-22 15:58:10,309 - auth - INFO - Signup attempt for username='baraneee', email='baraneee@gmail.com'
+2025-05-22 15:58:10,584 - auth - INFO - New user created: user_id=9, username=baraneee
+2025-05-22 15:58:18,611 - auth - INFO - Login attempt for username='baraneee'
+2025-05-22 15:58:19,059 - auth - INFO - Login successful for user_id=9, username=baraneee
+2025-05-22 15:58:31,805 - auth - INFO - Login attempt for username='baraneee'
+2025-05-22 15:58:32,205 - auth - INFO - Login successful for user_id=9, username=baraneee
+2025-05-22 15:58:47,657 - auth - INFO - Login attempt for username='baraneee'
+2025-05-22 15:58:48,084 - auth - INFO - Login successful for user_id=9, username=baraneee
+2025-05-22 16:02:20,746 - auth - INFO - Login attempt for username='baraneee'
+2025-05-22 16:02:21,162 - auth - INFO - Login successful for user_id=9, username=baraneee
+2025-05-22 16:03:45,665 - auth - INFO - Login attempt for username=''
+2025-05-22 16:03:45,667 - auth - WARNING - Login failed for username=''
+2025-05-22 16:04:05,272 - auth - INFO - Login attempt for username='baraneee'
+2025-05-22 16:04:05,752 - auth - INFO - Login successful for user_id=9, username=baraneee
+2025-05-22 16:07:02,762 - auth - INFO - Login attempt for username='Baranee123'
+2025-05-22 16:07:02,960 - auth - INFO - Login successful for user_id=7, username=Baranee123
+2025-05-22 16:07:05,199 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:07:56,751 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:11:28,344 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:11:55,553 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:26:38,319 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:28:03,059 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:28:29,410 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:28:34,232 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:30:56,439 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:32:14,870 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:32:51,893 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:49:36,241 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:49:47,199 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 16:49:56,443 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:23:54,904 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:24:21,298 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:32:16,827 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:32:20,587 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:32:36,644 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:32:50,256 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:33:08,069 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 17:33:38,744 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:02:51,935 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:02:59,447 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:03:21,459 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:04:07,149 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:06:32,751 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:15:54,612 - auth - INFO - Login attempt for username='string'
+2025-05-22 18:15:55,094 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-22 18:15:56,984 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 18:16:15,519 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 18:16:21,183 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 18:16:45,837 - auth - INFO - Login attempt for username='baraneee'
+2025-05-22 18:16:46,253 - auth - INFO - Login successful for user_id=9, username=baraneee
+2025-05-22 18:16:47,882 - auth - INFO - Fetching all users for user_id=9
+2025-05-22 18:17:09,055 - auth - INFO - Fetching all users for user_id=9
+2025-05-22 18:17:44,709 - auth - INFO - Fetching all users for user_id=7
+2025-05-22 18:18:13,562 - auth - INFO - Fetching all users for user_id=2
+2025-05-22 18:18:27,164 - auth - INFO - Fetching all users for user_id=2
+2025-05-23 14:34:08,199 - auth - INFO - Login attempt for username='string'
+2025-05-23 14:34:08,734 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 14:42:40,913 - auth - INFO - Login attempt for username='string'
+2025-05-23 14:42:41,158 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 15:10:20,182 - auth - INFO - Login attempt for username='string'
+2025-05-23 15:10:20,693 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 15:56:01,291 - auth - INFO - Fetching all users for user_id=2
+2025-05-23 15:58:06,035 - auth - INFO - Fetching all users for user_id=2
+2025-05-23 16:01:25,913 - auth - INFO - Login attempt for username='string'
+2025-05-23 16:01:26,397 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 16:02:48,720 - auth - INFO - Fetching all users for user_id=2
+2025-05-23 16:10:48,331 - auth - INFO - Login attempt for username='string'
+2025-05-23 16:10:48,850 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 16:13:11,602 - auth - INFO - Login attempt for username='string'
+2025-05-23 16:13:12,019 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 16:13:50,018 - auth - INFO - Fetching all users for user_id=2
+2025-05-23 16:14:16,255 - auth - INFO - Fetching all users for user_id=2
+2025-05-23 16:17:16,060 - auth - INFO - Login attempt for username='string'
+2025-05-23 16:17:16,533 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-23 16:20:12,819 - auth - INFO - Fetching all users for user_id=2

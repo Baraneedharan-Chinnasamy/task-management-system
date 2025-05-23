@@ -3,6 +3,7 @@ from database.database import get_db
 from Authentication.functions import decode_token
 from sqlalchemy.orm import Session
 from models.models import User  # Adjust the import path based on your project structure
+import json
 
 def get_current_user(request: Request,
     db: Session = Depends(get_db)):
@@ -21,4 +22,6 @@ def get_current_user(request: Request,
     user = db.query(User).filter(User.employee_id == employee_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    
+
     return user

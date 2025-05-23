@@ -77,9 +77,11 @@ def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_use
         subtask_exists = db.query(TaskChecklistLink).filter(
             TaskChecklistLink.checklist_id == data.checklist_id,
             TaskChecklistLink.sub_task_id.isnot(None)
-        ).first()
-
-        if subtask_exists:
+        ).all()
+        subtask_ids = [link.sub_task_id for link in subtask_exists]
+        sub = db.query(Task).filter(Task.task_id.in_(subtask_ids),Task.is_delete == False).all()
+        if sub:
+            
             logger.warning(f"Checklist {data.checklist_id} has subtasks and cannot be directly updated")
             raise HTTPException(
                 status_code=400,

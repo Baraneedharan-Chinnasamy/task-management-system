@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Response, Query
 from sqlalchemy.orm import Session
-from models.models import User
+from models.models import User,DropdownOption
 from Authentication.functions import hash_password, verify_password, create_access_token, decode_token,send_email
 from Authentication.inputs import UserCreate, ForgotPasswordRequest, ResetPasswordRequest
 from database.database import get_db
@@ -12,14 +12,9 @@ from fastapi.responses import JSONResponse
 from Currentuser.currentUser import get_current_user
 from logger.logger import get_logger
 
-
 router = APIRouter()
 
-
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
-
-
 
 @router.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
@@ -134,6 +129,7 @@ def get_me(token: str = Depends(oauth2_scheme)):
     return {"message": "You're authenticated", "token": token}
 
 
+
 @router.get("/users")
 def read_current_user(
     current_user: User = Depends(get_current_user),
@@ -142,8 +138,8 @@ def read_current_user(
     logger = get_logger("auth", "auth.log")
     logger.info(f"Fetching all users for user_id={current_user.employee_id}")
 
+    # ✅ Fetch all users
     all_users = db.query(User).all()
-
     people = [
         {
             "employee_id": user.employee_id,
@@ -152,13 +148,25 @@ def read_current_user(
         for user in all_users
     ]
 
+    # ✅ Fetch active dropdowns grouped by column (type)
+    active_options = db.query(DropdownOption.type, DropdownOption.value).filter(
+        DropdownOption.is_active == True
+    ).all()
+
+    dropdown_map = {}
+    for type_, value in active_options:
+        type_lower = type_.lower()
+        dropdown_map.setdefault(type_lower, []).append(value)
+
     logger.debug(f"{len(people)} users fetched by user_id={current_user.employee_id}")
+    logger.debug(f"Active dropdowns fetched: {list(dropdown_map.keys())}")
 
     return {
         "employee_id": current_user.employee_id,
         "username": current_user.username,
         "email": current_user.email,
         "designation": current_user.designation,
-        "people": people
+        "permissions": current_user.permissions,
+        "people": people,
+        "dropdowns": dropdown_map
     }
-

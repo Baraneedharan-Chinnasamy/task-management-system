@@ -116,3 +116,64 @@
 2025-05-22 11:51:32,023 - delete - INFO - DELETE requested by user_id=2
 2025-05-22 11:51:32,082 - delete - INFO - Marked tasks as deleted: [45]
 2025-05-22 11:51:32,088 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:07:54,271 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:07:54,313 - delete - INFO - Marked tasks as deleted: [47]
+2025-05-22 16:07:54,316 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:27:29,621 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:27:29,663 - delete - INFO - Marked tasks as deleted: [50]
+2025-05-22 16:27:29,674 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:28:24,504 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:28:24,547 - delete - INFO - Marked tasks as deleted: [49]
+2025-05-22 16:28:24,557 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:28:31,987 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:28:32,061 - delete - INFO - Marked tasks as deleted: [48]
+2025-05-22 16:28:32,075 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:29:25,500 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:29:25,542 - delete - INFO - Marked tasks as deleted: [51]
+2025-05-22 16:29:25,553 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:31:19,235 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:31:19,298 - delete - INFO - Marked tasks as deleted: [52]
+2025-05-22 16:31:19,312 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:32:33,728 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:32:33,794 - delete - INFO - Marked tasks as deleted: [53]
+2025-05-22 16:32:33,813 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:47:43,249 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:47:43,295 - delete - INFO - Marked tasks as deleted: [56]
+2025-05-22 16:47:43,312 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:49:23,987 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:49:24,030 - delete - INFO - Marked tasks as deleted: [57]
+2025-05-22 16:49:24,049 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:49:29,278 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:49:29,300 - delete - INFO - Marked tasks as deleted: [57]
+2025-05-22 16:49:29,318 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:49:41,202 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:49:41,236 - delete - INFO - Marked tasks as deleted: [55]
+2025-05-22 16:49:41,244 - delete - INFO - Deletion process completed successfully.
+2025-05-22 16:49:49,590 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 16:49:49,640 - delete - INFO - Marked tasks as deleted: [54]
+2025-05-22 16:49:49,649 - delete - INFO - Deletion process completed successfully.
+2025-05-22 17:10:42,785 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 17:10:42,799 - delete - INFO - Marked checklists as deleted: [87]
+2025-05-22 17:10:42,819 - delete - INFO - Deletion process completed successfully.
+2025-05-22 17:15:59,805 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 17:15:59,831 - delete - INFO - Marked tasks as deleted: [59]
+2025-05-22 17:15:59,844 - delete - INFO - Deletion process completed successfully.
+2025-05-22 17:16:35,030 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 17:16:35,046 - delete - INFO - Marked tasks as deleted: [60]
+2025-05-22 17:16:35,061 - delete - INFO - Deletion process completed successfully.
+2025-05-22 18:02:15,556 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 18:02:50,084 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 18:02:50,117 - delete - INFO - Marked tasks as deleted: [63]
+2025-05-22 18:02:50,126 - delete - INFO - Deletion process completed successfully.
+2025-05-22 18:02:57,538 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 18:02:57,564 - delete - INFO - Marked tasks as deleted: [62]
+2025-05-22 18:02:57,583 - delete - INFO - Deletion process completed successfully.
+2025-05-22 18:03:17,628 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 18:03:17,649 - delete - INFO - Marked tasks as deleted: [64]
+2025-05-22 18:03:17,665 - delete - INFO - Deletion process completed successfully.
+2025-05-22 18:04:04,770 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 18:04:04,824 - delete - INFO - Marked tasks as deleted: [65]
+2025-05-22 18:04:04,832 - delete - INFO - Deletion process completed successfully.
+2025-05-22 18:06:30,307 - delete - INFO - DELETE requested by user_id=7
+2025-05-22 18:06:30,336 - delete - INFO - Marked tasks as deleted: [67]
+2025-05-22 18:06:30,343 - delete - INFO - Deletion process completed successfully.

@@ -162,3 +162,39 @@
 2025-05-22 11:43:55,558 - create_checklist - INFO - Task found: task_id=35, type=TaskType.Normal
 2025-05-22 11:43:55,565 - create_checklist - INFO - Checklist created with ID=69
 2025-05-22 11:43:55,614 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 16:07:25,728 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 16:07:25,732 - create_checklist - INFO - Task found: task_id=46, type=TaskType.Normal
+2025-05-22 16:07:25,734 - create_checklist - INFO - Checklist created with ID=75
+2025-05-22 16:07:25,746 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 17:10:40,412 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 17:10:40,414 - create_checklist - INFO - Task found: task_id=46, type=TaskType.Normal
+2025-05-22 17:10:40,417 - create_checklist - INFO - Checklist created with ID=87
+2025-05-22 17:10:40,428 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 17:19:42,121 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 17:19:42,126 - create_checklist - INFO - Task found: task_id=58, type=TaskType.Normal
+2025-05-22 17:19:42,130 - create_checklist - INFO - Checklist created with ID=91
+2025-05-22 17:19:42,144 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 17:19:43,609 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 17:19:43,616 - create_checklist - INFO - Task found: task_id=58, type=TaskType.Normal
+2025-05-22 17:19:43,622 - create_checklist - INFO - Checklist created with ID=92
+2025-05-22 17:19:43,644 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 17:19:45,639 - create_checklist - INFO - POST /add_checklist called by user_id=7
+2025-05-22 17:19:45,648 - create_checklist - INFO - Task found: task_id=58, type=TaskType.Normal
+2025-05-22 17:19:45,653 - create_checklist - INFO - Checklist created with ID=93
+2025-05-22 17:19:45,670 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 18:20:41,406 - create_checklist - INFO - POST /add_checklist called by user_id=9
+2025-05-22 18:20:41,406 - create_checklist - INFO - Task found: task_id=69, type=TaskType.Normal
+2025-05-22 18:20:41,406 - create_checklist - INFO - Checklist created with ID=103
+2025-05-22 18:20:41,431 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 18:20:48,437 - create_checklist - INFO - POST /add_checklist called by user_id=9
+2025-05-22 18:20:48,446 - create_checklist - INFO - Task found: task_id=69, type=TaskType.Normal
+2025-05-22 18:20:48,453 - create_checklist - INFO - Checklist created with ID=104
+2025-05-22 18:20:48,482 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 18:20:50,783 - create_checklist - INFO - POST /add_checklist called by user_id=9
+2025-05-22 18:20:50,788 - create_checklist - INFO - Task found: task_id=69, type=TaskType.Normal
+2025-05-22 18:20:50,788 - create_checklist - INFO - Checklist created with ID=105
+2025-05-22 18:20:50,830 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-05-22 18:20:52,538 - create_checklist - INFO - POST /add_checklist called by user_id=9
+2025-05-22 18:20:52,544 - create_checklist - INFO - Task found: task_id=69, type=TaskType.Normal
+2025-05-22 18:20:52,554 - create_checklist - INFO - Checklist created with ID=106
+2025-05-22 18:20:52,578 - create_checklist - INFO - All checklists created and task updates committed successfully

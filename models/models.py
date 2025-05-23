@@ -23,6 +23,7 @@ class TaskType(PyEnum):
     Normal = "Normal"
     Review = "Review"
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -32,10 +33,12 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
     designation = Column(String(100), nullable=True)
     department = Column(String(100), nullable=True)  
-    role = Column(String(50), nullable=True, index=True)  
+    role = Column(String(50), nullable=True, index=True)
     is_active = Column(Boolean, default=True, index=True)
+    permissions = Column(JSON, nullable=True)
     updated_at = Column(TIMESTAMP, server_default=func.current_timestamp(), onupdate=func.current_timestamp())
     created_at = Column(TIMESTAMP, server_default=func.current_timestamp())
+
 
 
 class Task(Base):
@@ -155,3 +158,43 @@ class TaskTimeLog(Base):
 
     task = relationship("Task", backref="time_logs")
     user = relationship("User", backref="time_logs")
+
+class MarketingContent(Base):
+    __tablename__ = "marketing_content"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    marketing_funnel = Column(String(50), nullable=True)
+    top_pointers = Column(String(100), nullable=True)
+    post_type = Column(String(50), nullable=True)
+    detailed_concept = Column(Text, nullable=True)
+    copy = Column(Text, nullable=True)
+    description = Column(Text, nullable=True)
+    reference = Column(Text, nullable=True)
+    media_links = Column(Text, nullable=True)
+    hashtags = Column(Text, nullable=True)
+    seo_keywords = Column(Text, nullable=True)
+    brand_name = Column(String(255), nullable=True)
+    status = Column(String(50), default='Working', nullable=True)
+    live_date = Column(Date, nullable=True)
+    task_id = Column(Integer, ForeignKey("tasks.task_id"), nullable=True)
+    created_by = Column(Integer, ForeignKey("users.employee_id"), nullable=True, index=True)
+    is_delete = Column(Boolean, default=False, index=True)
+    created_at = Column(TIMESTAMP, server_default=func.current_timestamp(), index=True)
+    updated_at = Column(TIMESTAMP, server_default=func.current_timestamp(), onupdate=func.current_timestamp(), index=True)
+
+    task = relationship("Task", backref="marketing_contents")
+    creator = relationship("User", foreign_keys=[created_by])
+
+
+class DropdownOption(Base):
+    __tablename__ = "dropdown_options"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    type = Column(String(50), nullable=False, index=True) 
+    value = Column(String(255), nullable=False, index=True)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(TIMESTAMP, server_default=func.current_timestamp())
+
+    __table_args__ = (
+        UniqueConstraint("type", "value", name="uq_type_value"),
+    )
