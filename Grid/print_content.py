@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
 from models.models import MarketingContent
-from Grid.input import MarketingContentSchema
 from database.database import get_db
 from typing import List, Optional
 
@@ -13,19 +12,25 @@ def get_paginated_content(
     db: Session = Depends(get_db),
     brand_name: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
+    post_type: Optional[str] = Query(None),
+    format_type: Optional[str] = Query(None),  # Added format_type filter
     sort_by: Optional[str] = Query("created_at"),
     sort_order: Optional[str] = Query("desc"),
     offset: int = 0,
-    limit: int = 50  # Default to 50 records
+    limit: int = 50
 ):
     query = db.query(MarketingContent).filter(MarketingContent.is_delete == False)
 
-    # Apply filters
+    # Filters
     if brand_name:
         query = query.filter(MarketingContent.brand_name.ilike(f"%{brand_name}%"))
     if status:
         query = query.filter(MarketingContent.status == status)
-        
+    if post_type:
+        query = query.filter(MarketingContent.post_type == post_type)
+    if format_type:
+        query = query.filter(MarketingContent.format_type == format_type)
+
     # Sorting
     sort_fields = {
         "id": MarketingContent.id,
@@ -40,36 +45,62 @@ def get_paginated_content(
     query = query.order_by(sort_func(sort_column))
 
     total_records = query.count()
-
-    # Apply pagination
     records = query.offset(offset).limit(limit).all()
-
-    # Determine if there are more records
     has_more = (offset + limit) < total_records
 
-    # Convert SQLAlchemy objects to JSON
+    # Conditional serialization
     def to_dict(row):
-        return {
+        if row.format_type == "Ads":
+            return {
+                "format_type": row.format_type,
+                "Ads_Type": row.Ads_Type,
+                "detailed_concept": row.detailed_concept,
+                "reference": row.reference,
+                "description": row.description,
+                "media_links": row.media_links,
+                "brand_name": row.brand_name,
+                "live_date": row.live_date,
+                "status": row.status,
+                "review_comment": row.review_comment,
+                "task_name": row.task_name,
+                "task_id": row.task_id,
+                "created_by": row.created_by,
+                "created_at": row.created_at,
+                "updated_at": row.updated_at
+            }
+
+        # Base fields for all non-Ads formats
+        base = {
             "id": row.id,
             "marketing_funnel": row.marketing_funnel,
             "top_pointers": row.top_pointers,
             "post_type": row.post_type,
+            "format_type": row.format_type,
             "detailed_concept": row.detailed_concept,
             "copy": row.copy,
-            "description": row.description,
             "reference": row.reference,
             "media_links": row.media_links,
-            "hashtags": row.hashtags,
-            "seo_keywords": row.seo_keywords,
             "brand_name": row.brand_name,
             "status": row.status,
+            "review_comment": row.review_comment,
+            "task_name": row.task_name,
             "live_date": row.live_date,
             "task_id": row.task_id,
             "created_by": row.created_by,
             "is_delete": row.is_delete,
             "created_at": row.created_at,
-            "updated_at": row.updated_at
+            "updated_at": row.updated_at,
         }
+
+        # Exclude certain fields if format_type is Story
+        if row.format_type != "Story":
+            base.update({
+                "description": row.description,
+                "hashtags": row.hashtags,
+                "seo_keywords": row.seo_keywords
+            })
+
+        return base
 
     return {
         "data": [to_dict(record) for record in records],

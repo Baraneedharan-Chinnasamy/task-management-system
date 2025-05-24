@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 class UserCreate(BaseModel):
     username: str
@@ -18,7 +18,10 @@ class ResetPasswordRequest(BaseModel):
 
 
 class PermissionUpdate(BaseModel):
-    employee_id: int  
-    admin: Optional[bool] = False
-    brands: Optional[List[str]] = []
+    employee_id: int
+    admin: bool
     settings: Optional[bool] = False
+    brands: Optional[Dict[str, Dict[str, List[str]]]] = None  # brand -> format -> roles
+
+    class Config:
+        extra = "forbid"

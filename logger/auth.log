@@ -295,3 +295,9 @@
 2025-05-23 16:20:12,819 - auth - INFO - Fetching all users for user_id=2
 2025-05-23 16:47:30,348 - auth - INFO - Login attempt for username='string'
 2025-05-23 16:47:30,924 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-24 10:12:40,290 - auth - INFO - Login attempt for username='string'
+2025-05-24 10:12:41,031 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-24 10:53:22,920 - auth - INFO - Login attempt for username='string'
+2025-05-24 10:53:23,285 - auth - INFO - Login successful for user_id=2, username=string
+2025-05-24 10:56:34,596 - auth - INFO - Login attempt for username='string'
+2025-05-24 10:56:35,197 - auth - INFO - Login successful for user_id=2, username=string

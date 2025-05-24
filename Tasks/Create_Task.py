@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import or_, desc
-from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, ChatRoom, User, TaskTimeLog
+from models.models import Task, TaskStatus, Checklist, TaskChecklistLink, TaskType, ChatRoom, User, TaskTimeLog,MarketingContent
 from Logs.functions import log_task_field_change,log_checklist_field_change
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
@@ -118,6 +118,11 @@ def add_checklist_subtask(
 
                 propagate_incomplete_upwards(data.checklist_id, db, Current_user)
         db.commit()
+        if data.row_id is not None:
+            row = db.query(MarketingContent).filter(MarketingContent.id == data.row_id).first()
+            row.task_id == new_task.task_id
+            row.task_name = new_task.task_name
+            db.commit()
         if data.checklist_id is not None:
             link = db.query(TaskChecklistLink).filter(
                 TaskChecklistLink.checklist_id == data.checklist_id,

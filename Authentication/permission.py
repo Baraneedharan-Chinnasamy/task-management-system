@@ -1,62 +1,98 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from sqlalchemy import func
-from models.models import User, DropdownOption
+from models.models import User
 from Authentication.inputs import PermissionUpdate
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
 
 router = APIRouter()
 
+ALLOWED_BRANDS = {"beelittle", "zing", "prathiksham", "adoreaboo"}
+ALLOWED_FORMATS = {"Story", "Reels", "Ads"}
+ALLOWED_ROLES = {"creator", "reviewer", "viewer"}
+
+
 @router.post("/permissions")
 def update_user_permissions(
     data: PermissionUpdate,
     db: Session = Depends(get_db),
-    Current_user: User = Depends(get_current_user)
+    Current_user=Depends(get_current_user)
 ):
-    # ✅ Only allow admins to update permissions
-    if not Current_user.permissions or not Current_user.permissions.get("admin", False):
+    # ✅ Load current user (who is making the request)
+    requesting_user = db.query(User).filter(User.employee_id == Current_user.employee_id).first()
+    if not requesting_user:
+        raise HTTPException(status_code=404, detail="Current user not found.")
+
+    # ✅ Only admins can assign permissions
+    if not (requesting_user.permissions and requesting_user.permissions.get("admin")):
         raise HTTPException(status_code=403, detail="Only admins can update permissions.")
 
-    # ✅ Fetch the user to be updated
+    # ✅ Load target user
     user = db.query(User).filter(User.employee_id == data.employee_id).first()
     if not user:
-        raise HTTPException(status_code=404, detail="User not found.")
+        raise HTTPException(status_code=404, detail="Target user not found.")
 
-    # ✅ Start with current permissions or default
-    updated_permissions = user.permissions or {"admin": False}
-
-    # ✅ If admin is True, override all
+    # ✅ Handle admin = True
     if data.admin is True:
-        user.permissions = {"admin": True}
+        user.permissions = {
+            "admin": True,
+            "settings": True,
+            "brands": {
+                brand: {
+                    format_type: list(ALLOWED_ROLES)
+                    for format_type in ALLOWED_FORMATS
+                }
+                for brand in ALLOWED_BRANDS
+            }
+        }
+
+    # ✅ Handle admin = False (or explicit demotion)
+    elif data.admin is False:
+        has_settings = bool(data.settings)
+        has_brands = bool(data.brands)
+
+        # ❌ If nothing else provided, clear all permissions
+        if not has_settings and not has_brands:
+            user.permissions = None
+            db.commit()
+            db.refresh(user)
+            return {
+                "message": f"Permissions removed for user {user.employee_id} (admin revoked).",
+                "permissions": None
+            }
+
+        # ✅ Validate brand-format-role structure
+        validated_brands = {}
+        if has_brands:
+            for brand, formats in data.brands.items():
+                if brand not in ALLOWED_BRANDS:
+                    raise HTTPException(status_code=422, detail=f"Invalid brand: {brand}")
+                validated_brands[brand] = {}
+
+                for format_type, roles in formats.items():
+                    if format_type not in ALLOWED_FORMATS:
+                        raise HTTPException(status_code=422, detail=f"Invalid format: {format_type}")
+                    invalid_roles = [r for r in roles if r not in ALLOWED_ROLES]
+                    if invalid_roles:
+                        raise HTTPException(
+                            status_code=422,
+                            detail=f"Invalid roles for {brand}/{format_type}: {', '.join(invalid_roles)}"
+                        )
+                    validated_brands[brand][format_type] = roles
+
+        # ✅ Overwrite permissions for non-admin user
+        user.permissions = {
+            "admin": False,
+            "settings": has_settings,
+            "brands": validated_brands
+        }
+
     else:
-        # ✅ Validate brands if provided
-        if data.brands is not None:
-            valid_brands = db.query(DropdownOption.value).filter(
-                func.lower(DropdownOption.type) == "brand_name",
-                DropdownOption.is_active == True
-            ).all()
-            valid_brand_list = {b[0].lower() for b in valid_brands}
-            requested_brands = {b.lower() for b in data.brands}
-
-            invalid = requested_brands - valid_brand_list
-            if invalid:
-                raise HTTPException(
-                    status_code=422,
-                    detail=f"Invalid or inactive brand(s): {', '.join(invalid)}"
-                )
-
-            updated_permissions["brands"] = data.brands
-
-        # ✅ Set settings permission if provided
-        if data.settings is not None:
-            updated_permissions["settings"] = data.settings
-
-        # ✅ Ensure admin is explicitly False if not True
-        updated_permissions["admin"] = False
-        user.permissions = updated_permissions
+        raise HTTPException(status_code=422, detail="'admin' must be explicitly true or false.")
 
     db.commit()
+    db.refresh(user)
+
     return {
         "message": f"Permissions updated for user {user.employee_id}.",
         "permissions": user.permissions

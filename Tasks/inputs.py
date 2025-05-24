@@ -5,6 +5,7 @@ from typing import Dict, List
 
 
 class CreateTask(BaseModel):
+    row_id:Optional[int] = None
     checklist_id: Optional[int] = None
     task_name: str
     description: str
