@@ -1,6 +1,6 @@
 from enum import Enum
 from datetime import datetime
-from models.models import TaskUpdateLog,ChecklistUpdateLog
+from models.models import LogMarketingContent, TaskUpdateLog,ChecklistUpdateLog
 
 def log_task_field_change(db, task_id: int, field_name: str, old_value, new_value, user_id):
     """
@@ -75,3 +75,42 @@ def log_checklist_field_change(db, checklist_id: int, field_name: str, old_value
         import logging
         logger = logging.getLogger(__name__)
         logger.error(f"Failed to log checklist field '{field_name}' change for checklist {checklist_id}: {str(e)}")
+
+
+
+def log_marketing_field_change(db, row_id: int, field_name: str, old_value, new_value, user_id: int):
+    """
+    Logs a field change in the marketing_content table to the log_marketing_content table.
+
+    Args:
+        db: SQLAlchemy session object
+        row_id: ID of the marketing_content row being modified
+        field_name: Name of the field that was changed
+        old_value: Previous value of the field
+        new_value: New value of the field
+        user_id: ID of the user making the update
+    """
+    try:
+        # Convert values to string for longtext storage
+        old_str = str(old_value) if old_value is not None else ''
+        new_str = str(new_value) if new_value is not None else ''
+
+        if old_str == new_str:
+            return  # No change, skip logging
+
+        log = LogMarketingContent(
+            row_id=row_id,
+            field_name=field_name,
+            old_value=old_str,
+            new_value=new_str,
+            updated_by=user_id,
+            updated_at=datetime.utcnow()
+        )
+
+        db.add(log)
+        db.flush()  # Optional: ensures insert happens immediately without committing
+
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Failed to log change for field '{field_name}' in row {row_id}: {str(e)}")

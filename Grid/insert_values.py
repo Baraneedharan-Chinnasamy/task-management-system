@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from models.models import MarketingContent, DropdownOption
+from Logs.functions import log_marketing_field_change
+from models.models import MarketingContent, DropdownOption, User
 from Grid.input import MarketingContentSchema
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
@@ -93,6 +94,15 @@ def upsert_content(
                 if value is not None and value != current_value:
                     setattr(content, field, value)
                     updated_fields[field] = value
+                    if field in ["status", "review_comment"]:
+                        log_marketing_field_change(
+                            db=db,
+                            row_id=content.id,
+                            field_name=field,
+                            old_value=current_value,
+                            new_value=value,
+                            user_id=Current_user.employee_id
+                        )
         else:
             new_data = data.model_dump(exclude_unset=True)
             new_data["created_by"] = Current_user.employee_id
@@ -113,12 +123,22 @@ def upsert_content(
 
         db.commit()
         db.refresh(content)
-
-        # Always return id + updated fields
-        return {
+        user = db.query(User).filter(User.employee_id == content.created_by).first()
+        # Base response
+        response = {
             "id": content.id,
-            **updated_fields
+            **updated_fields,
+            "created_by": content.created_by,
+            "created_by_name": Current_user.username if Current_user else None,
         }
+
+        # Add only the relevant timestamp
+        if data.id:
+            response["updated_at"] = content.updated_at
+        else:
+            response["created_at"] = content.created_at
+        # Always return id + updated fields
+        return response
 
     except HTTPException:
         raise

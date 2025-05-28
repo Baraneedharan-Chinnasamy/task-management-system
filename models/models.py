@@ -206,3 +206,15 @@ class DropdownOption(Base):
     __table_args__ = (
         UniqueConstraint("type", "value", name="uq_type_value"),
     )
+
+
+class LogMarketingContent(Base):
+    __tablename__ = 'log_marketing_content'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    row_id = Column(Integer, ForeignKey('marketing_content.id'), nullable=False)
+    field_name = Column(String(255), nullable=False)
+    old_value = Column(Text)
+    new_value = Column(Text)
+    updated_by = Column(Integer, nullable=False)
+    updated_at = Column(TIMESTAMP, server_default=func.current_timestamp())

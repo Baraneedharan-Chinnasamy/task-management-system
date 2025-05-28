@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import asc, desc
-from models.models import MarketingContent
+from models.models import MarketingContent, User
 from database.database import get_db
 from typing import List, Optional
 
@@ -13,7 +13,7 @@ def get_paginated_content(
     brand_name: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
     post_type: Optional[str] = Query(None),
-    format_type: Optional[str] = Query(None),  # Added format_type filter
+    format_type: Optional[str] = Query(None),  
     sort_by: Optional[str] = Query("created_at"),
     sort_order: Optional[str] = Query("desc"),
     offset: int = 0,
@@ -47,9 +47,20 @@ def get_paginated_content(
     total_records = query.count()
     records = query.offset(offset).limit(limit).all()
     has_more = (offset + limit) < total_records
-
+    users = db.query(User).all()
+    user_map = {u.employee_id: u.username for u in users}
     # Conditional serialization
     def to_dict(row):
+        task_info = {}
+        if row.task:
+            task_info = {
+                "task_name": row.task.task_name,
+                "task_status": row.task.status,
+                "assigned_to": row.task.assigned_to,
+                "assigned_to_name": user_map.get(row.task.assigned_to),
+                "due_date": row.task.due_date,
+            }
+
         if row.format_type == "Ads":
             return {
                 "format_type": row.format_type,
@@ -62,14 +73,14 @@ def get_paginated_content(
                 "live_date": row.live_date,
                 "status": row.status,
                 "review_comment": row.review_comment,
-                "task_name": row.task_name,
                 "task_id": row.task_id,
                 "created_by": row.created_by,
+                "created_by_name": user_map.get(row.created_by),
                 "created_at": row.created_at,
-                "updated_at": row.updated_at
+                "updated_at": row.updated_at,
+                **task_info,
             }
 
-        # Base fields for all non-Ads formats
         base = {
             "id": row.id,
             "marketing_funnel": row.marketing_funnel,
@@ -83,16 +94,16 @@ def get_paginated_content(
             "brand_name": row.brand_name,
             "status": row.status,
             "review_comment": row.review_comment,
-            "task_name": row.task_name,
             "live_date": row.live_date,
             "task_id": row.task_id,
             "created_by": row.created_by,
+            "created_by_name": user_map.get(row.created_by),
             "is_delete": row.is_delete,
             "created_at": row.created_at,
             "updated_at": row.updated_at,
+            **task_info,
         }
 
-        # Exclude certain fields if format_type is Story
         if row.format_type != "Story":
             base.update({
                 "description": row.description,
@@ -101,7 +112,7 @@ def get_paginated_content(
             })
 
         return base
-
+    
     return {
         "data": [to_dict(record) for record in records],
         "pagination": {

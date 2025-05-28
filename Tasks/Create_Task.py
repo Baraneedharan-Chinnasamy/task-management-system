@@ -120,7 +120,8 @@ def add_checklist_subtask(
         db.commit()
         if data.row_id is not None:
             row = db.query(MarketingContent).filter(MarketingContent.id == data.row_id).first()
-            row.task_id == new_task.task_id
+            print("HI")
+            row.task_id = new_task.task_id
             row.task_name = new_task.task_name
             db.commit()
         if data.checklist_id is not None:

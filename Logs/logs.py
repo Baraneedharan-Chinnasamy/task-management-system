@@ -1,9 +1,9 @@
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from database.database import get_db
 from models.models import (
-    Task, User, TaskUpdateLog, Checklist, ChecklistUpdateLog,
+    LogMarketingContent, Task, User, TaskUpdateLog, Checklist, ChecklistUpdateLog,
     TaskChecklistLink, TaskType
 )
 from Currentuser.currentUser import get_current_user
@@ -139,3 +139,32 @@ def get_task_log_summary(task_id: int, db: Session = Depends(get_db), current_us
         "task_name": task.task_name,
         "log_summary": logs
     }
+
+
+@router.get("/marketing")
+def get_marketing_change_statements(
+    row_id: int = Query(..., description="The marketing_content.id for which to get change history"),
+    db: Session = Depends(get_db)
+):
+    logs = (
+        db.query(LogMarketingContent, User)
+        .join(User, LogMarketingContent.updated_by == User.employee_id)
+        .filter(LogMarketingContent.row_id == row_id)
+        .order_by(LogMarketingContent.updated_at.desc())
+        .all()
+    )
+
+    statements = []
+    for log, user in logs:
+        old_val = log.old_value or ""
+        new_val = log.new_value or ""
+        user_name = user.username if user else "Unknown"
+
+        # Format the change statement
+        statement = (
+            f'{log.field_name.replace("_", " ").title()} changed '
+            f'from "{old_val}" to "{new_val}" by {user_name} on {log.updated_at.strftime("%Y-%m-%d %H:%M")}'
+        )
+        statements.append(statement)
+
+    return {"row_id": row_id, "log_statements": statements}
