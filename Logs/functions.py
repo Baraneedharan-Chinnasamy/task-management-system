@@ -104,7 +104,7 @@ def log_marketing_field_change(db, row_id: int, field_name: str, old_value, new_
             old_value=old_str,
             new_value=new_str,
             updated_by=user_id,
-            updated_at=datetime.utcnow()
+            updated_at=datetime.now()
         )
 
         db.add(log)

@@ -94,7 +94,7 @@ def upsert_content(
                 if value is not None and value != current_value:
                     setattr(content, field, value)
                     updated_fields[field] = value
-                    if field in ["status", "review_comment"]:
+                    if field in ["review_comment"]:
                         log_marketing_field_change(
                             db=db,
                             row_id=content.id,

@@ -1,5 +1,6 @@
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from database.database import get_db
 from models.models import (
@@ -144,27 +145,33 @@ def get_task_log_summary(task_id: int, db: Session = Depends(get_db), current_us
 @router.get("/marketing")
 def get_marketing_change_statements(
     row_id: int = Query(..., description="The marketing_content.id for which to get change history"),
+    field_name: str = Query(None, description="Optional field name to filter changes (case-insensitive)"),
     db: Session = Depends(get_db)
 ):
-    logs = (
+    # Base query
+    query = (
         db.query(LogMarketingContent, User)
         .join(User, LogMarketingContent.updated_by == User.employee_id)
         .filter(LogMarketingContent.row_id == row_id)
-        .order_by(LogMarketingContent.updated_at.desc())
-        .all()
     )
 
-    statements = []
+    # Optional case-insensitive filter for field_name
+    if field_name:
+        query = query.filter(func.lower(LogMarketingContent.field_name) == field_name.lower())
+
+    # Execute and sort results
+    logs = query.order_by(LogMarketingContent.updated_at.desc()).all()
+
+    # Format as structured JSON
+    log_entries = []
     for log, user in logs:
-        old_val = log.old_value or ""
-        new_val = log.new_value or ""
-        user_name = user.username if user else "Unknown"
+        log_entries.append({
+            "row_id": log.row_id,
+            "field_name": log.field_name,
+            "value": log.new_value or "",
+            "updated_by_name": user.username if user else "Unknown",
+            "Updated_by_id":user.employee_id if user else "Unknown",
+            "updated_at": log.updated_at.strftime("%Y-%m-%d %H:%M"),
+        })
 
-        # Format the change statement
-        statement = (
-            f'{log.field_name.replace("_", " ").title()} changed '
-            f'from "{old_val}" to "{new_val}" by {user_name} on {log.updated_at.strftime("%Y-%m-%d %H:%M")}'
-        )
-        statements.append(statement)
-
-    return {"row_id": row_id, "log_statements": statements}
+    return {"row_id": row_id, "logs": log_entries}
