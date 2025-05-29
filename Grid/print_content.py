@@ -10,6 +10,7 @@ router = APIRouter()
 @router.get("/print_content")
 def get_paginated_content(
     db: Session = Depends(get_db),
+    row_id:Optional[int] =Query(None),
     brand_name: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
     post_type: Optional[str] = Query(None),
@@ -23,6 +24,8 @@ def get_paginated_content(
     query = db.query(MarketingContent).filter(MarketingContent.is_delete == False)
 
     # Apply filters
+    if row_id:
+        query = query.filter(MarketingContent.id == row_id)
     if brand_name:
         query = query.filter(MarketingContent.brand_name.ilike(f"%{brand_name}%"))
     if status:
@@ -85,6 +88,7 @@ def get_paginated_content(
         task_info = {}
         if row.task:
             task_info = {
+                "task_id":row.task.task_id,
                 "task_name": row.task.task_name,
                 "task_status": row.task.status,
                 "assigned_to": row.task.assigned_to,
@@ -108,6 +112,7 @@ def get_paginated_content(
             "review_comment_log": log_map.get((row.id, "review_comment"), []),
             "live_date": row.live_date,
             "task_id": row.task_id,
+            "task_name":row.task_name,
             "created_by": row.created_by,
             "created_by_name": user_map.get(row.created_by),
             "is_delete": row.is_delete,

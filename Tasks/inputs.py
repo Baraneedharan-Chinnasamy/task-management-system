@@ -14,7 +14,6 @@ class CreateTask(BaseModel):
     checklist_names: List[str]
     is_review_required : bool
 
-
 class UpdateTaskRequest(BaseModel):
     task_id: Optional[int] = None
     assigned_to: Optional[int] = None

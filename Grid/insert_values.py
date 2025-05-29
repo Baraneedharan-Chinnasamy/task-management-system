@@ -40,10 +40,10 @@ def validate_dropdown_value(db: Session, field: str, value: str):
 
 
 # Utility: generate a unique task name
-def generate_task_name(db: Session, brand_name: str, post_type: str, format_type: str) -> str:
+def generate_task_name(db: Session, brand_name: str, format_type: str) -> str:
     now = datetime.now()
     date_segment = now.strftime("%y%m")  # e.g., "2506"
-    prefix = f"{brand_name[:3].upper()}-{post_type}-{format_type}-{date_segment}"
+    prefix = f"{brand_name[:3].upper()}-{format_type}-{date_segment}"
 
     existing = (
         db.query(MarketingContent.task_name)
@@ -109,15 +109,15 @@ def upsert_content(
             content = MarketingContent(**new_data)
             db.add(content)
             updated_fields = new_data  # All fields are new
-
+        db.add(content)
         # Task name generation logic (only once on first approval)
         if content.status and content.status.lower() == "approved" and not content.task_name:
-            if not content.brand_name or not content.post_type or not content.format_type:
+            if not content.brand_name  or not content.format_type:
                 raise HTTPException(
                     status_code=422,
-                    detail="Cannot generate task name: 'brand_name', 'post_type', and 'format_type' must be filled."
+                    detail="Cannot generate task name: 'brand_name', and 'format_type' must be filled."
                 )
-            generated_name = generate_task_name(db, content.brand_name, content.post_type, content.format_type)
+            generated_name = generate_task_name(db, content.brand_name,  content.format_type)
             content.task_name = generated_name
             updated_fields["task_name"] = generated_name
 
@@ -131,7 +131,7 @@ def upsert_content(
             "created_by": content.created_by,
             "created_by_name": Current_user.username if Current_user else None,
         }
-
+        
         # Add only the relevant timestamp
         if data.id:
             response["updated_at"] = content.updated_at
