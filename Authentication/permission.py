@@ -8,7 +8,7 @@ from Currentuser.currentUser import get_current_user
 router = APIRouter()
 
 ALLOWED_BRANDS = {"beelittle", "zing", "prathiksham", "adoreaboo"}
-ALLOWED_FORMATS = {"Story", "Reels", "Ads"}
+ALLOWED_FORMATS = {"Story", "Reels", "Ads","Post"}
 ALLOWED_ROLES = {"creator", "reviewer", "viewer"}
 
 

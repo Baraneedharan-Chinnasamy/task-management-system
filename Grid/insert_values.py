@@ -69,7 +69,7 @@ def generate_task_name(db: Session, brand_name: str, format_type: str) -> str:
 def upsert_content(
     data: MarketingContentSchema,
     db: Session = Depends(get_db),
-    Current_user=Depends(get_current_user)
+    Current_user = Depends(get_current_user)
 ):
     if not Current_user or not hasattr(Current_user, "employee_id"):
         raise HTTPException(status_code=401, detail="Unauthorized: user not found")
