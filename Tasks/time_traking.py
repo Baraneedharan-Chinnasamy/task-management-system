@@ -18,6 +18,9 @@ def start_task_timer(
     task = db.query(Task).filter(Task.task_id == task_id, Task.is_delete == False).first()
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
+    
+    if task.created_by != current_user.employee_id and task.assigned_to != current_user.employee_id:
+        raise HTTPException(status_code=403, detail="You dont have permistion to start the timer")
 
     # Check for an existing open session
     existing_log = db.query(TaskTimeLog).filter(
