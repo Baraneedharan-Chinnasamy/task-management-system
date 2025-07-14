@@ -1,4 +1,5 @@
 from passlib.context import CryptContext
+from Grid.function import mark_content_completed
 from models.models import Task, Checklist, TaskChecklistLink, TaskStatus, TaskType, TaskTimeLog
 from sqlalchemy import desc
 from Logs.functions import log_task_field_change, log_checklist_field_change
@@ -7,18 +8,21 @@ from logger.logger import get_logger
 
 def update_task_status(task, new_status, db, current_user_id):
     """Helper to update task status while preserving previous status and logging."""
+    print("correct pannu",new_status)
     if task.status != new_status:
         old_status = task.status
         if task.previous_status != task.status:
-            task.previous_status = task.status
+            task.previous_status = task.status  
         task.status = new_status
         log_task_field_change(db, task.task_id, "status", old_status, new_status, current_user_id)
         db.flush()
+        if new_status == TaskStatus.Completed:
+            print("marking content completed")
+            mark_content_completed(task.task_id, db, current_user_id)
 
 
 def update_parent_task_status(task_id, db, Current_user):
     
-   
     if not task_id:
         return
 
@@ -44,7 +48,7 @@ def update_parent_task_status(task_id, db, Current_user):
             if time is not None:
                 time.end_time = datetime.now()
                 db.flush()
-
+            
         if task.is_review_required:
             review_task = db.query(Task).filter(Task.parent_task_id == task.task_id).first()
             if review_task:

@@ -198,3 +198,7 @@
 2025-05-22 18:20:52,544 - create_checklist - INFO - Task found: task_id=69, type=TaskType.Normal
 2025-05-22 18:20:52,554 - create_checklist - INFO - Checklist created with ID=106
 2025-05-22 18:20:52,578 - create_checklist - INFO - All checklists created and task updates committed successfully
+2025-07-01 15:20:15,071 - create_checklist - INFO - POST /add_checklist called by user_id=3
+2025-07-01 15:20:15,170 - create_checklist - INFO - Task found: task_id=74, type=TaskType.Normal
+2025-07-01 15:20:15,328 - create_checklist - INFO - Checklist created with ID=1964
+2025-07-01 15:20:18,548 - create_checklist - INFO - All checklists created and task updates committed successfully

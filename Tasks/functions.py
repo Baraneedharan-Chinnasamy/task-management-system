@@ -1,4 +1,5 @@
-from models.models import TaskChecklistLink,Task,Checklist,TaskStatus, TaskType ,TaskUpdateLog, TaskTimeLog
+from Grid.function import mark_content_completed
+from models.models import TaskChecklistLink,Task,Checklist,TaskStatus, TaskType ,MarketingContent, TaskTimeLog
 from Logs.functions import log_task_field_change,log_checklist_field_change
 from logger.logger import get_logger
 from Checklist.functions import update_parent_task_status,propagate_incomplete_upwards
@@ -28,7 +29,7 @@ def propagate_completion_upwards(task, db, updated_by, logger, Current_user):
             child_task.previous_status = child_task.status
             child_task.status = TaskStatus.Completed
             db.flush()
-
+            mark_content_completed(child_task.task_id, db, updated_by)
             time_log = db.query(TaskTimeLog).filter(
                 TaskTimeLog.task_id == child_task.task_id,
                 TaskTimeLog.end_time == None

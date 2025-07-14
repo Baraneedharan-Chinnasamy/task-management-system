@@ -10,10 +10,7 @@ from Checklist.inputs import UpdateStatus
 from Checklist.functions import update_parent_task_status, propagate_incomplete_upwards
 from logger.logger import get_logger
 
-
 router = APIRouter()
-
-
 
 @router.post("/mark_checklist_complete")
 def update_Status(data: UpdateStatus, db: Session = Depends(get_db), Current_user: int = Depends(get_current_user)):

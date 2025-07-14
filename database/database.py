@@ -9,7 +9,7 @@ from fastapi import HTTPException
 load_dotenv()
 
 # Database connection URL (Fixed for employeee_task)
-DATABASE_URL = f"mysql+pymysql://root:Password@localhost/employeee_task"
+DATABASE_URL = "mysql+pymysql://root:Password@localhost/employeee_task"
 
 # Create the engine and session maker
 engine = create_engine(DATABASE_URL, pool_size=10, max_overflow=5)

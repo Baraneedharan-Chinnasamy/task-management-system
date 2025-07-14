@@ -17,6 +17,10 @@ from Grid.insert_values import router as Content
 from Grid.print_content import router as Print_Content
 from Grid.manage_dropdown import router as Manage_DropDown
 from Authentication.permission import router as Permission
+from Calender.create import router as create_router
+from Calender.print_content import router as Print_Content_Calendar
+from Calender.print_notes import router as Print_Notes_Calendar
+from Calender.update import router as update_router
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -65,3 +69,7 @@ app.include_router(Content, prefix=f"{API_PREFIX}/Content", tags=["Content"])
 app.include_router(Print_Content, prefix=f"{API_PREFIX}/Content", tags=["Content"])
 app.include_router(Manage_DropDown, prefix=f"{API_PREFIX}/Content", tags=["Content"])
 app.include_router(Permission, prefix=f"{API_PREFIX}/auth", tags=["Authentication"])
+app.include_router(create_router, prefix=f"{API_PREFIX}/calender", tags=["Calender"])
+app.include_router(Print_Content_Calendar, prefix=f"{API_PREFIX}/calender", tags=["Calender"])
+app.include_router(Print_Notes_Calendar, prefix=f"{API_PREFIX}/calender", tags=["Calender"])
+app.include_router(update_router, prefix=f"{API_PREFIX}/calender", tags=["Calender"])

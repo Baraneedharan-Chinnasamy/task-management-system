@@ -5,7 +5,7 @@ class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
-    designation: str 
+    designation: str
 
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr
@@ -22,6 +22,7 @@ class PermissionUpdate(BaseModel):
     admin: bool
     settings: Optional[bool] = False
     brands: Optional[Dict[str, Dict[str, List[str]]]] = None  # brand -> format -> roles
+    reportrix: Optional[List[str]] = []  # List of allowed brands (if using list format)
 
     class Config:
-        extra = "forbid"
+        extra = "forbid"  # Reject extra fields not defined in the model

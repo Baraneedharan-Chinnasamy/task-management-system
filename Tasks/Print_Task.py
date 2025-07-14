@@ -6,7 +6,7 @@ from datetime import date
 from typing import Optional
 from collections import defaultdict
 from Currentuser.currentUser import get_current_user
-from models.models import Task, User, ChatRoom, Checklist, TaskChecklistLink, TaskType, TaskTimeLog
+from models.models import MarketingContent, Task, User, ChatRoom, Checklist, TaskChecklistLink, TaskType, TaskTimeLog
 from logger.logger import get_logger
 
 router = APIRouter()
@@ -203,9 +203,28 @@ def get_tasks_by_employees(
         delete_allow = task.created_by == current_user.employee_id
         latest_time = time_log_map.get(task.task_id, {"start_time": None, "end_time": None})
 
+        if task.task_type == TaskType.Review:
+            def get_original_task_name(current_task):
+                """Recursively find the original task name by traversing parent tasks"""
+                if current_task.task_type != TaskType.Review:
+                    return current_task.task_name
+                
+                # If it's a review task, get the parent task
+                parent_task = db.query(Task).filter(Task.task_id == current_task.parent_task_id).first()
+                if parent_task:
+                    return get_original_task_name(parent_task)  # Recursive call
+                else:
+                    # If no parent found, return current task name as fallback
+                    return current_task.task_name
+            
+            name = get_original_task_name(task)
+            task_name = f"Review - {name}"
+        else:
+            task_name = task.task_name
+
         result.append({
             "task_id": task.task_id,
-            "task_name": task.task_name,
+            "task_name": task_name,
             "due_date": task.due_date,
             "assigned_to_name": user_map.get(task.assigned_to),
             "created_by_name": user_map.get(task.created_by),
@@ -251,7 +270,13 @@ def task_details(
         if not task:
             logger.warning("Task not found for task_id=%s", task_id)
             return {"error": "Task not found"}
-
+        marketing_content = db.query(MarketingContent).filter(
+        MarketingContent.task_id == task_id,
+        MarketingContent.is_delete == False  # or whatever flag you use for soft delete
+    ).first()
+        
+       
+            
         delete_allow = task.created_by == current_user.employee_id
 
         users = db.query(User).all()
@@ -365,7 +390,25 @@ def task_details(
         checklist_progress = f"{completed}/{total}" if total > 0 else "0/0"
 
         # ---------------- Parent Task Chain ----------------
+        # ---------------- Parent Task Chain ----------------
         parent_task_chain = []
+
+        def get_original_task_name(current_task):
+            """Recursively find the original task name by traversing parent tasks"""
+            if current_task.task_type != TaskType.Review:
+                return current_task.task_name
+            
+            # If it's a review task, get the parent task
+            parent_task = db.query(Task).filter(
+                Task.task_id == current_task.parent_task_id,
+                Task.is_delete == False
+            ).first()
+            
+            if parent_task:
+                return get_original_task_name(parent_task)  # Recursive call
+            else:
+                # If no parent found, return current task name as fallback
+                return current_task.task_name
 
         def get_parent_chain(current_task_id):
             if not current_task_id:
@@ -395,9 +438,16 @@ def task_details(
 
                 checklist_progress = f"{completed_count}/{total_count}" if total_count > 0 else "0/0"
 
+                # Get the appropriate task name based on task type
+                if current_task.task_type == TaskType.Review:
+                    original_name = get_original_task_name(current_task)
+                    display_task_name = f"Review - {original_name}"
+                else:
+                    display_task_name = current_task.task_name
+                
                 parent_task_chain.append({
                     "task_id": current_task.task_id,
-                    "task_name": current_task.task_name,
+                    "task_name": display_task_name,  # Use the original task name
                     "description": current_task.description,
                     "status": current_task.status,
                     "task_type": current_task.task_type,
@@ -423,6 +473,8 @@ def task_details(
             first_task = parent_task_chain[0]
             output = first_task.get("output")
             description = first_task.get("description")
+            name = first_task.get("task_name")  # This will now be the original task name
+            task_name = f"Review-{name}"
         else:
             output = None
             description = None
@@ -470,7 +522,7 @@ def task_details(
 
         return {
             "task_id": task.task_id,
-            "task_name": task.task_name,
+            "task_name": task.task_name if task.task_type == TaskType.Normal else task_name,
             "description": task.description if task.task_type == TaskType.Normal else description,
             "due_date": task.due_date,
             "assigned_to": task.assigned_to,
@@ -489,8 +541,8 @@ def task_details(
             "parent_task_chain": parent_task_chain,
             "last_review": is_last_review,
             "review_checklist": review_checklists if review_checklists else None,
-            **main_task_time_info
-        }
+            "marketing_content": {"id": marketing_content.id} if marketing_content else None,
+            **main_task_time_info }
 
     except Exception as e:
         logger.exception("Error retrieving task details for task_id=%s: %s", task_id, str(e))

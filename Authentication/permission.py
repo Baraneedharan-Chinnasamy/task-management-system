@@ -8,9 +8,8 @@ from Currentuser.currentUser import get_current_user
 router = APIRouter()
 
 ALLOWED_BRANDS = {"beelittle", "zing", "prathiksham", "adoreaboo"}
-ALLOWED_FORMATS = {"Story", "Reels", "Ads","Post"}
+ALLOWED_FORMATS = {"Story", "Reels", "Ads", "Post"}
 ALLOWED_ROLES = {"creator", "reviewer", "viewer"}
-
 
 @router.post("/permissions")
 def update_user_permissions(
@@ -18,7 +17,7 @@ def update_user_permissions(
     db: Session = Depends(get_db),
     Current_user=Depends(get_current_user)
 ):
-    # ✅ Load current user (who is making the request)
+    # ✅ Load current user
     requesting_user = db.query(User).filter(User.employee_id == Current_user.employee_id).first()
     if not requesting_user:
         raise HTTPException(status_code=404, detail="Current user not found.")
@@ -32,7 +31,7 @@ def update_user_permissions(
     if not user:
         raise HTTPException(status_code=404, detail="Target user not found.")
 
-    # ✅ Handle admin = True
+    # ✅ Handle admin = True → grant full access
     if data.admin is True:
         user.permissions = {
             "admin": True,
@@ -43,16 +42,18 @@ def update_user_permissions(
                     for format_type in ALLOWED_FORMATS
                 }
                 for brand in ALLOWED_BRANDS
-            }
+            },
+            "reportrix": [brand for brand in ALLOWED_BRANDS]
         }
 
-    # ✅ Handle admin = False (or explicit demotion)
+    # ✅ Handle admin = False (limited access or demotion)
     elif data.admin is False:
         has_settings = bool(data.settings)
         has_brands = bool(data.brands)
+        has_reportrix = bool(data.reportrix)
 
-        # ❌ If nothing else provided, clear all permissions
-        if not has_settings and not has_brands:
+        # ❌ If nothing is provided, remove permissions
+        if not has_settings and not has_brands and not has_reportrix:
             user.permissions = None
             db.commit()
             db.refresh(user)
@@ -61,7 +62,7 @@ def update_user_permissions(
                 "permissions": None
             }
 
-        # ✅ Validate brand-format-role structure
+        # ✅ Validate brand-role-format permissions
         validated_brands = {}
         if has_brands:
             for brand, formats in data.brands.items():
@@ -80,12 +81,23 @@ def update_user_permissions(
                         )
                     validated_brands[brand][format_type] = roles
 
-        # ✅ Overwrite permissions for non-admin user
+        # ✅ Validate reportrix brand toggles (now it's a list of brands, not a dictionary)
+        validated_reportrix = []
+        if has_reportrix:
+            for brand in data.reportrix:  # Iterate over the list of allowed brands
+                if brand not in ALLOWED_BRANDS:
+                    raise HTTPException(status_code=422, detail=f"Invalid reportrix brand: {brand}")
+                validated_reportrix.append(brand)  # Add brand to the list if allowed
+
+
+        # ✅ Set permissions
         user.permissions = {
             "admin": False,
             "settings": has_settings,
-            "brands": validated_brands
+            "brands": validated_brands if has_brands else {},
+            "reportrix": validated_reportrix if validated_reportrix else []
         }
+
 
     else:
         raise HTTPException(status_code=422, detail="'admin' must be explicitly true or false.")

@@ -7,6 +7,8 @@ from Grid.input import MarketingContentSchema
 from database.database import get_db
 from Currentuser.currentUser import get_current_user
 from datetime import datetime
+from Delete.delete import delete_related_items
+from Delete.inputs import DeleteItemsRequest
 
 router = APIRouter()
 
@@ -123,6 +125,11 @@ def upsert_content(
 
         db.commit()
         db.refresh(content)
+        # Auto-delete related items if is_delete is True and task_id exists
+        if getattr(content, "is_delete", False) and getattr(content, "task_id", None):
+            delete_request = DeleteItemsRequest(task_id=content.task_id)
+            delete_related_items(delete_request=delete_request, db=db, Current_user=Current_user)
+
         user = db.query(User).filter(User.employee_id == content.created_by).first()
         # Base response
         response = {
