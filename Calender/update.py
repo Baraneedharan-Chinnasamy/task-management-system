@@ -12,7 +12,7 @@ class MarketingContentNoteUpdate(BaseModel):
 
 router = APIRouter()
 
-@router.patch("/update-notes/{note_id}")
+@router.post("/update-notes/{note_id}")
 def update_marketing_content_note(
     note_id: int,
     update: MarketingContentNoteUpdate,
