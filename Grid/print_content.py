@@ -19,7 +19,8 @@ def get_paginated_content(
     sort_order: Optional[str] = Query("desc"),
     offset: int = 0,
     limit: int = 50,
-    log_field: Optional[str] = Query(None, description="Optional field to filter logs (case-insensitive, e.g., 'review_comment')")
+    log_field: Optional[str] = Query(None, description="Optional field to filter logs (case-insensitive, e.g., 'review_comment')"),
+    live_month_year: Optional[str] = Query(None, description="Filter by live_date in mm-yyyy format")
 ):
     query = db.query(MarketingContent).filter(MarketingContent.is_delete == False)
 
@@ -34,6 +35,16 @@ def get_paginated_content(
         query = query.filter(MarketingContent.post_type == post_type)
     if format_type:
         query = query.filter(MarketingContent.format_type == format_type)
+    # Filter by live_date month and year (mm-yyyy)
+    if live_month_year:
+        try:
+            month, year = live_month_year.split("-")
+            month = int(month)
+            year = int(year)
+            query = query.filter(func.extract('month', MarketingContent.live_date) == month)
+            query = query.filter(func.extract('year', MarketingContent.live_date) == year)
+        except Exception:
+            pass  # Ignore invalid format
 
     # Sorting
     sort_fields = {
@@ -99,6 +110,7 @@ def get_paginated_content(
         base = {
             "id": row.id,
             "marketing_funnel": row.marketing_funnel,
+            "content_name": row.content_name,
             "top_pointers": row.top_pointers,
             "post_type": row.post_type,
             "format_type": row.format_type,

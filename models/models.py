@@ -163,7 +163,7 @@ class MarketingContent(Base):
     __tablename__ = "marketing_content"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    
+    content_name = Column(String(255), nullable=True, index=True) 
     marketing_funnel = Column(String(255), nullable=True)
     top_pointers = Column(Text, nullable=True)
     post_type = Column(String(255), nullable=True)
@@ -219,18 +219,3 @@ class LogMarketingContent(Base):
     updated_by = Column(Integer, nullable=False)
     updated_at = Column(TIMESTAMP, server_default=func.current_timestamp())
 
-class MarketingContentNote(Base):
-    __tablename__ = "marketing_content_notes"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    row_id = Column(Integer, ForeignKey("marketing_content.id", ondelete="CASCADE"), nullable=False, index=True)
-    type = Column(String(255), nullable=True)
-    notes = Column(Text, nullable=True)
-    is_delete = Column(Boolean, default=False, index=True)
-    created_by = Column(Integer, ForeignKey("users.employee_id"), nullable=False, index=True)
-    date = Column(Date, nullable=True)  
-    created_at = Column(TIMESTAMP, server_default=func.current_timestamp(), index=True)
-    updated_at = Column(TIMESTAMP, server_default=func.current_timestamp(), onupdate=func.current_timestamp(), index=True)
-
-    marketing_content = relationship("MarketingContent", backref="notes")
-    creator = relationship("User", foreign_keys=[created_by])

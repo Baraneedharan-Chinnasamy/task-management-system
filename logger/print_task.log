@@ -1,29 +1,11 @@
-2025-07-02 10:27:51,153 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-02 10:27:51,479 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-02 11:10:07,773 - print_task - INFO - GET /tasks - Called by user_id=2
-2025-07-02 11:10:07,857 - print_task - INFO - GET /tasks - Called by user_id=2
-2025-07-02 14:53:29,520 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-02 14:53:29,849 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-02 18:25:12,985 - print_task - INFO - GET /task/task_id called - task_id=1136 by user_id=3
-2025-07-02 18:25:13,559 - print_task - INFO - Returning task details for task_id=1136
-2025-07-03 10:07:08,851 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 10:56:04,837 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 10:56:08,069 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 11:04:50,214 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 15:52:39,984 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 15:55:09,644 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 15:56:21,953 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 16:02:44,307 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 16:03:57,494 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-03 16:07:56,731 - print_task - INFO - GET /task/task_id called - task_id=1238 by user_id=3
-2025-07-03 16:07:57,199 - print_task - INFO - Returning task details for task_id=1238
-2025-07-03 16:08:33,887 - print_task - INFO - GET /task/task_id called - task_id=1239 by user_id=3
-2025-07-03 16:08:34,524 - print_task - INFO - Returning task details for task_id=1239
-2025-07-03 17:06:02,591 - print_task - INFO - GET /task/task_id called - task_id=1239 by user_id=3
-2025-07-03 17:06:03,302 - print_task - INFO - Returning task details for task_id=1239
-2025-07-03 17:08:47,370 - print_task - INFO - GET /task/task_id called - task_id=1239 by user_id=3
-2025-07-03 17:08:48,129 - print_task - INFO - Returning task details for task_id=1239
-2025-07-04 12:33:10,923 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-04 12:33:11,983 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-04 12:33:12,422 - print_task - INFO - GET /tasks - Called by user_id=3
-2025-07-07 09:59:47,356 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 12:24:36,836 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 12:24:37,279 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 12:54:22,556 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 12:54:23,024 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:30:50,537 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:30:50,844 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:48:00,431 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:48:00,745 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:48:34,833 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:48:34,834 - print_task - INFO - GET /tasks - Called by user_id=3
+2025-07-17 15:48:40,109 - print_task - INFO - GET /tasks - Called by user_id=3

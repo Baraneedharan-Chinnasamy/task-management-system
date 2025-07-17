@@ -5,6 +5,7 @@ from datetime import date
 class MarketingContentSchema(BaseModel):
     id: Optional[int] = None
     marketing_funnel: Optional[str] = None
+    content_name: Optional[str] = None
     top_pointers: Optional[str] = None
     post_type: Optional[str] = None
     format_type: Optional[str] = None  
